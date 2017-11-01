@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#000"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/step_one_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/step_one"
+        android:paddingTop="5dp"
+        android:text="@string/step_one_title"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.194" />
+
+    <TextView
+        android:id="@+id/step_one"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_bg"
+        android:padding="8dp"
+        android:text="@string/step_one"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042" />
+
+    <TextView
+        android:id="@+id/title_bun_option"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/step_one_subtitle"
+        android:background="@drawable/ingredient_select_bg"
+        android:paddingBottom="2dp"
+        android:paddingStart="8dp"
+        android:paddingTop="2dp"
+        android:text="@string/title_bun"
+        android:textColor="#000"
+        app:layout_constraintVertical_bias="0.273" />
+
+    <TextView
+        android:id="@+id/title_pattie_option"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/bun_choices"
+        android:background="@drawable/ingredient_select_bg"
+        android:paddingBottom="2dp"
+        android:paddingStart="8dp"
+        android:paddingTop="2dp"
+        android:text="@string/title_pattie"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.487" />
+
+    <TextView
+        android:id="@+id/title_cheese_option"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/pattie"
+        android:background="@drawable/ingredient_select_bg"
+        android:paddingBottom="2dp"
+        android:paddingStart="8dp"
+        android:paddingTop="2dp"
+        android:text="@string/title_cheese"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.702" />
+
+    <RadioGroup
+        android:id="@+id/bun_choices"
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title_bun_option"
+        android:padding="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363">
+
+        <RadioButton
+            android:id="@+id/low_carborator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Low Carborator"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Wholemeal Bun"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/gluten_free_bun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Gluten Free Bun"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/pattie"
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title_pattie_option"
+        android:padding="8dp"
+        app:layout_constraintVertical_bias="0.608">>
+
+        <RadioButton
+            android:id="@+id/Beef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Beef"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/chicken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Chicken"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/vegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Vegan"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title_cheese_option"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.852"><![CDATA[>
+
+
+
+        ]]>
+
+        <RadioButton
+            android:id="@+id/blue_cheese"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Blue Cheese"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/brie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Brie"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/cheddar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/radioGroup2"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Cheddar"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/textView8"
+        android:layout_width="143dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/textview_bg"
+        android:padding="8dp"
+        android:text="NEXT"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.983" />
+
+</RelativeLayout>

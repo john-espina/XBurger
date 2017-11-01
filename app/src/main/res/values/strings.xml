@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">XBurger</string>
+    <string name="step_one">STEP ONE</string>
+    <string name="step_one_title">Choose Your Ingredients</string>
+    <string name="title_bun">BUN OPTIONS</string>
+    <string name="title_pattie">PATTIE OPTIONS</string>
+    <string name="title_cheese">CHEESE OPTIONS</string>
+    <string name="button_order_now">ORDER NOW</string>
+
+
+</resources>

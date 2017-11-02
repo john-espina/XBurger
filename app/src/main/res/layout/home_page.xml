@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/logo_transparent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/burger_img_homepage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/button_login"
@@ -40,7 +40,7 @@
         android:layout_alignStart="@+id/password"
         android:layout_marginBottom="52dp"
         android:background="@drawable/textview_bg"
-        android:text="LOG IN"
+        android:text="@string/button_login"
         android:textColor="#fff" />
 
     <Button
@@ -52,7 +52,7 @@
         android:layout_alignEnd="@+id/password"
         android:layout_alignRight="@+id/password"
         android:background="@drawable/textview_bg"
-        android:text="SIGN UP"
+        android:text="@string/button_signup"
         android:textColor="#fff" />
 
     <EditText

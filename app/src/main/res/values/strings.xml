@@ -6,6 +6,17 @@
     <string name="title_pattie">PATTIE OPTIONS</string>
     <string name="title_cheese">CHEESE OPTIONS</string>
     <string name="button_order_now">ORDER NOW</string>
+    <string name="button_login">LOG IN</string>
+    <string name="button_signup">SIGN UP</string>
+    <string name="step_two">STEP TWO</string>
+    <string name="step_two_title">Review Your Order</string>
+    <string name="edit_order">Edit Order</string>
+    <string name="pay_now">PAY NOW</string>
+    <string name="step_three">STEP THREE</string>
+    <string name="step_three_title">Enter Payment Details</string>
+    <string name="confirm_payment">CONFIRM PAYMENT</string>
+
+
 
 
 </resources>

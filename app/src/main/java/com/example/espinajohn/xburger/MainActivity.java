@@ -15,8 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         control = new BurgerAppLayout(this);
+        control.setUpLandingPage();
 
-        SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
+        //SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
 
         //Get the preferences here
 
@@ -24,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onStop(){
-        SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
+        //SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
+        //SharedPreferences.Editor editor = settings.edit();
 
         //Save the preferences in here
 
-        editor.commit();
+        //editor.commit();
         super.onStop();
     }
 }

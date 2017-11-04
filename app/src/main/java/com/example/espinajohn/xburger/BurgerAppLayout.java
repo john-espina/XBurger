@@ -23,33 +23,33 @@ public class BurgerAppLayout extends ListActivity{
     BurgerAppLayout(Activity act) {
         activity = act;
 
-        switch(currentLayout){
-            case R.layout.activity_main:
-                setUpLandingPage();
-                break;
-            case R.layout.home_page:
-                setUpHomePage();
-                break;
-            case R.layout.ingredient_page:
-                setUpIngredientPage();
-                break;
-            case R.layout.payment_page:
-                setUpPaymentPage();
-                break;
-            case R.layout.review_order:
-                setUpReviewOrder();
-                break;
-            case R.layout.sign_up_page:
-                setUpSignUpPage();
-                break;
-        }
+//        switch(currentLayout){
+//            case R.layout.activity_main:
+//                setUpLandingPage();
+//                break;
+//            case R.layout.home_page:
+//                setUpHomePage();
+//                break;
+//            case R.layout.ingredient_page:
+//                setUpIngredientPage();
+//                break;
+//            case R.layout.payment_page:
+//                setUpPaymentPage();
+//                break;
+//            case R.layout.review_order:
+//                setUpReviewOrder();
+//                break;
+//            case R.layout.sign_up_page:
+//                setUpSignUpPage();
+//                break;
+//        }
     }
 
     //Methods
     public void setUpLandingPage(){
 
         //Set the layout
-        currentLayout = R.layout.activity_main;
+        //currentLayout = R.layout.activity_main;
         activity.setContentView(R.layout.activity_main);
 
         //Set the shared preferences
@@ -76,8 +76,8 @@ public class BurgerAppLayout extends ListActivity{
         //Set the controls
         EditText username = (EditText) findViewById(R.id.username);
         EditText password = (EditText) findViewById(R.id.password);
-        Button login = (Button) findViewById(R.id.button_login);
-        Button signup = (Button) findViewById(R.id.button_signup);
+        Button login = (Button) findViewById(R.id.homepage_login);
+        Button signup = (Button) findViewById(R.id.homepage_signup);
 
         String usernameString = username.getText().toString();
         String passwordString = password.getText().toString();

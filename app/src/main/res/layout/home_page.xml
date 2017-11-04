@@ -26,13 +26,13 @@
         android:id="@+id/burger_img_homepage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button_login"
+        android:layout_alignBottom="@+id/homepage_login"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         app:srcCompat="@drawable/burger_img2" />
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/homepage_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/password"
@@ -44,11 +44,11 @@
         android:textColor="#fff" />
 
     <Button
-        android:id="@+id/button_signup"
+        android:id="@+id/homepage_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_login"
-        android:layout_alignBottom="@+id/button_login"
+        android:layout_alignBaseline="@+id/homepage_login"
+        android:layout_alignBottom="@+id/homepage_login"
         android:layout_alignEnd="@+id/password"
         android:layout_alignRight="@+id/password"
         android:background="@drawable/textview_bg"
@@ -72,7 +72,7 @@
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_above="@+id/button_login"
+        android:layout_above="@+id/homepage_login"
         android:layout_alignLeft="@+id/username"
         android:layout_alignStart="@+id/username"
         android:layout_marginBottom="19dp"

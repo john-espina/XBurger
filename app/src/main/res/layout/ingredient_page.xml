@@ -238,7 +238,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/textView8"
+        android:id="@+id/button_next"
         android:layout_width="143dp"
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"

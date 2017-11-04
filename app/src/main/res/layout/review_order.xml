@@ -65,7 +65,7 @@
         app:layout_constraintVertical_bias="0.374" />
 
     <Button
-        android:id="@+id/button_confirm_payment"
+        android:id="@+id/button_confirm"
         android:layout_width="114dp"
         android:layout_height="61dp"
         android:layout_marginBottom="8dp"

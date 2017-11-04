@@ -86,7 +86,7 @@ public class BurgerAppLayout extends ListActivity{
         // Method to be put in CustomerControls class?
         // If successful go to login page
         login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){activity.setContentView(R.layout.ingredient_page);
+            public void onClick(View v){activity.setContentView(R.layout.ingredient_alternative_prototype);
             }
         });
         signup.setOnClickListener(new View.OnClickListener(){
@@ -119,6 +119,7 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 //Make the bun choices the active radio group
                 //Need to remember the selected option
+                //Remember the selection
             }
         });
 
@@ -126,6 +127,7 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 //Make the meats choices the active radio group
                 //Need to remember the selected option
+                //Remember the selection
             }
         });
 
@@ -133,6 +135,7 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 //Make the salads choices the active radio group
                 //Need to remember the selected option
+                //Remember the selection
             }
         });
 
@@ -140,6 +143,7 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 //Make the sauces choices the active radio group
                 //Need to remember the selected option
+                //Remember the selection
             }
         });
 

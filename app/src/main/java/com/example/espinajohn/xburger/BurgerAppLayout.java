@@ -2,11 +2,14 @@ package com.example.espinajohn.xburger;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import api_communicators.*;
+
 
 /**
  * Created by stlaumade on 2/11/2017.
@@ -23,26 +26,26 @@ public class BurgerAppLayout extends ListActivity{
     BurgerAppLayout(Activity act) {
         activity = act;
 
-//        switch(currentLayout){
-//            case R.layout.activity_main:
-//                setUpLandingPage();
-//                break;
-//            case R.layout.home_page:
-//                setUpHomePage();
-//                break;
-//            case R.layout.ingredient_page:
-//                setUpIngredientPage();
-//                break;
-//            case R.layout.payment_page:
-//                setUpPaymentPage();
-//                break;
-//            case R.layout.review_order:
-//                setUpReviewOrder();
-//                break;
-//            case R.layout.sign_up_page:
-//                setUpSignUpPage();
-//                break;
-//        }
+        switch(currentLayout){
+            case R.layout.activity_main:
+                setUpLandingPage();
+                break;
+            case R.layout.home_page:
+                setUpHomePage();
+                break;
+            case R.layout.ingredient_page:
+                setUpIngredientPage();
+                break;
+            case R.layout.payment_page:
+                setUpPaymentPage();
+                break;
+            case R.layout.review_order:
+                setUpReviewOrder();
+                break;
+            case R.layout.sign_up_page:
+                setUpSignUpPage();
+                break;
+        }
     }
 
     //Methods
@@ -51,6 +54,7 @@ public class BurgerAppLayout extends ListActivity{
         //Set the layout
         //currentLayout = R.layout.activity_main;
         activity.setContentView(R.layout.activity_main);
+
 
         //Set the shared preferences
 
@@ -75,19 +79,33 @@ public class BurgerAppLayout extends ListActivity{
         //Set the shared preferences
 
         //Set the controls
-        EditText username = (EditText) activity.findViewById(R.id.username_);
-        EditText password = (EditText) activity.findViewById(R.id.password);
+        final EditText username = (EditText) activity.findViewById(R.id.username_);
+        final EditText password = (EditText) activity.findViewById(R.id.password);
         Button login = (Button) activity.findViewById(R.id.homepage_login);
         Button signup = (Button) activity.findViewById(R.id.homepage_signup);
 
-        String usernameString = username.getText().toString();
-        String passwordString = password.getText().toString();
 
         // Connect to database to validate the username and ID
         // Method to be put in CustomerControls class?
         // If successful go to login page
         login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v){activity.setContentView(R.layout.ingredient_page);
+
+            public void onClick(View v){
+                final String usernameString = username.getText().toString();
+                String passwordString = password.getText().toString();
+
+                // CustomerVerifier object will execute async processes in the background to retrieve check and retrive customer email and HashPass
+                CustomerVerifier customerDetails = new CustomerVerifier();
+                customerDetails.execute(usernameString);
+
+                Log.d("email", customerDetails.getCustomerEmail());
+                Log.d("passHash", customerDetails.getCustomerPassHash());
+
+                // hash/salt inputted password
+                //compare hashed/salted inutted password to the hashed password retrieved from database
+                //if the same, proceeds to ingredient page
+
+                activity.setContentView(R.layout.ingredient_page);
             setUpIngredientPage();
             }
         });

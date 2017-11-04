@@ -60,7 +60,8 @@ public class BurgerAppLayout extends ListActivity{
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.setContentView(R.layout.home_page);
+//                activity.setContentView(R.layout.home_page);
+                setUpHomePage();
             }
         });
     }
@@ -69,15 +70,15 @@ public class BurgerAppLayout extends ListActivity{
 
         //Set the layout
         currentLayout = R.layout.home_page;
-        activity.setContentView(R.layout.activity_main);
+        activity.setContentView(R.layout.home_page);
 
         //Set the shared preferences
 
         //Set the controls
-        EditText username = (EditText) findViewById(R.id.username);
-        EditText password = (EditText) findViewById(R.id.password);
-        Button login = (Button) findViewById(R.id.homepage_login);
-        Button signup = (Button) findViewById(R.id.homepage_signup);
+        EditText username = (EditText) activity.findViewById(R.id.username_);
+        EditText password = (EditText) activity.findViewById(R.id.password);
+        Button login = (Button) activity.findViewById(R.id.homepage_login);
+        Button signup = (Button) activity.findViewById(R.id.homepage_signup);
 
         String usernameString = username.getText().toString();
         String passwordString = password.getText().toString();
@@ -87,10 +88,12 @@ public class BurgerAppLayout extends ListActivity{
         // If successful go to login page
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){activity.setContentView(R.layout.ingredient_page);
+            setUpIngredientPage();
             }
         });
         signup.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){ activity.setContentView(R.layout.sign_up_page);
+            public void onClick(View v){activity.setContentView(R.layout.sign_up_page);
+            setUpSignUpPage();
             }
         });
     }
@@ -104,15 +107,15 @@ public class BurgerAppLayout extends ListActivity{
         //Set the shared preferences
 
         //Set the controls
-        Button buns = (Button) findViewById(R.id.buns);
-        Button meats = (Button) findViewById(R.id.meats);
-        Button salads = (Button) findViewById(R.id.salads);
-        Button sauces = (Button) findViewById(R.id.sauces);
-        Button next = (Button) findViewById(R.id.button_next);
+        Button buns = (Button) activity.findViewById(R.id.buns);
+        Button meats = (Button) activity.findViewById(R.id.meats);
+        Button salads = (Button) activity.findViewById(R.id.salads);
+        Button sauces = (Button) activity.findViewById(R.id.sauces);
+        Button next = (Button) activity.findViewById(R.id.button_next);
 
         //Need three more radio groups for the other types of selections
         //May need to think of a different layout option rather than radio groups
-        RadioGroup bun_choices = (RadioGroup) findViewById(R.id.bun_choices);
+        RadioGroup bun_choices = (RadioGroup) activity.findViewById(R.id.bun_choices);
 
 
         buns.setOnClickListener(new View.OnClickListener(){
@@ -158,11 +161,11 @@ public class BurgerAppLayout extends ListActivity{
         //Set the shared preferences
 
         //Set the controls
-        EditText creditcard = (EditText) findViewById(R.id.credit_card);
-        EditText expirydate = (EditText) findViewById(R.id.expiry_date);
-        EditText cvv = (EditText) findViewById(R.id.cvv_number);
-        Button confirmpayment = (Button) findViewById(R.id.button_confirm);
-        Button editorder = (Button) findViewById(R.id.button_edit);
+        EditText creditcard = (EditText) activity.findViewById(R.id.credit_card);
+        EditText expirydate = (EditText) activity.findViewById(R.id.expiry_date);
+        EditText cvv = (EditText) activity.findViewById(R.id.cvv_number);
+        Button confirmpayment = (Button) activity.findViewById(R.id.button_confirm);
+        Button editorder = (Button) activity.findViewById(R.id.button_edit);
 
         String creditcard_string = creditcard.getText().toString();
         String expirydate_string = expirydate.getText().toString();
@@ -195,9 +198,9 @@ public class BurgerAppLayout extends ListActivity{
         //Set the shared preferences
 
         //Set the controls
-        TextView ingredient_list = (TextView) findViewById(R.id.order_details);
-        Button paynow = (Button) findViewById(R.id.button_confirm);
-        Button editorder2 = (Button) findViewById(R.id.button_edit);
+        TextView ingredient_list = (TextView) activity.findViewById(R.id.order_details);
+        Button paynow = (Button) activity.findViewById(R.id.button_confirm);
+        Button editorder2 = (Button) activity.findViewById(R.id.button_edit);
 
         //Set all the ingredients in the textview based on the shared preferences
 
@@ -224,12 +227,12 @@ public class BurgerAppLayout extends ListActivity{
         currentLayout = R.layout.sign_up_page;
         activity.setContentView(R.layout.sign_up_page);
 
-        EditText signup_username = (EditText) findViewById(R.id.signup_username);
-        EditText signup_password = (EditText) findViewById(R.id.signup_password);
-        EditText signup_email = (EditText) findViewById(R.id.signup_email);
-        EditText signup_fname = (EditText) findViewById(R.id.signup_fname);
-        EditText signup_lname = (EditText) findViewById(R.id.signup_lname);
-        Button signup = (Button) findViewById(R.id.sign_up_button);
+        EditText signup_username = (EditText) activity.findViewById(R.id.signup_username);
+        EditText signup_password = (EditText) activity.findViewById(R.id.signup_password);
+        EditText signup_email = (EditText) activity.findViewById(R.id.signup_email);
+        EditText signup_fname = (EditText) activity.findViewById(R.id.signup_fname);
+        EditText signup_lname = (EditText) activity.findViewById(R.id.signup_lname);
+        Button signup = (Button) activity.findViewById(R.id.sign_up_button);
 
         String usernameString = signup_username.getText().toString();
         String passwordString = signup_password.getText().toString();

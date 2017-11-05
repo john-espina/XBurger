@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="150dp"
+    android:background="#000"
+    app:layout_constraintTop_toBottomOf="@id/step_one_subtitle"
+    tools:context="com.example.espinajohn.xburger.fragments_ingredient_page.BunsFragment">
+
+    <RadioGroup
+        android:id="@+id/bun_choices"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title_bun_option"
+        android:layout_marginTop="50dp"
+        android:padding="8dp">
+
+        <RadioButton
+            android:id="@+id/low_carborator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Low Carborator"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/gluten_free_bun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Gluten Free Bun"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Wholemeal Bun"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/title_bun_option"
+        android:layout_width="400dp"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/step_one_subtitle"
+        android:layout_weight="1"
+        android:background="@drawable/ingredient_select_bg"
+        android:paddingBottom="2dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="2dp"
+        android:text="@string/title_bun"
+        android:textColor="#000" />
+
+</FrameLayout>

@@ -1,11 +1,10 @@
 package com.example.espinajohn.xburger;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-import java.util.ArrayList;
+import fragments_ingredient_page.BunsFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -73,5 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
         //editor.commit();
         super.onStop();
+    }
+
+    public void addBunFragment(View view){
+        BunsFragment bun_fragment = new BunsFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.placeholder_bun, bun_fragment)
+                .commit();
+
     }
 }

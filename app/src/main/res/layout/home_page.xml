@@ -18,8 +18,8 @@
         app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212"
-        app:srcCompat="@mipmap/logo" />
+        app:layout_constraintVertical_bias="0.212"/>
+        <!--app:srcCompat="@mipmap/logo" />-->
 
     <ImageView
         android:id="@+id/burger_img_homepage"
@@ -27,8 +27,8 @@
         android:layout_height="200dp"
         android:layout_above="@+id/username_"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        app:srcCompat="@mipmap/burger_img2" />
+        android:layout_alignParentStart="true"/>
+        <!--app:srcCompat="@mipmap/burger_img2" />-->
 
     <Button
         android:id="@+id/homepage_login"

@@ -6,7 +6,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/blue_lightning">
+    android:background="#000">
+
+    <FrameLayout
+        android:id="@+id/placeholder_bun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
 
 
     <TextView
@@ -48,64 +56,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.042" />
 
-    <TextView
-        android:id="@+id/title_bun_option"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/step_one_subtitle"
-        android:background="@drawable/ingredient_select_bg"
-        android:paddingBottom="2dp"
-        android:paddingLeft="8dp"
-        android:paddingTop="2dp"
-        android:text="@string/title_bun"
-        android:textColor="#000"
-        app:layout_constraintVertical_bias="0.273" />
 
-    <RadioGroup
-        android:id="@+id/bun_choices"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/title_bun_option"
-        android:padding="8dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363">
-
-        <RadioButton
-            android:id="@+id/low_carborator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Low Carborator"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Wholemeal Bun"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/gluten_free_bun"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Gluten Free Bun"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-    </RadioGroup>
 
     <Button
         android:id="@+id/button_next"
@@ -135,6 +86,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@drawable/textview_bg"
+        android:onClick="addBunFragment"
         android:padding="8dp"
         android:text="Buns"
         android:textAlignment="center"
@@ -207,5 +159,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.983" />
+
+
 
 </RelativeLayout>

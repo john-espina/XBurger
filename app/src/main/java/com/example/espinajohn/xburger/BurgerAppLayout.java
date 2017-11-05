@@ -147,12 +147,12 @@ public class BurgerAppLayout extends ListActivity{
         RadioGroup bun_choices = (RadioGroup) activity.findViewById(R.id.bun_choices);
 
 
-//        buns.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View v){
-//                //Make the bun choices the active radio group
-//                //Need to remember the selected option
-//            }
-//        });
+        buns.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                //Make the bun choices the active radio group
+                //Need to remember the selected option
+            }
+        });
 
         meats.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -278,6 +278,4 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
     }
-
-
 }

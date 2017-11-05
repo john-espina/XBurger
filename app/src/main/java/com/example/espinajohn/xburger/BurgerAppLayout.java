@@ -182,7 +182,7 @@ public class BurgerAppLayout extends ListActivity{
         });
     }
 
-    //This method crashed the app need to investigate. 
+    //This method crashed the app need to investigate.
     public void setUpPaymentPage(){
         //Set the layout
         currentLayout = R.layout.payment_page;
@@ -230,7 +230,7 @@ public class BurgerAppLayout extends ListActivity{
         //Set the controls
         TextView ingredient_list = (TextView) activity.findViewById(R.id.order_details);
         Button paynow = (Button) activity.findViewById(R.id.button_confirm);
-        Button editorder2 = (Button) activity.findViewById(R.id.button_edit);
+        Button editorder2 = (Button) activity.findViewById(R.id.button_edit_order);
 
         //Set all the ingredients in the textview based on the shared preferences
 
@@ -245,7 +245,7 @@ public class BurgerAppLayout extends ListActivity{
 
         editorder2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-               setUpIngredientPage();
+                setUpIngredientPage();
             }
         });
 

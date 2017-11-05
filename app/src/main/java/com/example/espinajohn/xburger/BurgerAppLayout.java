@@ -23,6 +23,7 @@ public class BurgerAppLayout extends ListActivity{
 
     //Shared Preferences
     /**
+     * Placeholder
      * String username;
      * String password;
      * String email;
@@ -69,7 +70,6 @@ public class BurgerAppLayout extends ListActivity{
         //currentLayout = R.layout.activity_main;
         activity.setContentView(R.layout.activity_main);
 
-
         //Set the shared preferences
 
         //Set the controls
@@ -109,8 +109,8 @@ public class BurgerAppLayout extends ListActivity{
                 String passwordString = password.getText().toString();
 
                 // CustomerVerifier object will execute async processes in the background to retrieve check and retrive customer email and HashPass
-                CustomerVerifier customerDetails = new CustomerVerifier();
-                customerDetails.execute(usernameString);
+                //CustomerVerifier customerDetails = new CustomerVerifier();
+                //customerDetails.execute(usernameString);
 
                 // hash/salt inputted password
                 //compare hashed/salted inutted password to the hashed password retrieved from database

@@ -5,8 +5,8 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#000"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/blue_lightning">
 
 
     <TextView
@@ -57,7 +57,7 @@
         android:layout_below="@+id/step_one_subtitle"
         android:background="@drawable/ingredient_select_bg"
         android:paddingBottom="2dp"
-        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
         android:paddingTop="2dp"
         android:text="@string/title_bun"
         android:textColor="#000"
@@ -114,7 +114,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="12dp"
-        android:background="@mipmap/textview_bg"
+        android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="NEXT"
         android:textAlignment="center"
@@ -134,7 +134,7 @@
         android:layout_above="@+id/button_next"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@mipmap/textview_bg"
+        android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="Buns"
         android:textAlignment="center"
@@ -154,7 +154,7 @@
         android:layout_above="@+id/button_next"
         android:layout_toEndOf="@+id/buns"
         android:layout_toRightOf="@+id/buns"
-        android:background="@mipmap/textview_bg"
+        android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="Meat"
         android:textAlignment="center"
@@ -174,7 +174,7 @@
         android:layout_above="@+id/button_next"
         android:layout_toEndOf="@+id/meats"
         android:layout_toRightOf="@+id/meats"
-        android:background="@mipmap/textview_bg"
+        android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="Salad"
         android:textAlignment="center"
@@ -195,7 +195,7 @@
         android:layout_alignBottom="@+id/salads"
         android:layout_toEndOf="@+id/salads"
         android:layout_toRightOf="@+id/salads"
-        android:background="@mipmap/textview_bg"
+        android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="Sauce"
         android:textAlignment="center"

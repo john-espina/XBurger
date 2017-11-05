@@ -10,9 +10,8 @@
         android:id="@+id/logo_login_page"
         android:layout_width="wrap_content"
         android:layout_height="120dp"
-        android:layout_above="@+id/burger_img_homepage"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,9 +23,9 @@
 
     <ImageView
         android:id="@+id/burger_img_homepage"
-        android:layout_width="600dp"
-        android:layout_height="300dp"
-        android:layout_alignBottom="@+id/password"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:layout_above="@+id/username_"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         app:srcCompat="@mipmap/burger_img2" />
@@ -39,7 +38,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/password"
         android:layout_marginBottom="52dp"
-        android:background="@mipmap/textview_bg"
+        android:background="@drawable/textview_bg"
         android:text="@string/button_login"
         android:textColor="#fff" />
 
@@ -51,7 +50,7 @@
         android:layout_alignBottom="@+id/homepage_login"
         android:layout_alignEnd="@+id/password"
         android:layout_alignRight="@+id/password"
-        android:background="@mipmap/textview_bg"
+        android:background="@drawable/textview_bg"
         android:text="@string/button_signup"
         android:textColor="#fff" />
 

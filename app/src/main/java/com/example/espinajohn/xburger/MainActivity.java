@@ -1,14 +1,13 @@
 package com.example.espinajohn.xburger;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import java.util.ArrayList;
-
 import fragments_ingredient_page.BunsFragment;
+import fragments_ingredient_page.CheeseFragment;
+import fragments_ingredient_page.MeatFragments;
+import fragments_ingredient_page.SaladsFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -79,10 +78,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addBunFragment(View view){
-        BunsFragment bun_fragment = new BunsFragment();
+        BunsFragment bunFragment = new BunsFragment();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.placeholder_bun, bun_fragment)
+                .replace(R.id.placeholder, bunFragment)
                 .commit();
 
     }
+
+    public void addMeatFragment(View view){
+        MeatFragments meatFragment = new MeatFragments();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.placeholder, meatFragment)
+                .commit();
+
+    }
+
+    public void addCheeseFragment(View view){
+        CheeseFragment cheeseFragment = new CheeseFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.placeholder, cheeseFragment)
+                .commit();
+
+    }
+
+    public void addSaladFragment(View view){
+        SaladsFragment saladsFragment = new SaladsFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.placeholder, saladsFragment)
+                .commit();
+
+    }
+
+
 }

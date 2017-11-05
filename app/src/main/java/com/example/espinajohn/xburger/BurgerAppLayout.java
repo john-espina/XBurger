@@ -2,13 +2,11 @@ package com.example.espinajohn.xburger;
 
 import android.app.Activity;
 import android.app.ListActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import api_communicators.*;
 
 
 /**
@@ -138,7 +136,8 @@ public class BurgerAppLayout extends ListActivity{
         //Set the controls
         Button buns = (Button) activity.findViewById(R.id.buns);
         Button meats = (Button) activity.findViewById(R.id.meats);
-        Button salads = (Button) activity.findViewById(R.id.salads);
+        Button cheese = (Button) activity.findViewById(R.id.cheese);
+        Button salads = (Button)activity.findViewById(R.id.salads);
         Button sauces = (Button) activity.findViewById(R.id.sauces);
         Button next = (Button) activity.findViewById(R.id.button_next);
 
@@ -147,33 +146,33 @@ public class BurgerAppLayout extends ListActivity{
         RadioGroup bun_choices = (RadioGroup) activity.findViewById(R.id.bun_choices);
 
 
-        buns.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                //Make the bun choices the active radio group
-                //Need to remember the selected option
-            }
-        });
-
-        meats.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                //Make the meats choices the active radio group
-                //Need to remember the selected option
-            }
-        });
-
-        salads.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                //Make the salads choices the active radio group
-                //Need to remember the selected option
-            }
-        });
-
-        sauces.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                //Make the sauces choices the active radio group
-                //Need to remember the selected option
-            }
-        });
+//        buns.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//                //Make the bun choices the active radio group
+//                //Need to remember the selected option
+//            }
+//        });
+//
+//        meats.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//                //Make the meats choices the active radio group
+//                //Need to remember the selected option
+//            }
+//        });
+//
+//        cheese.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//                //Make the salads choices the active radio group
+//                //Need to remember the selected option
+//            }
+//        });
+//
+//        sauces.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//                //Make the sauces choices the active radio group
+//                //Need to remember the selected option
+//            }
+//        });
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){

@@ -4,6 +4,7 @@
     <string name="step_one_title">Choose Your Ingredients</string>
     <string name="title_bun">BUN OPTIONS</string>
     <string name="title_pattie">PATTIE OPTIONS</string>
+    <string name="title_salad">SALAD OPTIONS</string>
     <string name="title_cheese">CHEESE OPTIONS</string>
     <string name="button_order_now">ORDER NOW</string>
     <string name="button_login">LOG IN</string>
@@ -16,8 +17,6 @@
     <string name="step_three_title">Enter Payment Details</string>
     <string name="confirm_payment">CONFIRM PAYMENT</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

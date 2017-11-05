@@ -9,7 +9,7 @@
     tools:context="com.example.espinajohn.xburger.fragments_ingredient_page.BunsFragment">
 
     <RadioGroup
-        android:id="@+id/bun_choices"
+        android:id="@+id/radiogroup_bun_choices"
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_alignParentLeft="true"
@@ -39,7 +39,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/wholemeal_bun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

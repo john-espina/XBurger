@@ -177,7 +177,7 @@ public class BurgerAppLayout extends ListActivity{
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-               setUpPaymentPage();
+               setUpReviewOrder();
             }
         });
     }
@@ -207,7 +207,8 @@ public class BurgerAppLayout extends ListActivity{
         //On click of confirm payment, if payment details are successful
         confirmpayment.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                setUpReviewOrder();
+                //Pop up button to confirm order is successful
+                setUpHomePage();
             }
         });
 
@@ -236,10 +237,7 @@ public class BurgerAppLayout extends ListActivity{
 
         paynow.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                //Make a popup to say order successful
-
-                //Go back to the homepage
-                setUpHomePage();
+                setUpPaymentPage();
             }
         });
 

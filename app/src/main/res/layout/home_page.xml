@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
+    android:background="@mipmap/blue_lightning">
 
     <ImageView
         android:id="@+id/logo_login_page"
@@ -18,8 +18,8 @@
         app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212"/>
-        <!--app:srcCompat="@mipmap/logo" />-->
+        app:layout_constraintVertical_bias="0.212" />
+    <!--app:srcCompat="@mipmap/logo" />-->
 
     <ImageView
         android:id="@+id/burger_img_homepage"
@@ -27,17 +27,17 @@
         android:layout_height="200dp"
         android:layout_above="@+id/username_"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-        <!--app:srcCompat="@mipmap/burger_img2" />-->
+        android:layout_alignParentStart="true" />
+    <!--app:srcCompat="@mipmap/burger_img2" />-->
 
     <Button
         android:id="@+id/homepage_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/password"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/password"
-        android:layout_marginBottom="52dp"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="13dp"
         android:background="@drawable/textview_bg"
         android:text="@string/button_login"
         android:textColor="#fff" />
@@ -58,9 +58,9 @@
         android:id="@+id/username_"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_above="@+id/password"
+        android:layout_below="@+id/logo_login_page"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/background_light"
         android:ems="10"
         android:hint="User Name or Email"
@@ -71,14 +71,14 @@
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_above="@+id/homepage_login"
         android:layout_alignLeft="@+id/username_"
         android:layout_alignStart="@+id/username_"
-        android:layout_marginBottom="19dp"
+        android:layout_alignTop="@+id/username_"
+        android:layout_marginTop="53dp"
         android:background="@android:color/background_light"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:paddingLeft="10dp" />
 
 </RelativeLayout>

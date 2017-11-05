@@ -6,4 +6,5 @@ package api_communicators;
  */
 
 public class IngredientsRetriever {
+    
 }

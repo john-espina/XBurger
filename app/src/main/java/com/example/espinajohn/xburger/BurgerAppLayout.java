@@ -182,6 +182,7 @@ public class BurgerAppLayout extends ListActivity{
         });
     }
 
+    //This method crashed the app need to investigate. 
     public void setUpPaymentPage(){
         //Set the layout
         currentLayout = R.layout.payment_page;

@@ -21,7 +21,8 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintVertical_bias="0.049"
+        app:srcCompat="@mipmap/logo" />
 
     <Button
         android:id="@+id/button_make_order"
@@ -31,7 +32,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/textview_bg"
+        android:background="@mipmap/textview_bg"
         android:padding="8dp"
         android:text="@string/button_order_now"
         android:textAlignment="center"
@@ -55,5 +56,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_order_page"
-        app:srcCompat="@drawable/burger_img2" />
+        app:srcCompat="@mipmap/burger_img2" />
 </android.support.constraint.ConstraintLayout>

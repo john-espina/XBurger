@@ -10,26 +10,26 @@
         android:id="@+id/logo_login_page"
         android:layout_width="wrap_content"
         android:layout_height="120dp"
+        android:layout_above="@+id/burger_img_homepage"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.212"
-        app:srcCompat="@drawable/logo_transparent" />
+        app:srcCompat="@mipmap/logo" />
 
     <ImageView
         android:id="@+id/burger_img_homepage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/homepage_login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        app:srcCompat="@drawable/burger_img2" />
+        android:layout_width="600dp"
+        android:layout_height="300dp"
+        android:layout_alignBottom="@+id/password"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@mipmap/burger_img2" />
 
     <Button
         android:id="@+id/homepage_login"
@@ -39,7 +39,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/password"
         android:layout_marginBottom="52dp"
-        android:background="@drawable/textview_bg"
+        android:background="@mipmap/textview_bg"
         android:text="@string/button_login"
         android:textColor="#fff" />
 
@@ -51,7 +51,7 @@
         android:layout_alignBottom="@+id/homepage_login"
         android:layout_alignEnd="@+id/password"
         android:layout_alignRight="@+id/password"
-        android:background="@drawable/textview_bg"
+        android:background="@mipmap/textview_bg"
         android:text="@string/button_signup"
         android:textColor="#fff" />
 

@@ -20,6 +20,18 @@ public class MainActivity extends AppCompatActivity {
         //SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
 
         //Get the preferences here
+        /**
+         * username;
+         * password;
+         * email;
+         * currentLayout;
+         * bun_choice;
+         * meat_choice;
+         * salad_choice;
+         * sauce_choice;
+         * logged_in;
+         *
+         * */
 
         //Call the Burger Controller to set up the main screen
     }

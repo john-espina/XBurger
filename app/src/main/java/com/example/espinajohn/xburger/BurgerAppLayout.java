@@ -21,6 +21,20 @@ public class BurgerAppLayout extends ListActivity{
     Activity activity;
     int currentLayout;
 
+    //Shared Preferences
+    /**
+     * String username;
+     * String password;
+     * String email;
+     * int currentLayout;
+     * String bun_choice;
+     * String meat_choice;
+     * ArrayList<String> salad_choice;
+     * ArrayList<String> sauce_choice;
+     * Boolean logged_in;
+     *
+     * */
+
     //Constructor
     //Will need to add the shared preferences variables
     BurgerAppLayout(Activity act) {
@@ -98,9 +112,6 @@ public class BurgerAppLayout extends ListActivity{
                 CustomerVerifier customerDetails = new CustomerVerifier();
                 customerDetails.execute(usernameString);
 
-                Log.d("email", customerDetails.getCustomerEmail());
-                Log.d("passHash", customerDetails.getCustomerPassHash());
-
                 // hash/salt inputted password
                 //compare hashed/salted inutted password to the hashed password retrieved from database
                 //if the same, proceeds to ingredient page
@@ -166,7 +177,7 @@ public class BurgerAppLayout extends ListActivity{
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                activity.setContentView(R.layout.payment_page);
+               setUpPaymentPage();
             }
         });
     }
@@ -195,13 +206,13 @@ public class BurgerAppLayout extends ListActivity{
         //On click of confirm payment, if payment details are successful
         confirmpayment.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                activity.setContentView(R.layout.review_order);
+                setUpReviewOrder();
             }
         });
 
         editorder.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                activity.setContentView(R.layout.ingredient_alternative_prototype);
+               setUpIngredientPage();
             }
         });
 
@@ -227,13 +238,13 @@ public class BurgerAppLayout extends ListActivity{
                 //Make a popup to say order successful
 
                 //Go back to the homepage
-                activity.setContentView(R.layout.home_page);
+                setUpHomePage();
             }
         });
 
         editorder2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                activity.setContentView(R.layout.ingredient_alternative_prototype);
+               setUpIngredientPage();
             }
         });
 
@@ -263,7 +274,7 @@ public class BurgerAppLayout extends ListActivity{
 
         signup.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                activity.setContentView(R.layout.ingredient_alternative_prototype);
+                setUpIngredientPage();
             }
         });
     }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/order_history"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/blue_lightning"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/order_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_bg"
+        android:text="Previous Orders"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#fff" />
+
+    <ListView
+        android:id="@+id/history_list"
+        style="@android:style/Widget.DeviceDefault.ExpandableListView.White"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        tools:style="@style/Widget.AppCompat.ListView">
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Reorder"
+            tools:ignore="ButtonStyle,HardcodedText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/ingredient_select_bg"
+            android:text="Reorder"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/back_to_landing_page"
+            tools:ignore="ButtonStyle,HardcodedText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/ingredient_select_bg"
+            android:text="Cancel"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</LinearLayout>

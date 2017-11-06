@@ -70,8 +70,6 @@ public class BurgerAppLayout extends ListActivity{
         currentLayout = R.layout.activity_main;
         activity.setContentView(R.layout.activity_main);
 
-        //Set the shared preferences
-
         //Set the controls
         Button order = (Button) activity.findViewById(R.id.button_make_order);
         Button order_history = (Button) activity.findViewById(R.id.button_order_history);

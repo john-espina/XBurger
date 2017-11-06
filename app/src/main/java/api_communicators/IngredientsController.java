@@ -5,6 +5,6 @@ package api_communicators;
  * Created by johnny on 11/4/2017.
  */
 
-public class IngredientsRetriever {
+public class IngredientsController {
     
 }

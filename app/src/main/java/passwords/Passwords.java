@@ -1,11 +1,8 @@
 package passwords;
 
-import android.annotation.TargetApi;
-import android.os.Build;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -61,7 +58,6 @@ public class Passwords {
      *
      * @return the hashed password with a pinch of salt
      */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     public static byte[] hash(char[] password, byte[] salt, int iterations) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, KEY_LENGTH);
 

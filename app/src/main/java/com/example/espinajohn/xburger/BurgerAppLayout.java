@@ -2,6 +2,7 @@ package com.example.espinajohn.xburger;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,27 +18,26 @@ public class BurgerAppLayout extends ListActivity{
 
     //Variables
     Activity activity;
-    int currentLayout;
 
     //Shared Preferences
+    Boolean app_logged_in;
+    int currentLayout;
+
     /**
      * Placeholder
-     * String username;
-     * String password;
      * String email;
-     * int currentLayout;
      * String bun_choice;
      * String meat_choice;
      * ArrayList<String> salad_choice;
      * ArrayList<String> sauce_choice;
-     * Boolean logged_in;
      *
      * */
 
     //Constructor
     //Will need to add the shared preferences variables
-    BurgerAppLayout(Activity act) {
+    BurgerAppLayout(Activity act, int layout) {
         activity = act;
+        currentLayout = layout;
 
         switch(currentLayout){
             case R.layout.activity_main:
@@ -46,7 +46,7 @@ public class BurgerAppLayout extends ListActivity{
             case R.layout.home_page:
                 setUpHomePage();
                 break;
-            case R.layout.ingredient_page:
+            case R.layout.ingredient_alternative_prototype:
                 setUpIngredientPage();
                 break;
             case R.layout.payment_page:
@@ -65,7 +65,7 @@ public class BurgerAppLayout extends ListActivity{
     public void setUpLandingPage(){
 
         //Set the layout
-        //currentLayout = R.layout.activity_main;
+        currentLayout = R.layout.activity_main;
         activity.setContentView(R.layout.activity_main);
 
         //Set the shared preferences
@@ -77,16 +77,12 @@ public class BurgerAppLayout extends ListActivity{
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                activity.setContentView(R.layout.home_page);
-//               if (logged in) {
-//                   setUpIngredientPage();
-//                } else {
-//                   setUpHomePage();
-//                }
-
-                setUpHomePage();
+               //if (app_logged_in) {
+                   //setUpIngredientPage();
+                //} else {
+                    setUpHomePage();
+                //}
             }
-
         });
 
         order_history.setOnClickListener(new View.OnClickListener(){
@@ -144,6 +140,7 @@ public class BurgerAppLayout extends ListActivity{
 
         //Set the layout
         currentLayout = R.layout.ingredient_alternative_prototype;
+        Log.d("CHECK", "ingredient page " + currentLayout);
         activity.setContentView(R.layout.ingredient_alternative_prototype);
 
         //Set the shared preferences

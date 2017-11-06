@@ -1,7 +1,10 @@
 package com.example.espinajohn.xburger;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import fragments_ingredient_page.BunsFragment;
@@ -14,66 +17,64 @@ public class MainActivity extends AppCompatActivity {
 
     BurgerAppLayout control;
     int currentLayout;
+    //Boolean loggedin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        Log.d("CHECK", "on create");
         super.onCreate(savedInstanceState);
-        control = new BurgerAppLayout(this);
 
+        SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
 
-        //SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
+        //loggedin = settings.getBoolean("logged_in", false);
+        //control.app_logged_in.equals(loggedin.booleanValue());//
 
         //Get the preferences here
+
         /**
-         * Placeholder:
-         * username;
-         * password;
          * email;
-         * currentLayout;
          * bun_choice;
          * meat_choice;
          * salad_choice;
-         * sauce_choice;
-         * logged_in;
-         *
+         * sauce_choice;*
          * */
 
         //Call the Burger Controller to set up the main screen
         if (savedInstanceState != null) {
             // Remember the layout
-            // currentLayout = savedInstanceState.getInt(currentLayout);
+            currentLayout = savedInstanceState.getInt("current_layout");
+            control = new BurgerAppLayout(this, currentLayout);
         } else {
-            control.setUpLandingPage();
+            control = new BurgerAppLayout(this, R.layout.activity_main);
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //Put the saved instance state preferences here
+        outState.putInt("current_layout", control.currentLayout);
         super.onSaveInstanceState(outState);
     }
 
     protected void onStop(){
-        //SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
-        //SharedPreferences.Editor editor = settings.edit();
+        Log.d("CHECK", "on stop");
+        SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+
+        //editor.putBoolean("logged_in", control.app_logged_in);
 
         //Save the preferences in here
         /**
          * Placeholder:
-         * username;
-         * password;
          * email;
-         * currentLayout;
          * bun_choice;
          * meat_choice;
          * salad_choice;
-         * sauce_choice;
-         * logged_in;
-         *
+         * sauce_choice;*
          * */
 
-        //editor.commit();
+        editor.commit();
         super.onStop();
     }
 

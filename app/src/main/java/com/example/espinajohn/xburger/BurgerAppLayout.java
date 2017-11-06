@@ -10,7 +10,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
+import api_communicators.Customer;
+import api_communicators.CustomerVerifier;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
@@ -122,6 +125,22 @@ public class BurgerAppLayout extends ListActivity{
                 // hash/salt inputted password
                 //compare hashed/salted inutted password to the hashed password retrieved from database
                 //if the same, proceeds to ingredient page
+
+                CustomerVerifier cv = new CustomerVerifier();
+                cv.execute(usernameString);
+
+                Customer customer = new Customer();
+                try {
+                    customer = cv.get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("user", customer.getUsername());
+
+
 
                 activity.setContentView(R.layout.ingredient_page);
             setUpIngredientPage();

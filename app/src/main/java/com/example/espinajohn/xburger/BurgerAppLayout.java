@@ -1,7 +1,11 @@
 package com.example.espinajohn.xburger;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +25,7 @@ import fragments_ingredient_page.SaladsFragment;
  * Created by stlaumade on 2/11/2017.
  */
 
-public class BurgerAppLayout extends ListActivity{
+public class BurgerAppLayout extends ListActivity {
 
     //Variables
     Activity activity;
@@ -37,7 +41,7 @@ public class BurgerAppLayout extends ListActivity{
         activity = act;
         currentLayout = layout;
 
-        switch(currentLayout){
+        switch (currentLayout) {
             case R.layout.activity_main:
                 setUpLandingPage();
                 break;
@@ -60,7 +64,7 @@ public class BurgerAppLayout extends ListActivity{
     }
 
     //Methods
-    public void setUpLandingPage(){
+    public void setUpLandingPage() {
 
         //Set the layout
         currentLayout = R.layout.activity_main;
@@ -75,23 +79,23 @@ public class BurgerAppLayout extends ListActivity{
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //if (app_logged_in) {
-                   //setUpIngredientPage();
+                //if (app_logged_in) {
+                //setUpIngredientPage();
                 //} else {
-                    setUpHomePage();
+                setUpHomePage();
                 //}
             }
         });
 
-        order_history.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        order_history.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 //Open the list layout with order history
                 //Needs to be created
             }
         });
     }
 
-    public void setUpHomePage(){
+    public void setUpHomePage() {
 
         //Set the layout
         currentLayout = R.layout.home_page;
@@ -111,7 +115,7 @@ public class BurgerAppLayout extends ListActivity{
         // If successful go to login page
         login.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v){
+            public void onClick(View v) {
                 final String usernameString = username.getText().toString();
                 String passwordString = password.getText().toString();
 
@@ -124,17 +128,18 @@ public class BurgerAppLayout extends ListActivity{
                 //if the same, proceeds to ingredient page
 
                 activity.setContentView(R.layout.ingredient_page);
-            setUpIngredientPage();
+                setUpIngredientPage();
             }
         });
-        signup.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){activity.setContentView(R.layout.sign_up_page);
-            setUpSignUpPage();
+        signup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                activity.setContentView(R.layout.sign_up_page);
+                setUpSignUpPage();
             }
         });
     }
 
-    public void setUpIngredientPage(){
+    public void setUpIngredientPage() {
 
         //Set the layout
         currentLayout = R.layout.ingredient_alternative_prototype;
@@ -148,20 +153,21 @@ public class BurgerAppLayout extends ListActivity{
         Button meats = (Button) activity.findViewById(R.id.meats);
         Button cheese = (Button) activity.findViewById(R.id.cheese);
 
-        buns.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-
+        buns.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                rememberIngredients();
                 BunsFragment bunFragment = new BunsFragment();
                 activity.getFragmentManager().beginTransaction()
-                            .replace(R.id.placeholder, bunFragment)
-                            .commit();
-                }
+                        .replace(R.id.placeholder, bunFragment)
+                        .commit();
+            }
 
         });
 
 
-        meats.setOnClickListener(new View.OnClickListener(){
+        meats.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                rememberIngredients();
                 MeatFragments meatFragment = new MeatFragments();
                 activity.getFragmentManager().beginTransaction()
                         .replace(R.id.placeholder, meatFragment)
@@ -169,8 +175,9 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
 
-        cheese.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        cheese.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                rememberIngredients();
                 CheeseFragment cheeseFragment = new CheeseFragment();
                 activity.getFragmentManager().beginTransaction()
                         .replace(R.id.placeholder, cheeseFragment)
@@ -179,8 +186,9 @@ public class BurgerAppLayout extends ListActivity{
         });
 
 
-        salads.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
+        salads.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                rememberIngredients();
                 SaladsFragment saladsFragment = new SaladsFragment();
                 activity.getFragmentManager().beginTransaction()
                         .replace(R.id.placeholder, saladsFragment)
@@ -189,15 +197,19 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
 
-        next.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                for (int i = 0; i < burger_order_ingredients.size(); i++) {
+                    Log.d ("Ingredients", burger_order_ingredients.get(i).toString ());
+                }
                 setUpReviewOrder();
+
             }
         });
     }
 
     //This method crashed the app need to investigate.
-    public void setUpPaymentPage(){
+    public void setUpPaymentPage() {
         //Set the layout
         currentLayout = R.layout.payment_page;
         activity.setContentView(R.layout.payment_page);
@@ -219,22 +231,22 @@ public class BurgerAppLayout extends ListActivity{
         //Connect with external payment provider
 
         //On click of confirm payment, if payment details are successful
-        confirmpayment.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        confirmpayment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 //Pop up button to confirm order is successful
                 setUpHomePage();
             }
         });
 
-        editorder.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-               setUpIngredientPage();
+        editorder.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setUpIngredientPage();
             }
         });
 
     }
 
-    public void setUpReviewOrder(){
+    public void setUpReviewOrder() {
 
         //Set the layout
         currentLayout = R.layout.review_order;
@@ -249,21 +261,21 @@ public class BurgerAppLayout extends ListActivity{
 
         //Set all the ingredients in the textview based on the shared preferences
 
-        paynow.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        paynow.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 setUpPaymentPage();
             }
         });
 
-        editorder2.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        editorder2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 setUpIngredientPage();
             }
         });
 
     }
 
-    public void setUpSignUpPage(){
+    public void setUpSignUpPage() {
 
         //Set the layout
         currentLayout = R.layout.sign_up_page;
@@ -280,18 +292,54 @@ public class BurgerAppLayout extends ListActivity{
         String passwordString = signup_password.getText().toString();
         String emailString = signup_email.getText().toString();
         String fnameString = signup_fname.getText().toString();
-        String lnameString = signup_lname.getText().toString();
+        String lnameString = signup_lname.getText().toString();s
 
         //Set the shared preferences
         //Send all the strings to the database
 
-        signup.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        signup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 setUpIngredientPage();
             }
         });
     }
 
+    public void rememberIngredients() {
 
+                if (activity.getFragmentManager ().findFragmentById (R.id.frag_buns).isVisible () && activity.getFragmentManager ().findFragmentById (R.id.frag_buns)!=null) {
+                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_bun_choices));
+                } else if (activity.getFragmentManager ().findFragmentById (R.id.frag_cheese).isVisible () && activity.getFragmentManager ().findFragmentById (R.id.frag_cheese) != null) {
+                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_cheese_options));
+                } else if (activity.getFragmentManager ().findFragmentById (R.id.frag_meat).isVisible () && activity.getFragmentManager ().findFragmentById (R.id.frag_meat)!=null) {
+                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_meat_choices));
+                } else if (activity.getFragmentManager ().findFragmentById (R.id.frag_salad).isVisible ()&& activity.getFragmentManager ().findFragmentById (R.id.frag_salad) != null) {
+                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_salad_choices));
+                } else if (activity.getFragmentManager ().findFragmentById (R.id.frag_sauce).isVisible () && activity.getFragmentManager ().findFragmentById (R.id.frag_sauce) != null) {
+                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_salad_choices));
+                }
+    }
 
+    public void findIngredientsChecked(RadioGroup radioGroup){
+        //Then find the ingredient/s checked
+        if (radioGroup.getCheckedRadioButtonId() ==-1){
+            //Pop up you have not selected any ingredients
+            alertDialogBox("You have not selected any ingredients");
+        } else {
+            //If not already in the array list
+            //Add them to the array list
+            if (!burger_order_ingredients.contains (radioGroup.getCheckedRadioButtonId ())) {
+                burger_order_ingredients.add (radioGroup.getCheckedRadioButtonId ());
+            }
+        }
+    }
+
+    public void alertDialogBox(String message){
+//        AlertDialog.Builder alertDialog = new AlertDialog(activity.getApplicationContext());
+//        alertDialog.setCancelable(false).setPositiveButton(message, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int id) {
+//            }
+//        });
+//        AlertDialog alert = alertDialog.create();
+//        alert.show();
+    }
 }

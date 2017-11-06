@@ -83,7 +83,10 @@ public class BurgerAppLayout extends ListActivity{
 //                } else {
 //                   setUpHomePage();
 //                }
+
+                setUpHomePage();
             }
+
         });
 
         order_history.setOnClickListener(new View.OnClickListener(){

@@ -2,18 +2,16 @@ package com.example.espinajohn.xburger;
 
 import android.app.Activity;
 import android.app.ListActivity;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import api_communicators.Customer;
-import api_communicators.CustomerVerifier;
+import api_communicators.CustomerDetailsController;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
@@ -117,33 +115,34 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 final String usernameString = username.getText().toString();
                 String passwordString = password.getText().toString();
+                String loginMethod ="";
 
-                // CustomerVerifier object will execute async processes in the background to retrieve check and retrive customer email and HashPass
-                //CustomerVerifier customerDetails = new CustomerVerifier();
-                //customerDetails.execute(usernameString);
+                if (usernameString.contains("@")){
+                    loginMethod = "email/";
+                } else {
+                    loginMethod = "username/";
+                }
 
-                // hash/salt inputted password
-                //compare hashed/salted inutted password to the hashed password retrieved from database
-                //if the same, proceeds to ingredient page
-
-                CustomerVerifier cv = new CustomerVerifier();
-                cv.execute(usernameString);
+                CustomerDetailsController customerDetails = new CustomerDetailsController();
+                customerDetails.execute(loginMethod,usernameString);
 
                 Customer customer = new Customer();
                 try {
-                    customer = cv.get();
+                    customer = customerDetails.get();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
 
-                Log.d("user", customer.getUsername());
+                Log.d("customer", customer.getUsername());
 
-
+                // hash/salt inputted password
+                //compare hashed/salted inutted password to the hashed password retrieved from database
+                //if the same, proceeds to ingredient page
 
                 activity.setContentView(R.layout.ingredient_page);
-            setUpIngredientPage();
+                setUpIngredientPage();
             }
         });
         signup.setOnClickListener(new View.OnClickListener(){

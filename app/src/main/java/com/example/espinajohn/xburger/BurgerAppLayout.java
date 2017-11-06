@@ -117,29 +117,29 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 final String usernameString = username.getText().toString();
                 String passwordString = password.getText().toString();
-                String loginMethod ="";
-                // CustomerVerifier object will execute async processes in the background to retrieve check and retrive customer email and HashPass
-                //CustomerVerifier customerDetails = new CustomerVerifier();
-                //customerDetails.execute(usernameString);
-
-                // hash/salt inputted password
-                //compare hashed/salted inutted password to the hashed password retrieved from database
-                //if the same, proceeds to ingredient page
-
-
-                CustomerDetailsController customerDetails = new CustomerDetailsController();
-                customerDetails.execute(loginMethod,usernameString);
-
-                Customer customer = new Customer();
-                try {
-                    customer = customerDetails.get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-                Log.d("user", customer.getUsername());
+//                String loginMethod ="";
+//                // CustomerVerifier object will execute async processes in the background to retrieve check and retrive customer email and HashPass
+//                //CustomerVerifier customerDetails = new CustomerVerifier();
+//                //customerDetails.execute(usernameString);
+//
+//                // hash/salt inputted password
+//                //compare hashed/salted inutted password to the hashed password retrieved from database
+//                //if the same, proceeds to ingredient page
+//
+//
+//                CustomerDetailsController customerDetails = new CustomerDetailsController();
+//                customerDetails.execute(loginMethod,usernameString);
+//
+//                Customer customer = new Customer();
+//                try {
+//                    customer = customerDetails.get();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (ExecutionException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                Log.d("user", customer.getUsername());
 
 
 
@@ -163,10 +163,10 @@ public class BurgerAppLayout extends ListActivity{
 
         //Set the controls
         Button next = (Button) activity.findViewById(R.id.button_next);
-        Button salads = (Button) activity.findViewById(R.id.salads);
-        Button buns = (Button) activity.findViewById(R.id.buns);
-        Button meats = (Button) activity.findViewById(R.id.meats);
-        Button cheese = (Button) activity.findViewById(R.id.cheese);
+        Button salads = (Button) activity.findViewById(R.id.salads_button);
+        Button buns = (Button) activity.findViewById(R.id.buns_button);
+        Button meats = (Button) activity.findViewById(R.id.meats_button);
+        Button cheese = (Button) activity.findViewById(R.id.cheese_button);
 
         buns.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){

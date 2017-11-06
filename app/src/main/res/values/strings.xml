@@ -11,6 +11,7 @@
     <string name="step_two">STEP TWO</string>
     <string name="step_two_title">Review Your Order</string>
     <string name="edit_order">Edit Order</string>
+    <string name="review_order">Review Order</string>
     <string name="pay_now">PAY NOW</string>
     <string name="step_three">STEP THREE</string>
     <string name="step_three_title">Enter Payment Details</string>

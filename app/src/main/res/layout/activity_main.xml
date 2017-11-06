@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,10 +28,9 @@
         android:id="@+id/button_make_order"
         android:layout_width="202dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_below="@+id/burger_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="@string/button_order_now"
@@ -44,18 +43,34 @@
         app:layout_constraintTop_toBottomOf="@+id/burger_img"
         app:layout_constraintVertical_bias="0.46" />
 
+    <Button
+        android:id="@+id/button_order_history"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/button_make_order"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/ingredient_select_bg"
+        android:text="@string/review_order"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/burger_img"
+        app:layout_constraintVertical_bias="0.46" />
+
     <ImageView
         android:id="@+id/burger_img"
         android:layout_width="261dp"
         android:layout_height="177dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_below="@+id/logo_order_page"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toTopOf="@+id/text_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_order_page"
         app:srcCompat="@mipmap/burger_img2" />
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

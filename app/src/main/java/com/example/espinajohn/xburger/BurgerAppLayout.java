@@ -74,12 +74,24 @@ public class BurgerAppLayout extends ListActivity{
 
         //Set the controls
         Button order = (Button) activity.findViewById(R.id.button_make_order);
+        Button order_history = (Button) activity.findViewById(R.id.button_order_history);
 
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                activity.setContentView(R.layout.home_page);
-                setUpHomePage();
+//               if (logged in) {
+//                   setUpIngredientPage();
+//                } else {
+//                   setUpHomePage();
+//                }
+            }
+        });
+
+        order_history.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                //Open the list layout with order history
+                //Needs to be created
             }
         });
     }

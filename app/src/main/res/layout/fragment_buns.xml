@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#fff"
+            android:onClick="onRadioButton"
             android:text="Gluten Free"
             android:textColor="#fff"
             android:textSize="12sp" />

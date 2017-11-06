@@ -93,11 +93,24 @@ public class MainActivity extends AppCompatActivity {
         boolean checked = ((RadioButton)view).isChecked();
         String chosen = null;
         switch (view.getId()){
-            case R.id.low_carborator:
+            case R.id.bun_white:
                 if (checked){
-                    chosen = "low carborator";
+                    chosen = "white";
                     Log.d("chosen:", chosen);
                 }
+            case R.id.bun_wholemeal:
+                if (checked){
+                    //code here
+                }
+            case R.id.bun_sordough:
+                if (checked){
+                    //code here
+                }
+            case R.id.bun_gluten_free:
+                if (checked){
+                    //code here
+                }
+
         }
 
     }

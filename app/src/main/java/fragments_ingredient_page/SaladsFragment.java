@@ -7,19 +7,26 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.espinajohn.xburger.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SaladsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SaladsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class SaladsFragment extends Fragment {
+
+    View rootView;
+    RadioGroup rg;
+    RadioButton lettuce;
+    RadioButton tomato;
+    RadioButton onion;
+    RadioButton redOnion;
+    RadioButton beetroot;
+    RadioButton pickle;
+    RadioButton capsicum;
+    RadioButton olives;
+    RadioButton cucumber;
 
 
     public SaladsFragment() {
@@ -32,7 +39,20 @@ public class SaladsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_salads, container, false);
+        rootView = inflater.inflate(R.layout.fragment_buns, container, false);
+        rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_bun_choices);
+        lettuce = (RadioButton) rootView.findViewById(R.id.salad_lettuce);
+        tomato =(RadioButton) rootView.findViewById(R.id.salad_tomato);
+        onion = (RadioButton) rootView.findViewById(R.id.salad_onion);
+        redOnion =(RadioButton) rootView.findViewById(R.id.salad_red_onion);
+        beetroot = (RadioButton) rootView.findViewById(R.id.salad_beetroot);
+        pickle = (RadioButton) rootView.findViewById(R.id.salad_pickle);
+        capsicum = (RadioButton) rootView.findViewById(R.id.salad_capsicum);
+        olives = (RadioButton) rootView.findViewById(R.id.salad_olives);
+        cucumber = (RadioButton) rootView.findViewById(R.id.salad_cucumber);
+
+
+        return  rootView;
     }
 
 

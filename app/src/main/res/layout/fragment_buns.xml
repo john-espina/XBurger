@@ -20,33 +20,43 @@
         android:padding="8dp">
 
         <RadioButton
-            android:id="@+id/low_carborator"
+            android:id="@+id/bun_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#fff"
             android:onClick="onRadioButtonClicked"
-            android:text="Low Carborator"
+            android:text="White"
             android:textColor="#fff"
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/gluten_free_bun"
+            android:id="@+id/bun_wholemeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#fff"
-            android:text="Gluten Free Bun"
+            android:text="Wholemeal"
             android:textColor="#fff"
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/wholemeal_bun"
+            android:id="@+id/bun_sordough"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#fff"
-            android:text="Wholemeal Bun"
+            android:text="Sordough"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/bun_gluten_free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Gluten Free"
             android:textColor="#fff"
             android:textSize="12sp" />
 

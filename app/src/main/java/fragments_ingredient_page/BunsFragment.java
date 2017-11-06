@@ -21,7 +21,10 @@ public class BunsFragment extends Fragment {
 
 
     RadioGroup rg;
-    RadioButton bunRB;
+    RadioButton bunWhite;
+    RadioButton bunWholemeal;
+    RadioButton bunSordough;
+    RadioButton bunGlutenFree;
     View rootView;
 
     public BunsFragment() {
@@ -34,8 +37,12 @@ public class BunsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_buns, container, false);
-        bunRB = (RadioButton) rootView.findViewById(R.id.low_carborator);
         rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_bun_choices);
+        bunWhite = (RadioButton) rootView.findViewById(R.id.bun_white);
+        bunWholemeal = (RadioButton) rootView.findViewById(R.id.bun_wholemeal);
+        bunSordough = (RadioButton) rootView.findViewById(R.id.bun_sordough);
+        bunGlutenFree =(RadioButton) rootView.findViewById(R.id.bun_gluten_free);
+
         return rootView;
     }
 

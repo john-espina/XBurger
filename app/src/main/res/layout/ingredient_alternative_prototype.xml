@@ -14,10 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp" />
 
-
-
-
-
     <TextView
         android:id="@+id/step_one_subtitle"
         android:layout_width="match_parent"
@@ -86,7 +82,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/meats"
         android:background="@drawable/textview_bg"
-        android:onClick="addBunFragment"
         android:padding="8dp"
         android:text="Buns"
         android:textAlignment="center"
@@ -107,7 +102,6 @@
         android:layout_toEndOf="@+id/buns"
         android:layout_toRightOf="@+id/buns"
         android:background="@drawable/textview_bg"
-        android:onClick="addMeatFragment"
         android:padding="8dp"
         android:text="Meat"
         android:textAlignment="center"
@@ -128,7 +122,6 @@
         android:layout_toEndOf="@+id/meats"
         android:layout_toRightOf="@+id/meats"
         android:background="@drawable/textview_bg"
-        android:onClick="addCheeseFragment"
         android:padding="8dp"
         android:text="CHEESE"
         android:textAlignment="center"
@@ -151,7 +144,6 @@
         android:layout_toEndOf="@+id/cheese"
         android:layout_toRightOf="@+id/cheese"
         android:background="@drawable/textview_bg"
-        android:onClick="addSaladFragment"
         android:padding="8dp"
         android:text="SALADS"
         android:textAlignment="center"

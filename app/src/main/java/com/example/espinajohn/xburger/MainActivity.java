@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     BurgerAppLayout control;
     int currentLayout;
+    ArrayList<Integer> burger_order_ingredients;
     //Boolean loggedin;
 
     @Override
@@ -45,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
             // Remember the layout
             currentLayout = savedInstanceState.getInt("current_layout");
             control = new BurgerAppLayout(this, currentLayout);
+            //Do something with the burger ingredient list
+
+
         } else {
             control = new BurgerAppLayout(this, R.layout.activity_main);
         }
@@ -54,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         //Put the saved instance state preferences here
         outState.putInt("current_layout", control.currentLayout);
+        //outState.putStringArrayList("burger_order", burger_order_ingredients);
         super.onSaveInstanceState(outState);
     }
 
@@ -77,38 +86,5 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
         super.onStop();
     }
-
-    public void addBunFragment(View view){
-        BunsFragment bunFragment = new BunsFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.placeholder, bunFragment)
-                .commit();
-
-    }
-
-    public void addMeatFragment(View view){
-        MeatFragments meatFragment = new MeatFragments();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.placeholder, meatFragment)
-                .commit();
-
-    }
-
-    public void addCheeseFragment(View view){
-        CheeseFragment cheeseFragment = new CheeseFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.placeholder, cheeseFragment)
-                .commit();
-
-    }
-
-    public void addSaladFragment(View view){
-        SaladsFragment saladsFragment = new SaladsFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.placeholder, saladsFragment)
-                .commit();
-
-    }
-
 
 }

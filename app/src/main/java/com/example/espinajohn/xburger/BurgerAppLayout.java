@@ -2,12 +2,19 @@ package com.example.espinajohn.xburger;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import java.util.ArrayList;
+
+import fragments_ingredient_page.BunsFragment;
+import fragments_ingredient_page.CheeseFragment;
+import fragments_ingredient_page.MeatFragments;
+import fragments_ingredient_page.SaladsFragment;
 
 
 /**
@@ -19,19 +26,10 @@ public class BurgerAppLayout extends ListActivity{
     //Variables
     Activity activity;
 
-    //Shared Preferences
+    //Things to remember for state
     Boolean app_logged_in;
     int currentLayout;
-
-    /**
-     * Placeholder
-     * String email;
-     * String bun_choice;
-     * String meat_choice;
-     * ArrayList<String> salad_choice;
-     * ArrayList<String> sauce_choice;
-     *
-     * */
+    ArrayList<Integer> burger_order_ingredients;
 
     //Constructor
     //Will need to add the shared preferences variables
@@ -143,52 +141,57 @@ public class BurgerAppLayout extends ListActivity{
         Log.d("CHECK", "ingredient page " + currentLayout);
         activity.setContentView(R.layout.ingredient_alternative_prototype);
 
-        //Set the shared preferences
-
         //Set the controls
+        Button next = (Button) activity.findViewById(R.id.button_next);
+        Button salads = (Button) activity.findViewById(R.id.salads);
         Button buns = (Button) activity.findViewById(R.id.buns);
         Button meats = (Button) activity.findViewById(R.id.meats);
         Button cheese = (Button) activity.findViewById(R.id.cheese);
-        Button salads = (Button)activity.findViewById(R.id.salads);
-        Button sauces = (Button) activity.findViewById(R.id.sauces);
-        Button next = (Button) activity.findViewById(R.id.button_next);
 
-        //Need three more radio groups for the other types of selections
-        //May need to think of a different layout option rather than radio groups
-        RadioGroup bun_choices = (RadioGroup) activity.findViewById(R.id.bun_choices);
+        buns.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                BunsFragment bunFragment = new BunsFragment();
+                activity.getFragmentManager().beginTransaction()
+                            .replace(R.id.placeholder, bunFragment)
+                            .commit();
+                }
+
+        });
 
 
-//        buns.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View v){
-//                //Make the bun choices the active radio group
-//                //Need to remember the selected option
-//            }
-//        });
-//
-//        meats.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View v){
-//                //Make the meats choices the active radio group
-//                //Need to remember the selected option
-//            }
-//        });
-//
-//        cheese.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View v){
-//                //Make the salads choices the active radio group
-//                //Need to remember the selected option
-//            }
-//        });
-//
-//        sauces.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View v){
-//                //Make the sauces choices the active radio group
-//                //Need to remember the selected option
-//            }
-//        });
+        meats.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                MeatFragments meatFragment = new MeatFragments();
+                activity.getFragmentManager().beginTransaction()
+                        .replace(R.id.placeholder, meatFragment)
+                        .commit();
+            }
+        });
+
+        cheese.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                CheeseFragment cheeseFragment = new CheeseFragment();
+                activity.getFragmentManager().beginTransaction()
+                        .replace(R.id.placeholder, cheeseFragment)
+                        .commit();
+            }
+        });
+
+
+        salads.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                SaladsFragment saladsFragment = new SaladsFragment();
+                activity.getFragmentManager().beginTransaction()
+                        .replace(R.id.placeholder, saladsFragment)
+                        .commit();
+
+            }
+        });
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-               setUpReviewOrder();
+                setUpReviewOrder();
             }
         });
     }
@@ -288,4 +291,7 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
     }
+
+
+
 }

@@ -6,15 +6,14 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import api_communicators.Customer;
+import api_communicators.CustomerVerifier;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
@@ -127,19 +126,19 @@ public class BurgerAppLayout extends ListActivity{
                 //compare hashed/salted inutted password to the hashed password retrieved from database
                 //if the same, proceeds to ingredient page
 
-//                CustomerVerifier cv = new CustomerVerifier();
-//                cv.execute(usernameString);
-//
-//                Customer customer = new Customer();
-//                try {
-//                    customer = cv.get();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                Log.d("user", customer.getUsername());
+                CustomerVerifier cv = new CustomerVerifier();
+                cv.execute(usernameString);
+
+                Customer customer = new Customer();
+                try {
+                    customer = cv.get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("user", customer.getUsername());
 
 
 
@@ -163,41 +162,19 @@ public class BurgerAppLayout extends ListActivity{
 
         //Set the controls
         Button next = (Button) activity.findViewById(R.id.button_next);
-        Button salads = (Button) activity.findViewById(R.id.salads_button);
-        Button buns = (Button) activity.findViewById(R.id.buns_button);
-        Button meats = (Button) activity.findViewById(R.id.meats_button);
-        Button cheese = (Button) activity.findViewById(R.id.cheese_button);
+        Button salads = (Button) activity.findViewById(R.id.salads);
+        Button buns = (Button) activity.findViewById(R.id.buns);
+        Button meats = (Button) activity.findViewById(R.id.meats);
+        Button cheese = (Button) activity.findViewById(R.id.cheese);
 
-        //RadioGroup does not exist
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radiogroup_bun_choices);
+        buns.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
 
-        buns.setOnClickListener(new PassRadioOnClickListener (radioGroup){
-                    public void onClick(View v){
-
-                        BunsFragment bunFragment = new BunsFragment();
-                        activity.getFragmentManager().beginTransaction()
-                                .replace(R.id.placeholder, bunFragment)
-                                .commit();
-
-                        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener ()
-                {
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        switch(checkedId) {
-                            case R.id.low_carborator:
-                                burger_order_ingredients.add (R.id.low_carborator);
-                                break;
-                            case R.id.gluten_free_bun:
-                                burger_order_ingredients.add (R.id.gluten_free_bun);
-                                break;
-                            case R.id.wholemeal_bun:
-                                burger_order_ingredients.add (R.id.wholemeal_bun);
-                                break;
-                        }
-                    }
-                });
-            }
-
-
+                BunsFragment bunFragment = new BunsFragment();
+                activity.getFragmentManager().beginTransaction()
+                            .replace(R.id.placeholder, bunFragment)
+                            .commit();
+                }
 
         });
 
@@ -238,6 +215,7 @@ public class BurgerAppLayout extends ListActivity{
         });
     }
 
+    //This method crashed the app need to investigate.
     public void setUpPaymentPage(){
         //Set the layout
         currentLayout = R.layout.payment_page;

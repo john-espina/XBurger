@@ -75,12 +75,12 @@
         app:layout_constraintVertical_bias="0.983" />
 
     <Button
-        android:id="@+id/buns"
+        android:id="@+id/buns_button"
         android:layout_width="65dp"
         android:layout_height="55dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/meats"
+        android:layout_alignTop="@+id/meats_button"
         android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="Buns"
@@ -95,12 +95,12 @@
         app:layout_constraintVertical_bias="0.983" />
 
     <Button
-        android:id="@+id/meats"
+        android:id="@+id/meats_button"
         android:layout_width="75dp"
         android:layout_height="55dp"
         android:layout_above="@+id/button_next"
-        android:layout_toEndOf="@+id/buns"
-        android:layout_toRightOf="@+id/buns"
+        android:layout_toEndOf="@+id/buns_button"
+        android:layout_toRightOf="@+id/buns_button"
         android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="Meat"
@@ -115,12 +115,12 @@
         app:layout_constraintVertical_bias="0.983" />
 
     <Button
-        android:id="@+id/cheese"
+        android:id="@+id/cheese_button"
         android:layout_width="65dp"
         android:layout_height="55dp"
         android:layout_above="@+id/button_next"
-        android:layout_toEndOf="@+id/meats"
-        android:layout_toRightOf="@+id/meats"
+        android:layout_toEndOf="@+id/meats_button"
+        android:layout_toRightOf="@+id/meats_button"
         android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="CHEESE"
@@ -135,14 +135,14 @@
         app:layout_constraintVertical_bias="0.983" />
 
     <Button
-        android:id="@+id/salads"
+        android:id="@+id/salads_button"
         android:layout_width="65dp"
         android:layout_height="55dp"
         android:layout_above="@+id/button_next"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
-        android:layout_toEndOf="@+id/cheese"
-        android:layout_toRightOf="@+id/cheese"
+        android:layout_toEndOf="@+id/cheese_button"
+        android:layout_toRightOf="@+id/cheese_button"
         android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="SALADS"
@@ -157,14 +157,14 @@
         app:layout_constraintVertical_bias="0.983" />
 
     <Button
-        android:id="@+id/sauces"
+        android:id="@+id/sauces_button"
         android:layout_width="65dp"
         android:layout_height="55dp"
-        android:layout_alignBottom="@+id/salads"
+        android:layout_alignBottom="@+id/salads_button"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
-        android:layout_toEndOf="@+id/salads"
-        android:layout_toRightOf="@+id/salads"
+        android:layout_toEndOf="@+id/salads_button"
+        android:layout_toRightOf="@+id/salads_button"
         android:background="@drawable/textview_bg"
         android:padding="8dp"
         android:text="Sauce"

@@ -1,23 +1,17 @@
 package com.example.espinajohn.xburger;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
-import android.os.Build;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
-import api_communicators.Customer;
-import api_communicators.CustomerVerifier;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
@@ -46,22 +40,22 @@ public class BurgerAppLayout extends ListActivity {
 
         switch (currentLayout) {
             case R.layout.activity_main:
-                setUpLandingPage();
+                setUpLandingPage ();
                 break;
             case R.layout.home_page:
-                setUpHomePage();
+                setUpHomePage ();
                 break;
             case R.layout.ingredient_alternative_prototype:
-                setUpIngredientPage();
+                setUpIngredientPage ();
                 break;
             case R.layout.payment_page:
-                setUpPaymentPage();
+                setUpPaymentPage ();
                 break;
             case R.layout.review_order:
-                setUpReviewOrder();
+                setUpReviewOrder ();
                 break;
             case R.layout.sign_up_page:
-                setUpSignUpPage();
+                setUpSignUpPage ();
                 break;
         }
     }
@@ -71,26 +65,26 @@ public class BurgerAppLayout extends ListActivity {
 
         //Set the layout
         currentLayout = R.layout.activity_main;
-        activity.setContentView(R.layout.activity_main);
+        activity.setContentView (R.layout.activity_main);
 
         //Set the shared preferences
 
         //Set the controls
-        Button order = (Button) activity.findViewById(R.id.button_make_order);
-        Button order_history = (Button) activity.findViewById(R.id.button_order_history);
+        Button order = (Button) activity.findViewById (R.id.button_make_order);
+        Button order_history = (Button) activity.findViewById (R.id.button_order_history);
 
-        order.setOnClickListener(new View.OnClickListener() {
+        order.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 //if (app_logged_in) {
                 //setUpIngredientPage();
                 //} else {
-                setUpHomePage();
+                setUpHomePage ();
                 //}
             }
         });
 
-        order_history.setOnClickListener(new View.OnClickListener() {
+        order_history.setOnClickListener (new View.OnClickListener () {
             public void onClick(View v) {
                 //Open the list layout with order history
                 //Needs to be created
@@ -102,25 +96,25 @@ public class BurgerAppLayout extends ListActivity {
 
         //Set the layout
         currentLayout = R.layout.home_page;
-        activity.setContentView(R.layout.home_page);
+        activity.setContentView (R.layout.home_page);
 
         //Set the shared preferences
 
         //Set the controls
-        final EditText username = (EditText) activity.findViewById(R.id.username_);
-        final EditText password = (EditText) activity.findViewById(R.id.password);
-        Button login = (Button) activity.findViewById(R.id.homepage_login);
-        Button signup = (Button) activity.findViewById(R.id.homepage_signup);
+        final EditText username = (EditText) activity.findViewById (R.id.username_);
+        final EditText password = (EditText) activity.findViewById (R.id.password);
+        Button login = (Button) activity.findViewById (R.id.homepage_login);
+        Button signup = (Button) activity.findViewById (R.id.homepage_signup);
 
 
         // Connect to database to validate the username and ID
         // Method to be put in CustomerControls class?
         // If successful go to login page
-        login.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener (new View.OnClickListener () {
 
             public void onClick(View v) {
-                final String usernameString = username.getText().toString();
-                String passwordString = password.getText().toString();
+                final String usernameString = username.getText ().toString ();
+                String passwordString = password.getText ().toString ();
 
                 // CustomerVerifier object will execute async processes in the background to retrieve check and retrive customer email and HashPass
                 //CustomerVerifier customerDetails = new CustomerVerifier();
@@ -130,30 +124,28 @@ public class BurgerAppLayout extends ListActivity {
                 //compare hashed/salted inutted password to the hashed password retrieved from database
                 //if the same, proceeds to ingredient page
 
-                CustomerVerifier cv = new CustomerVerifier();
-                cv.execute(usernameString);
+//                CustomerVerifier cv = new CustomerVerifier();
+//                cv.execute(usernameString);
+//
+//                Customer customer = new Customer();
+//                try {
+//                    customer = cv.get();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (ExecutionException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                Log.d("user", customer.getUsername());
 
-                Customer customer = new Customer();
-                try {
-                    customer = cv.get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
 
-                Log.d("user", customer.getUsername());
-
-
-
-                activity.setContentView(R.layout.ingredient_page);
-                setUpIngredientPage();
+                setUpIngredientPage ();
             }
         });
-        signup.setOnClickListener(new View.OnClickListener() {
+
+        signup.setOnClickListener (new View.OnClickListener () {
             public void onClick(View v) {
-                activity.setContentView(R.layout.sign_up_page);
-                setUpSignUpPage();
+                setUpSignUpPage ();
             }
         });
     }
@@ -162,104 +154,62 @@ public class BurgerAppLayout extends ListActivity {
 
         //Set the layout
         currentLayout = R.layout.ingredient_alternative_prototype;
-        Log.d("CHECK", "ingredient page " + currentLayout);
-        activity.setContentView(R.layout.ingredient_alternative_prototype);
+        Log.d ("CHECK", "ingredient page " + currentLayout);
+        activity.setContentView (R.layout.ingredient_alternative_prototype);
 
         //Set the controls
-        Button next = (Button) activity.findViewById(R.id.button_next);
-        Button salads = (Button) activity.findViewById(R.id.salads);
-        Button buns = (Button) activity.findViewById(R.id.buns);
-        Button meats = (Button) activity.findViewById(R.id.meats);
-        Button cheese = (Button) activity.findViewById(R.id.cheese);
+        setUpIngredientButtons();
+        setUpRadioButtons();
+        Button next = (Button) activity.findViewById (R.id.button_next);
 
-        buns.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener (new View.OnClickListener () {
             public void onClick(View v) {
-                rememberIngredients();
-                BunsFragment bunFragment = new BunsFragment();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.placeholder, bunFragment)
-                        .commit();
-            }
 
-        });
-
-
-        meats.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                rememberIngredients();
-                MeatFragments meatFragment = new MeatFragments();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.placeholder, meatFragment)
-                        .commit();
-            }
-        });
-
-        cheese.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                rememberIngredients();
-                CheeseFragment cheeseFragment = new CheeseFragment();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.placeholder, cheeseFragment)
-                        .commit();
-            }
-        });
-
-
-        salads.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                rememberIngredients();
-                SaladsFragment saladsFragment = new SaladsFragment();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.placeholder, saladsFragment)
-                        .commit();
-
-            }
-        });
-
-        next.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                for (int i = 0; i < burger_order_ingredients.size(); i++) {
-                    Log.d ("Ingredients", burger_order_ingredients.get(i).toString ());
+                if (burger_order_ingredients != null) {
+                    for (int i = 0; i < burger_order_ingredients.size (); i++) {
+                        Log.d ("Ingredients", burger_order_ingredients.get (i).toString ());
+                    }
                 }
-                setUpReviewOrder();
+                setUpReviewOrder ();
 
             }
         });
+
+
     }
 
-    //This method crashed the app need to investigate.
     public void setUpPaymentPage() {
         //Set the layout
         currentLayout = R.layout.payment_page;
-        activity.setContentView(R.layout.payment_page);
+        activity.setContentView (R.layout.payment_page);
 
         //Set the shared preferences
 
         //Set the controls
-        EditText creditcard = (EditText) activity.findViewById(R.id.credit_card);
-        EditText expirydate = (EditText) activity.findViewById(R.id.expiry_date);
-        EditText cvv = (EditText) activity.findViewById(R.id.cvv_number);
-        Button confirmpayment = (Button) activity.findViewById(R.id.button_confirm);
-        Button editorder = (Button) activity.findViewById(R.id.button_edit);
+        EditText creditcard = (EditText) activity.findViewById (R.id.credit_card);
+        EditText expirydate = (EditText) activity.findViewById (R.id.expiry_date);
+        EditText cvv = (EditText) activity.findViewById (R.id.cvv_number);
+        Button confirmpayment = (Button) activity.findViewById (R.id.button_confirm);
+        Button editorder = (Button) activity.findViewById (R.id.button_edit);
 
-        String creditcard_string = creditcard.getText().toString();
-        String expirydate_string = expirydate.getText().toString();
-        String cvv_String = cvv.getText().toString();
+        String creditcard_string = creditcard.getText ().toString ();
+        String expirydate_string = expirydate.getText ().toString ();
+        String cvv_String = cvv.getText ().toString ();
 
         //Connect with the database and Customer Control methods to validate the numbers
         //Connect with external payment provider
 
         //On click of confirm payment, if payment details are successful
-        confirmpayment.setOnClickListener(new View.OnClickListener() {
+        confirmpayment.setOnClickListener (new View.OnClickListener () {
             public void onClick(View v) {
                 //Pop up button to confirm order is successful
-                setUpHomePage();
+                setUpHomePage ();
             }
         });
 
-        editorder.setOnClickListener(new View.OnClickListener() {
+        editorder.setOnClickListener (new View.OnClickListener () {
             public void onClick(View v) {
-                setUpIngredientPage();
+                setUpIngredientPage ();
             }
         });
 
@@ -269,26 +219,26 @@ public class BurgerAppLayout extends ListActivity {
 
         //Set the layout
         currentLayout = R.layout.review_order;
-        activity.setContentView(R.layout.review_order);
+        activity.setContentView (R.layout.review_order);
 
         //Set the shared preferences
 
         //Set the controls
-        TextView ingredient_list = (TextView) activity.findViewById(R.id.order_details);
-        Button paynow = (Button) activity.findViewById(R.id.button_confirm);
-        Button editorder2 = (Button) activity.findViewById(R.id.button_edit_order);
+        TextView ingredient_list = (TextView) activity.findViewById (R.id.order_details);
+        Button paynow = (Button) activity.findViewById (R.id.button_confirm);
+        Button editorder2 = (Button) activity.findViewById (R.id.button_edit_order);
 
         //Set all the ingredients in the textview based on the shared preferences
 
-        paynow.setOnClickListener(new View.OnClickListener() {
+        paynow.setOnClickListener (new View.OnClickListener () {
             public void onClick(View v) {
-                setUpPaymentPage();
+                setUpPaymentPage ();
             }
         });
 
-        editorder2.setOnClickListener(new View.OnClickListener() {
+        editorder2.setOnClickListener (new View.OnClickListener () {
             public void onClick(View v) {
-                setUpIngredientPage();
+                setUpIngredientPage ();
             }
         });
 
@@ -298,51 +248,123 @@ public class BurgerAppLayout extends ListActivity {
 
         //Set the layout
         currentLayout = R.layout.sign_up_page;
-        activity.setContentView(R.layout.sign_up_page);
+        activity.setContentView (R.layout.sign_up_page);
 
-        EditText signup_username = (EditText) activity.findViewById(R.id.signup_username);
-        EditText signup_password = (EditText) activity.findViewById(R.id.signup_password);
-        EditText signup_email = (EditText) activity.findViewById(R.id.signup_email);
-        EditText signup_fname = (EditText) activity.findViewById(R.id.signup_fname);
-        EditText signup_lname = (EditText) activity.findViewById(R.id.signup_lname);
-        Button signup = (Button) activity.findViewById(R.id.sign_up_button);
+        EditText signup_username = (EditText) activity.findViewById (R.id.signup_username);
+        EditText signup_password = (EditText) activity.findViewById (R.id.signup_password);
+        EditText signup_email = (EditText) activity.findViewById (R.id.signup_email);
+        EditText signup_fname = (EditText) activity.findViewById (R.id.signup_fname);
+        EditText signup_lname = (EditText) activity.findViewById (R.id.signup_lname);
+        Button signup = (Button) activity.findViewById (R.id.sign_up_button);
 
-        String usernameString = signup_username.getText().toString();
-        String passwordString = signup_password.getText().toString();
-        String emailString = signup_email.getText().toString();
-        String fnameString = signup_fname.getText().toString();
-        String lnameString = signup_lname.getText().toString();s
+        String usernameString = signup_username.getText ().toString ();
+        String passwordString = signup_password.getText ().toString ();
+        String emailString = signup_email.getText ().toString ();
+        String fnameString = signup_fname.getText ().toString ();
+        String lnameString = signup_lname.getText ().toString ();
 
         //Set the shared preferences
         //Send all the strings to the database
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        signup.setOnClickListener (new View.OnClickListener () {
             public void onClick(View v) {
-                setUpIngredientPage();
+                setUpIngredientPage ();
             }
         });
     }
 
-    public void rememberIngredients() {
+    public void setUpIngredientButtons(){
+        Button salads = (Button) activity.findViewById (R.id.salads_button);
+        Button buns = (Button) activity.findViewById (R.id.buns_button);
+        Button meats = (Button) activity.findViewById (R.id.meats_button);
+        Button cheese = (Button) activity.findViewById (R.id.cheese_button);
+        Button sauces = (Button) activity.findViewById (R.id.sauces_button);
 
-                if (activity.getFragmentManager ().findFragmentById (R.id.frag_buns).isVisible () && activity.getFragmentManager ().findFragmentById (R.id.frag_buns)!=null) {
-                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_bun_choices));
-                } else if (activity.getFragmentManager ().findFragmentById (R.id.frag_cheese).isVisible () && activity.getFragmentManager ().findFragmentById (R.id.frag_cheese) != null) {
-                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_cheese_options));
-                } else if (activity.getFragmentManager ().findFragmentById (R.id.frag_meat).isVisible () && activity.getFragmentManager ().findFragmentById (R.id.frag_meat)!=null) {
-                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_meat_choices));
-                } else if (activity.getFragmentManager ().findFragmentById (R.id.frag_salad).isVisible ()&& activity.getFragmentManager ().findFragmentById (R.id.frag_salad) != null) {
-                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_salad_choices));
-                } else if (activity.getFragmentManager ().findFragmentById (R.id.frag_sauce).isVisible () && activity.getFragmentManager ().findFragmentById (R.id.frag_sauce) != null) {
-                    findIngredientsChecked ((RadioGroup) activity.findViewById (R.id.radiogroup_salad_choices));
-                }
+        buns.setOnClickListener (new View.OnClickListener () {
+            public void onClick(View v) {
+                BunsFragment bunFragment = new BunsFragment ();
+                activity.getFragmentManager ().beginTransaction ()
+                        .replace (R.id.placeholder, bunFragment)
+                        .commit ();
+            }
+
+        });
+
+
+        meats.setOnClickListener (new View.OnClickListener () {
+            public void onClick(View v) {
+
+                MeatFragments meatFragment = new MeatFragments ();
+                activity.getFragmentManager ().beginTransaction ()
+                        .replace (R.id.placeholder, meatFragment)
+                        .commit ();
+            }
+        });
+
+        cheese.setOnClickListener (new View.OnClickListener () {
+            public void onClick(View v) {
+
+                CheeseFragment cheeseFragment = new CheeseFragment ();
+                activity.getFragmentManager ().beginTransaction ()
+                        .replace (R.id.placeholder, cheeseFragment)
+                        .commit ();
+            }
+        });
+
+
+        salads.setOnClickListener (new View.OnClickListener () {
+            public void onClick(View view) {
+
+                SaladsFragment saladsFragment = new SaladsFragment ();
+                activity.getFragmentManager ().beginTransaction ()
+                        .replace (R.id.placeholder, saladsFragment)
+                        .commit ();
+
+
+            }
+        });
+
     }
 
-    public void findIngredientsChecked(RadioGroup radioGroup){
+    public void setUpRadioButtons(){
+        //Buns
+        RadioButton lowcarb = (RadioButton) activity.findViewById (R.id.low_carborator);
+        RadioButton gluten = (RadioButton) activity.findViewById (R.id.gluten_free_bun);
+        RadioButton wholemeal = (RadioButton) activity.findViewById (R.id.wholemeal_bun);
+
+        //Cheese
+        RadioButton brie = (RadioButton) activity.findViewById (R.id.brie);
+        RadioButton cheddar = (RadioButton) activity.findViewById (R.id.cheddar);
+        RadioButton blue = (RadioButton) activity.findViewById (R.id.blue);
+
+        //Meats
+        RadioButton chicken = (RadioButton) activity.findViewById (R.id.chicken);
+        RadioButton beef = (RadioButton) activity.findViewById (R.id.beef);
+        RadioButton vege = (RadioButton) activity.findViewById (R.id.vegetarian);
+
+        //Salad
+        RadioButton lettuce = (RadioButton) activity.findViewById (R.id.lettuce);
+        RadioButton tomato = (RadioButton) activity.findViewById (R.id.tomato);
+        RadioButton avo = (RadioButton) activity.findViewById (R.id.avo);
+
+    }
+
+//    public void setUpCheckedListener(final RadioButton button){
+//        button.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if (b){
+//                    Log.d("CHECK", "Added to list");
+//                }
+//            }
+//        });
+//    }
+
+    public void findIngredientsChecked(RadioGroup radioGroup) {
         //Then find the ingredient/s checked
-        if (radioGroup.getCheckedRadioButtonId() ==-1){
+        if (radioGroup.getCheckedRadioButtonId () == -1) {
             //Pop up you have not selected any ingredients
-            alertDialogBox("You have not selected any ingredients");
+            //alertDialogBox("You have not selected any ingredients");
         } else {
             //If not already in the array list
             //Add them to the array list
@@ -352,7 +374,8 @@ public class BurgerAppLayout extends ListActivity {
         }
     }
 
-    public void alertDialogBox(String message){
+
+//    public void alertDialogBox(String message){
 //        AlertDialog.Builder alertDialog = new AlertDialog(activity.getApplicationContext());
 //        alertDialog.setCancelable(false).setPositiveButton(message, new DialogInterface.OnClickListener() {
 //            public void onClick(DialogInterface dialog, int id) {
@@ -360,5 +383,5 @@ public class BurgerAppLayout extends ListActivity {
 //        });
 //        AlertDialog alert = alertDialog.create();
 //        alert.show();
-    }
+//    }
 }

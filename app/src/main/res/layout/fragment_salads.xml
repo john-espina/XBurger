@@ -1,13 +1,70 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.espinajohn.xburger.fragments_ingredient_page.SaladsFragment">
+    android:layout_marginTop="150dp"
+    android:background="#000"
+    app:layout_constraintTop_toBottomOf="@id/step_one_subtitle"
+    tools:context="com.example.espinajohn.xburger.fragments_ingredient_page.BunsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RadioGroup
+        android:id="@+id/radiogroup_salad_choices"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="190dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title_bun_option"
+        android:layout_marginTop="50dp"
+        android:padding="8dp">
+
+        <RadioButton
+            android:id="@+id/lettuce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Lettuce"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/avo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Avo"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/tomato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Tomato"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/title_salad_options"
+        android:layout_width="400dp"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/step_one_subtitle"
+        android:layout_weight="1"
+        android:background="@drawable/ingredient_select_bg"
+        android:paddingBottom="2dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="2dp"
+        android:text="@string/title_salad"
+        android:textColor="#000" />
 
 </FrameLayout>
+
+

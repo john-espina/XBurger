@@ -9,9 +9,10 @@
     android:background="#000">
 
     <FrameLayout
-        android:id="@+id/placeholder_bun"
+        android:id="@+id/placeholder"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp" />
 
 
 
@@ -79,18 +80,18 @@
 
     <Button
         android:id="@+id/buns"
-        android:layout_width="90dp"
+        android:layout_width="65dp"
         android:layout_height="55dp"
-        android:layout_above="@+id/button_next"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/meats"
         android:background="@drawable/textview_bg"
         android:onClick="addBunFragment"
         android:padding="8dp"
         android:text="Buns"
         android:textAlignment="center"
         android:textColor="#fff"
-        android:textSize="25sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -100,17 +101,39 @@
 
     <Button
         android:id="@+id/meats"
-        android:layout_width="95dp"
+        android:layout_width="75dp"
         android:layout_height="55dp"
         android:layout_above="@+id/button_next"
         android:layout_toEndOf="@+id/buns"
         android:layout_toRightOf="@+id/buns"
         android:background="@drawable/textview_bg"
+        android:onClick="addMeatFragment"
         android:padding="8dp"
         android:text="Meat"
         android:textAlignment="center"
         android:textColor="#fff"
-        android:textSize="25sp"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.983" />
+
+    <Button
+        android:id="@+id/cheese"
+        android:layout_width="65dp"
+        android:layout_height="55dp"
+        android:layout_above="@+id/button_next"
+        android:layout_toEndOf="@+id/meats"
+        android:layout_toRightOf="@+id/meats"
+        android:background="@drawable/textview_bg"
+        android:onClick="addCheeseFragment"
+        android:padding="8dp"
+        android:text="CHEESE"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -120,17 +143,20 @@
 
     <Button
         android:id="@+id/salads"
-        android:layout_width="95dp"
+        android:layout_width="65dp"
         android:layout_height="55dp"
         android:layout_above="@+id/button_next"
-        android:layout_toEndOf="@+id/meats"
-        android:layout_toRightOf="@+id/meats"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/cheese"
+        android:layout_toRightOf="@+id/cheese"
         android:background="@drawable/textview_bg"
+        android:onClick="addSaladFragment"
         android:padding="8dp"
-        android:text="Salad"
+        android:text="SALADS"
         android:textAlignment="center"
         android:textColor="#fff"
-        android:textSize="25sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -140,10 +166,11 @@
 
     <Button
         android:id="@+id/sauces"
-        android:layout_width="100dp"
+        android:layout_width="65dp"
         android:layout_height="55dp"
-        android:layout_alignBaseline="@+id/salads"
         android:layout_alignBottom="@+id/salads"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:layout_toEndOf="@+id/salads"
         android:layout_toRightOf="@+id/salads"
         android:background="@drawable/textview_bg"
@@ -151,7 +178,7 @@
         android:text="Sauce"
         android:textAlignment="center"
         android:textColor="#fff"
-        android:textSize="25sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

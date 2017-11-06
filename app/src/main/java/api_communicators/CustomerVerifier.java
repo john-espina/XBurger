@@ -3,11 +3,14 @@ package api_communicators;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -18,89 +21,114 @@ import java.net.URL;
  * Created by johnny on 11/4/2017.
  */
 
-public class CustomerVerifier extends AsyncTask <String, Integer, String> {
+public class CustomerVerifier extends AsyncTask<String, Integer, Customer> {
 
-    private String customerEmail = null;
-    private String customerPassHash = null;
+    int customer_id;
+    String username;
+    String email;
+    String phone_number;
+    int iterations;
+    String salt;
+    String passHash;
+    String passPin;
+    String cardToken;
+    Customer customer;
+    static final String api_base_url = "http://project2-burgerx-database-api.herokuapp.com/customer/username/";
 
-    String apiURL = "http://project2-burgerx-database-api.herokuapp.com/customer/";
 
     @Override
-    protected String doInBackground(String...args) {
-        String finalJson ="";
-        String output;
+    protected Customer doInBackground(String...args) {
+
+        JsonObject customer_object = null;
         try {
-            URL url = new URL (apiURL + args[0]);
+            URL url = new URL(api_base_url + args[0]);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
+            connection.connect();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            JsonParser jp = new JsonParser();
+            JsonElement root = jp.parse(new InputStreamReader((InputStream) connection.getContent()));
+            customer_object = root.getAsJsonObject();
+            Gson gson = new GsonBuilder().serializeNulls().create();
 
-            StringBuffer json = new StringBuffer();
+            customer_id = customer_object.get("Customer_ID").getAsInt();
+            username = customer_object.get("Username").getAsString();
+            email = customer_object.get("Email").getAsString();
+            phone_number =  customer_object.get("Phone_Number").getAsString();
+            iterations = customer_object.get("Iterations").getAsInt();
+            salt = customer_object.get("Salt").getAsString();
+            passHash = customer_object.get("PassHash").getAsString();
+            passPin = customer_object.get("PassPin").getAsString();
+            cardToken = customer_object.get("Card_Token").getAsString();
+            customer =  new Customer(customer_id, username, email, phone_number, iterations, salt, passHash, passPin, cardToken);
 
-            while ((output=reader.readLine())!=null)
-                json.append(output);
-
-            connection.disconnect();
-
-            finalJson = new String(json.toString());
+            Log.d("Customer Object", customer_object.toString());
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("url", apiURL + args[0]);
-        return finalJson;
+
+
+        return customer;
+
+
     }
+
+
 
     protected void onProgressUpdate (Integer...progress){
 
     }
 
-    protected  void onPostExecute (String result){
-        processCustomerData(result);
+    protected  void onPostExecute (Customer c){
+
     }
 
-    private void processCustomerData (String result){
-        JSONObject customerJSONObject = null;
-
-        try {
-            customerJSONObject = new JSONObject(result);
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
-
-
-        try{
-            setCustomerEmail(customerJSONObject.getString("Email"));
-            setCustomerPassHash(customerJSONObject.getString("PassHash"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-            Log.d("Email", getCustomerEmail());
-            Log.d("PassHash", getCustomerPassHash());
-
-        }
 
 
 
 
-    public String getCustomerEmail() {
-        return customerEmail;
+
+    public Customer getCustomer(){
+        return customer;
+    }
+    public int getCustomer_id() {
+        return customer_id;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public String getUsername() {
+        return username;
     }
 
-    public String getCustomerPassHash() {
-        return customerPassHash;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCustomerPassHash(String customerPassHash) {
-        this.customerPassHash = customerPassHash;
+    public String getPhone_number() {
+        return phone_number;
     }
+
+    public int getIterations() {
+        return iterations;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public String getPassHash() {
+        return passHash;
+    }
+
+    public String getPassPin() {
+        return passPin;
+    }
+
+    public String getCardToken() {
+        return cardToken;
+    }
+
+
+
 }

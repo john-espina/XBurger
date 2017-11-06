@@ -25,6 +25,10 @@ public class Customer {
     String cardToken;
     static final String api_base_url = "http://project2-burgerx-database-api.herokuapp.com/customer/";
 
+    public Customer(){
+
+    }
+
     // Constructor for Customer object with full suite of details as pulled from the database
     public Customer(int customer_id, String username, String email, String phone_number, int iterations, String salt, String passHash, String passPin, String cardToken) {
         this.customer_id = customer_id;

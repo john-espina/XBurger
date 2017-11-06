@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -87,4 +88,17 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    public void onRadioButtonClicked(View view){
+
+        boolean checked = ((RadioButton)view).isChecked();
+        String chosen = null;
+        switch (view.getId()){
+            case R.id.low_carborator:
+                if (checked){
+                    chosen = "low carborator";
+                    Log.d("chosen:", chosen);
+                }
+        }
+
+    }
 }

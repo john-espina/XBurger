@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -171,10 +172,13 @@ public class BurgerAppLayout extends ListActivity{
         buns.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
+
                 BunsFragment bunFragment = new BunsFragment();
                 activity.getFragmentManager().beginTransaction()
                             .replace(R.id.placeholder, bunFragment)
                             .commit();
+
+
                 }
 
         });

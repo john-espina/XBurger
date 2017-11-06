@@ -3,9 +3,13 @@ package fragments_ingredient_page;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.espinajohn.xburger.R;
 
@@ -16,6 +20,10 @@ import com.example.espinajohn.xburger.R;
 public class BunsFragment extends Fragment {
 
 
+    RadioGroup rg;
+    RadioButton bunRB;
+    View rootView;
+
     public BunsFragment() {
         // Required empty public constructor
     }
@@ -24,8 +32,13 @@ public class BunsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_buns, container, false);
+
+        rootView = inflater.inflate(R.layout.fragment_buns, container, false);
+        bunRB = (RadioButton) rootView.findViewById(R.id.low_carborator);
+        rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_bun_choices);
+        return rootView;
     }
+
+
 
 }

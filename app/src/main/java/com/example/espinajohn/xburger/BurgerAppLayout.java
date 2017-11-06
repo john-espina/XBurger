@@ -88,7 +88,31 @@ public class BurgerAppLayout extends ListActivity{
         order_history.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //Open the list layout with order history
-                //Needs to be created
+                setUpOrderHistory ();
+            }
+        });
+    }
+
+    public void setUpOrderHistory(){
+        currentLayout = R.layout.previous_orders;
+        activity.setContentView (R.layout.previous_orders);
+
+        Button reorder = (Button) activity.findViewById (R.id.reorder);
+        Button back = (Button) activity.findViewById (R.id.back_to_landing_page);
+
+        reorder.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                //Do what needs to be done to reorder
+            }
+        });
+
+        back.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+               setUpLandingPage ();
             }
         });
     }

@@ -14,6 +14,7 @@ import api_communicators.CustomerDetailsController;
 public class CustomerControls {
 
     public static Customer createCustomer(String username, String loginMethod){
+        Customer customer = null;
         CustomerDetailsController customerDetails = new CustomerDetailsController();
 
         if (username.contains("@")){
@@ -21,17 +22,27 @@ public class CustomerControls {
         } else {
             loginMethod = "username/";
         }
+
         customerDetails.execute(loginMethod,username);
-        Customer customer = new Customer();
+
         try {
-            customer = customerDetails.get();
+            if (customerDetails.get() !=null){
+                try {
+                    return customer = customerDetails.get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        return customer;
+
+        return null;
 
     }
 

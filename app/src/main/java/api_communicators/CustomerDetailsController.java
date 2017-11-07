@@ -39,7 +39,6 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
     @Override
     protected Customer doInBackground(String...args) {
 
-        JsonObject customer_object = null;
 
         try {
 
@@ -49,7 +48,7 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
 
             JsonParser jp = new JsonParser();
             JsonElement root = jp.parse(new InputStreamReader((InputStream) connection.getContent()));
-            customer_object = root.getAsJsonObject();
+            JsonObject customer_object = root.getAsJsonObject();
             Gson gson = new GsonBuilder().serializeNulls().create();
 
             setCustomer_id(customer_object.get("Customer_ID").getAsInt());

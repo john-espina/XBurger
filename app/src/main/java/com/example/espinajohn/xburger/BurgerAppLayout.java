@@ -150,11 +150,15 @@ public class BurgerAppLayout extends ListActivity{
                 String passwordString = password.getText().toString();
                 String loginMethod ="";
 
-                if (CustomerControls.validateUsername (usernameString, loginMethod)){
+                if (CustomerControls.validateCredentials(usernameString, passwordString)){
                     setUpIngredientPage();
-                } else {
+                }else {
                     alertDialogMessage ("Invalid User", "Please check the username is valid");
                 }
+
+//                if (CustomerControls.validateUsername (usernameString, loginMethod)){
+//
+//                }
             }
         });
         signup.setOnClickListener(new View.OnClickListener(){

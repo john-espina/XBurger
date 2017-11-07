@@ -13,8 +13,9 @@ import api_communicators.CustomerDetailsController;
 
 public class CustomerControls {
 
-    public static Customer createCustomer(String username, String loginMethod){
+    public static Customer createCustomer(String username){
         Customer customer = null;
+        String loginMethod;
         CustomerDetailsController customerDetails = new CustomerDetailsController();
 
         if (username.contains("@")){
@@ -46,9 +47,25 @@ public class CustomerControls {
 
     }
 
-    public static boolean validateUsername(String username, String loginMethod){
+    public boolean validateCredentials(String name, String password){
+        //
+        if (validateUsername (name) && validatePassword(password)){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean validatePassword(String password){
+        //Get the customer
+        //Get the hash
+        //Get the salt
+        //Get the iterations
+        return false;
+    }
+
+    public static boolean validateUsername(String username){
         //Do something
-        if (createCustomer (username,loginMethod) != null){
+        if (createCustomer (username) != null){
             return true;
         }
         return false;

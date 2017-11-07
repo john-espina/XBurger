@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     android:background="@mipmap/blue_lightning">
 
+    <Button
+        android:id="@+id/back_to_landing_page2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp"
+        android:layout_weight="1"
+        android:background="@drawable/ingredient_select_bg"
+        android:text="Cancel"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        tools:ignore="ButtonStyle,HardcodedText" />
+
     <ImageView
         android:id="@+id/logo_login_page"
         android:layout_width="wrap_content"

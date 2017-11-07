@@ -44,12 +44,11 @@
             android:layout_weight="1"
             android:background="@drawable/ingredient_select_bg"
             android:text="Reorder"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
             android:id="@+id/back_to_landing_page"
-            tools:ignore="ButtonStyle,HardcodedText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
@@ -59,6 +58,7 @@
             android:layout_weight="1"
             android:background="@drawable/ingredient_select_bg"
             android:text="Cancel"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black"
+            tools:ignore="ButtonStyle,HardcodedText" />
     </LinearLayout>
 </LinearLayout>

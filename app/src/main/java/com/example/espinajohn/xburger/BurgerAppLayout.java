@@ -1,20 +1,16 @@
 package com.example.espinajohn.xburger;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.provider.MediaStore;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
-import api_communicators.Customer;
-import api_communicators.CustomerDetailsController;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
@@ -130,7 +126,15 @@ public class BurgerAppLayout extends ListActivity{
         final EditText password = (EditText) activity.findViewById(R.id.password);
         Button login = (Button) activity.findViewById(R.id.homepage_login);
         Button signup = (Button) activity.findViewById(R.id.homepage_signup);
+        Button back2 = (Button) activity.findViewById (R.id.back_to_landing_page2);
 
+        back2.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
 
         // Connect to database to validate the username and ID
         // Method to be put in CustomerControls class?
@@ -190,6 +194,15 @@ public class BurgerAppLayout extends ListActivity{
         Button buns = (Button) activity.findViewById(R.id.buns_button);
         Button meats = (Button) activity.findViewById(R.id.meats_button);
         Button cheese = (Button) activity.findViewById(R.id.cheese_button);
+        Button back3 = (Button) activity.findViewById (R.id.back_to_landing_page3);
+
+        back3.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
 
         buns.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -237,7 +250,12 @@ public class BurgerAppLayout extends ListActivity{
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                setUpReviewOrder();
+                //if (burger_order_ingredients == null){
+                    // Commented out until ingredients are added to temp list
+                    //alertDialogMessage("Error", "You have not selected any ingredients");
+                //} else {
+                    setUpReviewOrder ();
+                //}
             }
         });
     }
@@ -256,10 +274,19 @@ public class BurgerAppLayout extends ListActivity{
         EditText cvv = (EditText) activity.findViewById(R.id.cvv_number);
         Button confirmpayment = (Button) activity.findViewById(R.id.button_confirm);
         Button editorder = (Button) activity.findViewById(R.id.button_edit);
+        Button back4 = (Button) activity.findViewById (R.id.back_to_landing_page4);
 
         String creditcard_string = creditcard.getText().toString();
         String expirydate_string = expirydate.getText().toString();
         String cvv_String = cvv.getText().toString();
+
+        back4.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
 
         //Connect with the database and Customer Control methods to validate the numbers
         //Connect with external payment provider
@@ -267,8 +294,8 @@ public class BurgerAppLayout extends ListActivity{
         //On click of confirm payment, if payment details are successful
         confirmpayment.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                //Pop up button to confirm order is successful
-                setUpHomePage();
+                alertDialogMessage ("Order Successful", "Thank you for ordering with XBurger!");
+                setUpLandingPage ();
             }
         });
 
@@ -292,6 +319,7 @@ public class BurgerAppLayout extends ListActivity{
         TextView ingredient_list = (TextView) activity.findViewById(R.id.order_details);
         Button paynow = (Button) activity.findViewById(R.id.button_confirm);
         Button editorder2 = (Button) activity.findViewById(R.id.button_edit_order);
+        Button back5 = (Button) activity.findViewById (R.id.back_to_landing_page5);
 
         //Set all the ingredients in the textview based on the shared preferences
 
@@ -307,6 +335,13 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
 
+        back5.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
     }
 
     public void setUpSignUpPage(){
@@ -321,6 +356,7 @@ public class BurgerAppLayout extends ListActivity{
         EditText signup_fname = (EditText) activity.findViewById(R.id.signup_fname);
         EditText signup_lname = (EditText) activity.findViewById(R.id.signup_lname);
         Button signup = (Button) activity.findViewById(R.id.sign_up_button);
+        Button back6 = (Button) activity.findViewById (R.id.back_to_landing_page6);
 
         String usernameString = signup_username.getText().toString();
         String passwordString = signup_password.getText().toString();
@@ -336,8 +372,30 @@ public class BurgerAppLayout extends ListActivity{
                 setUpIngredientPage();
             }
         });
+
+        back6.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
     }
 
+    public void alertDialogMessage (String title, String message) {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder (activity);
 
+        //Title & message
+        alertDialogBuilder.setMessage (message).setTitle (title);
 
+        //Action button ok
+        alertDialogBuilder.setPositiveButton ("OK", new DialogInterface.OnClickListener () {
+            public void onClick(DialogInterface dialog, int id) {
+                finish ();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create ();
+        alertDialog.show ();
+    }
 }

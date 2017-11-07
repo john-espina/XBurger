@@ -169,11 +169,14 @@
 
     <Button
         android:id="@+id/sign_up_button"
-        android:layout_width="148dp"
+        android:layout_width="100dp"
         android:layout_height="49dp"
         android:layout_below="@+id/signup_lname"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="33dp"
+        android:layout_toLeftOf="@+id/back_to_landing_page6"
+        android:layout_toStartOf="@+id/back_to_landing_page6"
         android:background="@drawable/textview_bg"
         android:text="SIGN UP"
         android:textAlignment="center"
@@ -193,6 +196,20 @@
         android:layout_below="@+id/sign_up_button"
         android:layout_centerHorizontal="true"
         app:srcCompat="@mipmap/logo_transparent" />
+
+    <Button
+        android:id="@+id/back_to_landing_page6"
+        android:layout_width="100dp"
+        android:layout_height="49dp"
+        android:layout_above="@+id/imageView2"
+        android:layout_alignEnd="@+id/signup_username"
+        android:layout_alignRight="@+id/signup_username"
+        android:layout_weight="1"
+        android:background="@drawable/textview_bg"
+        android:text="Cancel"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        tools:ignore="ButtonStyle,HardcodedText" />
 
     <!--app:srcCompat="@mipmap/burger_img2" />-->
 

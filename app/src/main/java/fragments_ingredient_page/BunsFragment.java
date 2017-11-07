@@ -40,7 +40,7 @@ public class BunsFragment extends Fragment {
         rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_bun_choices);
         bunWhite = (RadioButton) rootView.findViewById(R.id.bun_white);
         bunWholemeal = (RadioButton) rootView.findViewById(R.id.bun_wholemeal);
-        bunSordough = (RadioButton) rootView.findViewById(R.id.bun_sordough);
+        bunSordough = (RadioButton) rootView.findViewById(R.id.bun_sourdough);
         bunGlutenFree =(RadioButton) rootView.findViewById(R.id.bun_gluten_free);
 
         return rootView;

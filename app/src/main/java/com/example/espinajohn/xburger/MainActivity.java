@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 if (checked){
                     //code here
                 }
-            case R.id.bun_sordough:
+            case R.id.bun_sourdough:
                 if (checked){
                     //code here
                 }

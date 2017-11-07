@@ -70,7 +70,7 @@ public class Passwords {
         Arrays.fill(password, Character.MIN_VALUE);
 
         try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("HmacSHA512");
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2withHmacSHA1");
             return skf.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new AssertionError("Error while hashing a password: " + e.getMessage());

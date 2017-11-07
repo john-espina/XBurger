@@ -150,31 +150,11 @@ public class BurgerAppLayout extends ListActivity{
                 String passwordString = password.getText().toString();
                 String loginMethod ="";
 
-                if (usernameString.contains("@")){
-                    loginMethod = "email/";
+                if (CustomerControls.validateUsername (usernameString, loginMethod)){
+                    setUpIngredientPage();
                 } else {
-                    loginMethod = "username/";
+                    alertDialogMessage ("Invalid User", "Please check the username is valid");
                 }
-
-
-                CustomerDetailsController customerDetails = new CustomerDetailsController();
-                customerDetails.execute(loginMethod,usernameString);
-
-                Customer customer = new Customer();
-                try {
-                    customer = customerDetails.get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-                Log.d("user", customer.getUsername());
-
-
-
-                activity.setContentView(R.layout.ingredient_page);
-            setUpIngredientPage();
             }
         });
         signup.setOnClickListener(new View.OnClickListener(){

@@ -42,25 +42,28 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
 
         try {
 
-            URL url = new URL(api_base_url + args[0] + args[1]);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.connect();
+            URL url = new URL (api_base_url + args[0] + args[1]);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection ();
+            connection.connect ();
 
-            JsonParser jp = new JsonParser();
-            JsonElement root = jp.parse(new InputStreamReader((InputStream) connection.getContent()));
-            JsonObject customer_object = root.getAsJsonObject();
-            Gson gson = new GsonBuilder().serializeNulls().create();
+            JsonParser jp = new JsonParser ();
+            JsonElement root = jp.parse (new InputStreamReader ((InputStream) connection.getContent ()));
+            JsonObject customer_object = root.getAsJsonObject ();
+            Gson gson = new GsonBuilder ().serializeNulls ().create ();
 
-            setCustomer_id(customer_object.get("Customer_ID").getAsInt());
-            setUsername(customer_object.get("Username").getAsString());
-            setEmail(customer_object.get("Email").getAsString());
-            setPhone_number(customer_object.get("Phone_Number").getAsString());
-            setIterations(customer_object.get("Iterations").getAsInt());
-            setSalt(customer_object.get("Salt").getAsString());
-            setPassHash(customer_object.get("PassHash").getAsString());
-            setPassPin(customer_object.get("PassPin").getAsString());
-            setCardToken(customer_object.get("Card_Token").getAsString());
-            setCustomer(new Customer(getCustomer_id(), getUsername(), getEmail(), getPhone_number(), getIterations(), getSalt(), getPassHash(), getPassPin(), getCardToken()));
+
+                setCustomer_id (customer_object.get ("Customer_ID").getAsInt ());
+                setUsername (customer_object.get ("Username").getAsString ());
+                setEmail (customer_object.get ("Email").getAsString ());
+                setPhone_number (customer_object.get ("Phone_Number").getAsString ());
+                setIterations (customer_object.get ("Iterations").getAsInt ());
+                setSalt (customer_object.get ("Salt").getAsString ());
+                setPassHash (customer_object.get ("PassHash").getAsString ());
+                setPassPin (customer_object.get ("PassPin").getAsString ());
+                setCardToken (customer_object.get ("Card_Token").getAsString ());
+                setCustomer (new Customer (getCustomer_id (), getUsername (), getEmail (), getPhone_number (), getIterations (), getSalt (), getPassHash (), getPassPin (), getCardToken ()));
+
+                return getCustomer ();
 
 
         } catch (MalformedURLException e) {
@@ -68,7 +71,7 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return getCustomer();
+        return null;
     }
 
 

@@ -10,15 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import api_communicators.Customer;
-import api_communicators.CustomerDetailsController;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
 import fragments_ingredient_page.SaladsFragment;
 import fragments_ingredient_page.SaucesFragment;
+import helpers.CustomerControls;
 
 
 /**

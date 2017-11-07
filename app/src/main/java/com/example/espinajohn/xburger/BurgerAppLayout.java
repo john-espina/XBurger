@@ -156,6 +156,7 @@ public class BurgerAppLayout extends ListActivity{
 
                     if(customer.validateCustomerPassword(passwordString, customer.getPassHash(), customer.getSalt(),customer.getIterations())){
                      setUpIngredientPage();
+                     app_logged_in = true;
                     } else {
                         alertDialogMessage ("Invalid Password", "Please check credentials");
                     }

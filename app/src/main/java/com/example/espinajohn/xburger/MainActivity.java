@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     BurgerAppLayout control;
     int currentLayout;
-    ArrayList<Integer> burger_order_ingredients;
+    ArrayList<Integer> burger_order;
     //Boolean loggedin;
 
     @Override
@@ -110,6 +110,121 @@ public class MainActivity extends AppCompatActivity {
                 if (checked){
                     //code here
                 }
+            case R.id.salad_lettuce:
+                if (checked){
+                    chosen = "white";
+                    Log.d("chosen:", chosen);
+                }
+            case R.id.salad_tomato:
+                if (checked){
+                    //code here
+                }
+            case R.id.salad_onion:
+                if (checked){
+                    //code here
+                }
+            case R.id.salad_red_onion:
+                if (checked){
+                    //code here
+                }
+            case R.id.salad_beetroot:
+                if (checked){
+                    chosen = "white";
+                    Log.d("chosen:", chosen);
+                }
+            case R.id.salad_pickle:
+                if (checked){
+                    //code here
+                }
+            case R.id.salad_capsicum:
+                if (checked){
+                    //code here
+                }
+            case R.id.salad_olives:
+                if (checked){
+                    //code here
+                }
+            case R.id.salad_cucumber:
+                if (checked){
+                    chosen = "white";
+                    Log.d("chosen:", chosen);
+                }
+            case R.id.pattie_beef:
+                if (checked){
+                    //code here
+                }
+            case R.id.pattie_chicken:
+                if (checked){
+                    //code here
+                }
+            case R.id.pattie_falafel:
+                if (checked){
+                    //code here
+                }
+            case R.id.pattie_tofu:
+                if (checked){
+                    chosen = "white";
+                    Log.d("chosen:", chosen);
+                }
+            case R.id.pattie_pork:
+                if (checked){
+                    //code here
+                }
+            case R.id.pattie_lamb:
+                if (checked){
+                    //code here
+                }
+            case R.id.cheese_smoke:
+                if (checked){
+                    //code here
+                }
+            case R.id.cheese_edam:
+                if (checked){
+                    chosen = "white";
+                    Log.d("chosen:", chosen);
+                }
+            case R.id.cheese_brie:
+                if (checked){
+                    //code here
+                }
+            case R.id.sauce_halloumi:
+                if (checked){
+                    //code here
+                }
+            case R.id.sauce_tomato_sauce:
+                if (checked){
+                    //code here
+                }
+            case R.id.sauce_aioli:
+                if (checked){
+                    //code here
+                }
+            case R.id.sauce_mayonnaise:
+                if (checked){
+                    //code here
+                }
+            case R.id.sauce_american_mustard:
+                if (checked){
+                    chosen = "white";
+                    Log.d("chosen:", chosen);
+                }
+            case R.id.sauce_dijon_mustard:
+                if (checked){
+                    //code here
+                }
+            case R.id.sauce_honey_mustard:
+                if (checked){
+                    //code here
+                }
+            case R.id.sauce_mint:
+                if (checked){
+                    //code here
+                }
+            case R.id.sauce_brown:
+                if (checked){
+                    //code here
+                }
+
 
         }
 

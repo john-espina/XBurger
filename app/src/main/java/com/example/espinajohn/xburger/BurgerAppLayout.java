@@ -14,7 +14,6 @@ import java.util.concurrent.ExecutionException;
 
 import api_communicators.Customer;
 import api_communicators.CustomerDetailsController;
-import api_communicators.StockController;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
@@ -156,7 +155,6 @@ public class BurgerAppLayout extends ListActivity{
                 if (customer !=null){
                     if(customer.validateCustomerPassword(passwordString, customer.getPassHash(), customer.getSalt(),customer.getIterations())){
                      setUpIngredientPage();
-                     new StockController().execute();
                      app_logged_in = true;
                     } else {
                         alertDialogMessage ("Invalid Password", "Please check credentials");

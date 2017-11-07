@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/blue_lightning">
+    android:background="@mipmap/blue_lightning"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
     <!--android:background="@mipmap/blue_lightning">-->
 
     <TextView
@@ -80,39 +82,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.804" />
 
-    <Button
-        android:id="@+id/button_edit_order"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/order_details"
-        android:layout_alignStart="@+id/order_details"
-        android:layout_alignTop="@+id/back_to_landing_page5"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp"
-        android:background="@drawable/ingredient_select_bg"
-        android:text="EDIT ORDER"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935"
-        tools:textAllCaps="false" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/back_to_landing_page5"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/order_details"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/order_details"
-        android:layout_marginBottom="13dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="23dp"
-        android:layout_weight="1"
-        android:background="@drawable/ingredient_select_bg"
-        android:text="Cancel"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
-        tools:ignore="ButtonStyle,HardcodedText" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/button_edit_order"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/order_details"
+            android:layout_alignStart="@+id/order_details"
+            android:layout_alignTop="@+id/back_to_landing_page5"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/ingredient_select_bg"
+            android:text="EDIT ORDER"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.935"
+            tools:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/back_to_landing_page5"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/order_details"
+            android:layout_alignParentBottom="false"
+            android:layout_alignRight="@+id/order_details"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/ingredient_select_bg"
+            android:text="Cancel"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
+    </LinearLayout>
+
+</LinearLayout>

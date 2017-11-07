@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Created by espinajohn on 8/11/2017.
  */
 
-public class StockController extends AsyncTask<String, Integer, Stock>{
+public class StockDetailsController extends AsyncTask<String, Integer, Stock>{
 
 
     int ingredient_id;

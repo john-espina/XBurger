@@ -46,28 +46,4 @@ public class CustomerControls {
         return null;
 
     }
-
-    public boolean validateCredentials(String name, String password){
-        //
-        if (validateUsername (name) && validatePassword(password)){
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean validatePassword(String password){
-        //Get the customer
-        //Get the hash
-        //Get the salt
-        //Get the iterations
-        return false;
-    }
-
-    public static boolean validateUsername(String username){
-        //Do something
-        if (createCustomer (username) != null){
-            return true;
-        }
-        return false;
-    }
 }

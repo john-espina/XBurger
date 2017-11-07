@@ -1,5 +1,9 @@
 package passwords;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.MessageDigest;
@@ -58,6 +62,7 @@ public class Passwords {
      *
      * @return the hashed password with a pinch of salt
      */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     public static byte[] hash(char[] password, byte[] salt, int iterations) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, KEY_LENGTH);
 
@@ -112,6 +117,7 @@ public class Passwords {
      * @return A byte array representing the data encoded in the b64 argument string
      * @throws IllegalArgumentException Thrown if the argument b64 is not a valid base64 string
      */
+    @TargetApi(Build.VERSION_CODES.O)
     public static byte[] base64Decode(String b64) throws IllegalArgumentException {
         return Base64.getDecoder().decode(b64);
     }
@@ -123,6 +129,7 @@ public class Passwords {
      *
      * @return A base64 encoded String representing the data contained in the array
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String base64Encode(byte[] array) {
         return Base64.getEncoder().encodeToString(array);
     }

@@ -12,12 +12,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import api_communicators.Customer;
+import api_communicators.CustomerDetailsController;
+import api_communicators.NewCustomerController;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
 import fragments_ingredient_page.SaladsFragment;
 import fragments_ingredient_page.SaucesFragment;
 import helpers.CustomerControls;
+import passwords.Passwords;
+
+import static helpers.CustomerControls.createCustomer;
 
 
 /**
@@ -152,11 +157,11 @@ public class BurgerAppLayout extends ListActivity{
                 Customer customer = CustomerControls.createCustomer(usernameString);
 
                 if (customer !=null){
-                    if(customer.validateCustomerPassword(passwordString, customer.getPassHash(), customer.getSalt(),customer.getIterations())){
-                     setUpIngredientPage();
-                     app_logged_in = true;
+                    if (!passwordString.equals("") && customer.validateCustomerPassword (passwordString, customer.getPassHash (), customer.getSalt (), customer.getIterations ())) {
+                            setUpIngredientPage ();
+                            app_logged_in = true;
                     } else {
-                        alertDialogMessage ("Invalid Password", "Please check credentials");
+                    alertDialogMessage ("Invalid Password", "Please check credentials");
                     }
                 }else {
                     alertDialogMessage ("Invalid User", "We don't recognise the username. Please check.");
@@ -260,7 +265,6 @@ public class BurgerAppLayout extends ListActivity{
         });
     }
 
-    //This method crashed the app need to investigate.
     public void setUpPaymentPage(){
         //Set the layout
         currentLayout = R.layout.payment_page;
@@ -355,21 +359,56 @@ public class BurgerAppLayout extends ListActivity{
         EditText signup_email = (EditText) activity.findViewById(R.id.signup_email);
         EditText signup_fname = (EditText) activity.findViewById(R.id.signup_fname);
         EditText signup_lname = (EditText) activity.findViewById(R.id.signup_lname);
+        EditText signup_ph = (EditText) activity.findViewById (R.id.signup_phnum);
         Button signup = (Button) activity.findViewById(R.id.sign_up_button);
         Button back6 = (Button) activity.findViewById (R.id.back_to_landing_page6);
 
-        String usernameString = signup_username.getText().toString();
-        String passwordString = signup_password.getText().toString();
-        String emailString = signup_email.getText().toString();
-        String fnameString = signup_fname.getText().toString();
-        String lnameString = signup_lname.getText().toString();
-
-        //Set the shared preferences
-        //Send all the strings to the database
+        final String usernameString = signup_username.getText().toString();
+        final String passwordString = signup_password.getText ().toString ();
+        final String emailString = signup_email.getText().toString();
+        final String fnameString = signup_fname.getText().toString();
+        final String lnameString = signup_lname.getText().toString();
+        final String phoneString = signup_ph.getText ().toString ();
 
         signup.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                setUpIngredientPage();
+                //Send all the strings to the database
+                //Check if username is taken
+
+                Customer check = CustomerControls.createCustomer(usernameString);
+                if (check != null){
+                    alertDialogMessage ("Username Not Available", "Please select a different username");
+                } else {
+                    //Get a new salt
+                    byte[] salt = Passwords.getNextSalt (16);
+                    String saltString = salt.toString ();
+
+                    //Get a new iteration
+                    int iterationsInt = Passwords.getNextNumIterations ();
+
+                    //Get the password as char[]
+                    char[] pword = passwordString.toCharArray ();
+
+                    //Hash the password
+                    byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
+                    String hashpassString = hashpass.toString ();
+
+                    //Other variables that are needed to construct a customer
+                    String passpinString = "";
+                    String cardtokenString = "";
+
+                    Customer customer = new Customer(usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString,passpinString, cardtokenString );
+
+                    // Send this customer to the database to be added
+                    // Connect to the API to send the customer
+                    // Need a Json query for this
+
+                    //Alert dialog thanks for signing up
+                    alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
+
+                    //Then set up ingredient page
+                    setUpIngredientPage();
+                }
             }
         });
 

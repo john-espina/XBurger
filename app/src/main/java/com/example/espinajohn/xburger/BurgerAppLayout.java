@@ -15,6 +15,7 @@ import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
 import fragments_ingredient_page.SaladsFragment;
+import fragments_ingredient_page.SaucesFragment;
 
 
 /**
@@ -194,6 +195,7 @@ public class BurgerAppLayout extends ListActivity{
         Button buns = (Button) activity.findViewById(R.id.buns_button);
         Button meats = (Button) activity.findViewById(R.id.meats_button);
         Button cheese = (Button) activity.findViewById(R.id.cheese_button);
+        Button sauces = (Button) activity.findViewById(R.id.sauces_button);
         Button back3 = (Button) activity.findViewById (R.id.back_to_landing_page3);
 
         back3.setOnClickListener (new View.OnClickListener (){
@@ -243,6 +245,16 @@ public class BurgerAppLayout extends ListActivity{
                 SaladsFragment saladsFragment = new SaladsFragment();
                 activity.getFragmentManager().beginTransaction()
                         .replace(R.id.placeholder, saladsFragment)
+                        .commit();
+
+            }
+        });
+
+        sauces.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                SaucesFragment saucesFragment = new SaucesFragment();
+                activity.getFragmentManager().beginTransaction()
+                        .replace(R.id.placeholder, saucesFragment)
                         .commit();
 
             }

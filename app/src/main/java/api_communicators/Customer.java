@@ -3,6 +3,7 @@ import com.google.gson.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,7 +13,7 @@ import passwords.Passwords;
 /**
  * Created by Julian Lees on 5/11/2017.
  */
-public class Customer {
+public class Customer implements Serializable{
 
     int customer_id;
     String username;

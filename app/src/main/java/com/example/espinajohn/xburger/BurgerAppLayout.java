@@ -153,22 +153,15 @@ public class BurgerAppLayout extends ListActivity{
                 Customer customer = CustomerControls.createCustomer(usernameString);
 
                 if (customer !=null){
-
                     if(customer.validateCustomerPassword(passwordString, customer.getPassHash(), customer.getSalt(),customer.getIterations())){
                      setUpIngredientPage();
                      app_logged_in = true;
                     } else {
                         alertDialogMessage ("Invalid Password", "Please check credentials");
                     }
-
-
                 }else {
                     alertDialogMessage ("Invalid User", "We don't recognise the username. Please check.");
                 }
-
-//                if (CustomerControls.validateUsername (usernameString, loginMethod)){
-//
-//                }
             }
         });
         signup.setOnClickListener(new View.OnClickListener(){

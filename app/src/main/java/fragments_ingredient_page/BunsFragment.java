@@ -19,7 +19,6 @@ import com.example.espinajohn.xburger.R;
  */
 public class BunsFragment extends Fragment {
 
-
     RadioGroup rg;
     RadioButton bunWhite;
     RadioButton bunWholemeal;
@@ -30,8 +29,7 @@ public class BunsFragment extends Fragment {
     public BunsFragment() {
         // Required empty public constructor
     }
-
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

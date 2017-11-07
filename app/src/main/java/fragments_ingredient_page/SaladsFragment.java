@@ -18,6 +18,7 @@ public class SaladsFragment extends Fragment {
 
     View rootView;
     RadioGroup rg;
+    RadioGroup rg2;
     RadioButton lettuce;
     RadioButton tomato;
     RadioButton onion;
@@ -39,8 +40,9 @@ public class SaladsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_buns, container, false);
-        rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_bun_choices);
+        rootView = inflater.inflate(R.layout.fragment_salads, container, false);
+        rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_salad_choices);
+        rg2 = (RadioGroup) rootView.findViewById(R.id.radiogroup_salad_choices2);
         lettuce = (RadioButton) rootView.findViewById(R.id.salad_lettuce);
         tomato =(RadioButton) rootView.findViewById(R.id.salad_tomato);
         onion = (RadioButton) rootView.findViewById(R.id.salad_onion);

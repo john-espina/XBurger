@@ -7,20 +7,21 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.espinajohn.xburger.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CheeseFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CheeseFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CheeseFragment extends Fragment {
 
+    View rootView;
+    RadioGroup rg;
+    RadioButton swiss;
+    RadioButton edam;
+    RadioButton smoked;
+    RadioButton brie;
 
     public CheeseFragment() {
         // Required empty public constructor
@@ -33,7 +34,14 @@ public class CheeseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cheese, container, false);
+       rootView =inflater.inflate(R.layout.fragment_cheese, container, false);
+       rg = (RadioGroup)rootView.findViewById(R.id.radiogroup_cheese_options);
+       swiss = (RadioButton) rootView.findViewById(R.id.cheese_swiss);
+       edam = (RadioButton) rootView.findViewById(R.id.cheese_edam);
+       smoked = (RadioButton) rootView.findViewById(R.id.cheese_smoke);
+       brie = (RadioButton) rootView.findViewById(R.id.cheese_brie);
+
+       return rootView;
     }
 
 }

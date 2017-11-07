@@ -11,8 +11,8 @@
 
     <RadioGroup
         android:id="@+id/radiogroup_cheese_options"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/title_bun_option"
@@ -20,7 +20,7 @@
         android:padding="8dp">
 
         <RadioButton
-            android:id="@+id/brie"
+            android:id="@+id/cheese_brie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -30,22 +30,32 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/cheddar"
+            android:id="@+id/cheese_edam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#fff"
-            android:text="Cheddar"
+            android:text="Edam"
             android:textColor="#fff"
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/blue"
+            android:id="@+id/cheese_swiss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#fff"
-            android:text="Blue"
+            android:text="Swiss"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/cheese_smoke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Smoked"
             android:textColor="#fff"
             android:textSize="12sp" />
 

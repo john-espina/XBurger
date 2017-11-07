@@ -7,26 +7,24 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.espinajohn.xburger.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MeatFragments.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MeatFragments#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MeatFragments extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-
-
+    View rootView;
+    RadioGroup rg;
+    RadioGroup rg2;
+    RadioButton beef;
+    RadioButton chicken;
+    RadioButton falafel;
+    RadioButton tofu;
+    RadioButton pork;
+    RadioButton lamb;
 
 
     public MeatFragments() {
@@ -37,7 +35,18 @@ public class MeatFragments extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meat_fragments, container, false);
+        rootView = inflater.inflate(R.layout.fragment_meat_fragments, container, false);
+        rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_meat_choices);
+        rg2= (RadioGroup) rootView.findViewById(R.id.radiogroup_meat_choices2);
+        beef = (RadioButton)rootView.findViewById(R.id.pattie_beef);
+        chicken = (RadioButton)rootView.findViewById(R.id.pattie_chicken);
+        falafel = (RadioButton)rootView.findViewById(R.id.pattie_falafel);
+        tofu = (RadioButton)rootView.findViewById(R.id.pattie_tofu);
+        pork = (RadioButton)rootView.findViewById(R.id.pattie_pork);
+        lamb = (RadioButton)rootView.findViewById(R.id.pattie_lamb);
+
+
+        return rootView;
     }
 
 

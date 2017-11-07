@@ -41,12 +41,12 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/bun_sordough"
+            android:id="@+id/bun_sourdough"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#fff"
-            android:text="Sordough"
+            android:text="Sourdough"
             android:textColor="#fff"
             android:textSize="12sp" />
 

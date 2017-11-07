@@ -26,8 +26,8 @@
 
     <RadioGroup
         android:id="@+id/radiogroup_meat_choices"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/title_bun_option"
@@ -35,17 +35,7 @@
         android:padding="8dp">
 
         <RadioButton
-            android:id="@+id/chicken"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Chicken"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/beef"
+            android:id="@+id/pattie_beef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -55,12 +45,62 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/vegetarian"
+            android:id="@+id/pattie_chicken"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#fff"
-            android:text="Vegetarian"
+            android:text="Chicken"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/pattie_pork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Pork"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/pattie_lamb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Lamb"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radiogroup_meat_choices2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="50dp"
+        android:padding="8dp">
+
+        <RadioButton
+            android:id="@+id/pattie_falafel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Falafel"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/pattie_tofu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="#fff"
+            android:text="Tofu"
             android:textColor="#fff"
             android:textSize="12sp" />
 

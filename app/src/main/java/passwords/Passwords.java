@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
-import java.util.Base64;
+import android.util.Base64;
 import java.util.Random;
 
 /**
@@ -117,9 +117,8 @@ public class Passwords {
      * @return A byte array representing the data encoded in the b64 argument string
      * @throws IllegalArgumentException Thrown if the argument b64 is not a valid base64 string
      */
-    @TargetApi(Build.VERSION_CODES.O)
     public static byte[] base64Decode(String b64) throws IllegalArgumentException {
-        return Base64.getDecoder().decode(b64);
+        return Base64.decode (b64, Base64.DEFAULT);
     }
 
     /**
@@ -129,8 +128,7 @@ public class Passwords {
      *
      * @return A base64 encoded String representing the data contained in the array
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String base64Encode(byte[] array) {
-        return Base64.getEncoder().encodeToString(array);
+        return Base64.encodeToString (array, Base64.DEFAULT);
     }
 }

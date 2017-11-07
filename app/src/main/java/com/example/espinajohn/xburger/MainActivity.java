@@ -38,14 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Get the preferences here
 
-        /**
-         * email;
-         * bun_choice;
-         * meat_choice;
-         * salad_choice;
-         * sauce_choice;*
-         * */
-
         //Call the Burger Controller to set up the main screen
         if (savedInstanceState != null) {
             // Remember the layout
@@ -186,6 +178,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.cheese_brie:
                 if (checked){
                     //code here
+                    //Create stock object
+                    //Add it to item list
+                    //Add item to the order
                 }
             case R.id.sauce_halloumi:
                 if (checked){

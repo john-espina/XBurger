@@ -270,8 +270,6 @@ public class BurgerAppLayout extends ListActivity{
         currentLayout = R.layout.payment_page;
         activity.setContentView(R.layout.payment_page);
 
-        //Set the shared preferences
-
         //Set the controls
         EditText creditcard = (EditText) activity.findViewById(R.id.credit_card);
         EditText expirydate = (EditText) activity.findViewById(R.id.expiry_date);

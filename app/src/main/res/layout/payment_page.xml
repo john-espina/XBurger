@@ -56,20 +56,12 @@
         app:layout_constraintVertical_bias="0.124" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/cc_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/credit_card"
-        android:layout_alignLeft="@+id/credit_card"
-        android:layout_alignStart="@+id/credit_card"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:textColor="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.319"
-        tools:layout_editor_absoluteX="85dp"
-        tools:text="Credit Card No" />
+        android:layout_gravity="center"
+        android:text="Credit Card Number"
+        android:textColor="@android:color/white" />
 
     <EditText
         android:id="@+id/credit_card"
@@ -77,8 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView13"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginBottom="36dp"
-        android:layout_marginLeft="20dp"
         android:background="@android:color/background_light"
         android:ems="10"
         android:inputType="textPersonName"

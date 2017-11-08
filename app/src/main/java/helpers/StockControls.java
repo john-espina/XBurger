@@ -190,6 +190,35 @@ public class StockControls {
         return radioButtonArrayList;
     }
 
+    public static ArrayList <RadioButton> createRadioButtonList(RadioGroup rg, RadioGroup rg2){
+
+        int count = rg.getChildCount();
+
+        ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
+
+        for (int i=0;i<count;i++){
+            View o = rg.getChildAt(i);
+
+            if (o instanceof RadioButton){
+                radioButtonArrayList.add((RadioButton) o);
+            }
+        }
+
+        int count2 = rg2.getChildCount();
+
+        for (int i=0; i<count2;i++){
+            View m = rg2.getChildAt(i);
+
+            if (m instanceof RadioButton){
+                radioButtonArrayList.add((RadioButton)m);
+            }
+        }
+
+
+
+        return radioButtonArrayList;
+    }
+
 
     public static void updateStockView(ArrayList<Stock> buns, ArrayList<RadioButton>radioButtonArrayList){
         ArrayList<String> ingredientNames = new ArrayList<>();
@@ -208,5 +237,7 @@ public class StockControls {
             Log.d("radios", radioButtonArrayList.get(i).getText().toString());
         }
     }
+
+
 
 }

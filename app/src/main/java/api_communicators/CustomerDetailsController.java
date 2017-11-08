@@ -35,10 +35,8 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
     private Customer customer;
     static final String api_base_url = "http://project2-burgerx-database-api.herokuapp.com/customer/";
 
-
     @Override
     protected Customer doInBackground(String...args) {
-
 
         try {
 

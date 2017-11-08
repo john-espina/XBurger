@@ -81,11 +81,11 @@ public class BurgerAppLayout extends ListActivity{
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //if (app_logged_in) {
-                   //setUpIngredientPage();
-                //} else {
+               if (app_logged_in != null && app_logged_in) {
+                   setUpIngredientPage();
+                } else {
                     setUpHomePage();
-                //}
+                }
             }
         });
 
@@ -126,6 +126,7 @@ public class BurgerAppLayout extends ListActivity{
         //Set the layout
         currentLayout = R.layout.home_page;
         activity.setContentView(R.layout.home_page);
+        app_logged_in = false;
 
         //Set the shared preferences
 

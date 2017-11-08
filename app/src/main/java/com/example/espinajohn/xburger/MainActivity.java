@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     BurgerAppLayout control;
     int currentLayout;
     ArrayList<Integer> burger_order;
-    //Boolean loggedin;
+    Boolean loggedin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +33,20 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
 
-        //loggedin = settings.getBoolean("logged_in", false);
-        //control.app_logged_in.equals(loggedin.booleanValue());//
-
         //Get the preferences here
+        loggedin = settings.getBoolean("logged_in", false);
+
+
 
         //Call the Burger Controller to set up the main screen
         if (savedInstanceState != null) {
             // Remember the layout
             currentLayout = savedInstanceState.getInt("current_layout");
             control = new BurgerAppLayout(this, currentLayout);
+
+            if (loggedin !=null) {
+                control.app_logged_in = loggedin;
+            }
             //Do something with the burger ingredient list
 
 
@@ -63,18 +67,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("CHECK", "on stop");
         SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-
-        //editor.putBoolean("logged_in", control.app_logged_in);
-
-        //Save the preferences in here
-        /**
-         * Placeholder:
-         * email;
-         * bun_choice;
-         * meat_choice;
-         * salad_choice;
-         * sauce_choice;*
-         * */
+        editor.putBoolean("logged_in", control.app_logged_in);
 
         editor.commit();
         super.onStop();

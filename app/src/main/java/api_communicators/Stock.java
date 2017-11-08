@@ -11,11 +11,12 @@ public class Stock implements Serializable {
     int ingredient_id;
     String ingredient_name;
     String category;
+    private int categoryID;
     int stock_level;
     double price;
     String img_file_name;
 
-    public Stock(int ingredient_id, String ingredient_name, String category, int stock_level, double price, String img_file_name) {
+    public Stock(int ingredient_id, String ingredient_name, String category,int categoryID, int stock_level, double price, String img_file_name) {
         this.ingredient_id = ingredient_id;
         this.ingredient_name = ingredient_name;
         this.category = category;
@@ -70,5 +71,13 @@ public class Stock implements Serializable {
 
     public void setImg_file_name(String img_file_name) {
         this.img_file_name = img_file_name;
+    }
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 }

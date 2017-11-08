@@ -44,6 +44,8 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
             HttpURLConnection connection = (HttpURLConnection) url.openConnection ();
             connection.connect ();
 
+
+
             JsonParser jp = new JsonParser ();
             JsonElement root = jp.parse (new InputStreamReader ((InputStream) connection.getContent ()));
             JsonObject customer_object = root.getAsJsonObject ();

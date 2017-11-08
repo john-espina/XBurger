@@ -1,72 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/blue_lightning">
+    android:background="@mipmap/blue_lightning"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/back_to_landing_page2"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"
-        android:layout_weight="1"
-        android:background="@drawable/ingredient_select_bg"
-        android:text="Cancel"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
-        tools:ignore="ButtonStyle,HardcodedText" />
-
-    <ImageView
-        android:id="@+id/logo_login_page"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212" />
     <!--app:srcCompat="@mipmap/logo" />-->
 
-    <ImageView
-        android:id="@+id/burger_img_homepage"
-        android:layout_width="400dp"
-        android:layout_height="200dp"
-        android:layout_above="@+id/username_"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
     <!--app:srcCompat="@mipmap/burger_img2" />-->
-
-    <Button
-        android:id="@+id/homepage_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/password"
-        android:layout_alignStart="@+id/password"
-        android:layout_below="@+id/password"
-        android:layout_marginTop="13dp"
-        android:background="@drawable/textview_bg"
-        android:text="@string/button_login"
-        android:textColor="#fff" />
-
-    <Button
-        android:id="@+id/homepage_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/homepage_login"
-        android:layout_alignBottom="@+id/homepage_login"
-        android:layout_alignEnd="@+id/password"
-        android:layout_alignRight="@+id/password"
-        android:background="@drawable/textview_bg"
-        android:text="@string/button_signup"
-        android:textColor="#fff" />
 
     <EditText
         android:id="@+id/username_"
@@ -74,7 +18,7 @@
         android:layout_height="40dp"
         android:layout_below="@+id/logo_login_page"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:background="@android:color/background_light"
         android:ems="10"
         android:hint="User Name or Email"
@@ -88,11 +32,70 @@
         android:layout_alignLeft="@+id/username_"
         android:layout_alignStart="@+id/username_"
         android:layout_alignTop="@+id/username_"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/background_light"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="10dp" />
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/homepage_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/password"
+            android:layout_alignStart="@+id/password"
+            android:layout_below="@+id/password"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview_bg"
+            android:text="@string/button_login"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/homepage_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/homepage_login"
+            android:layout_alignBottom="@+id/homepage_login"
+            android:layout_alignEnd="@+id/password"
+            android:layout_alignRight="@+id/password"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview_bg"
+            android:text="@string/button_signup"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/back_to_landing_page2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/homepage_login"
+            android:layout_alignBottom="@+id/homepage_login"
+            android:layout_alignEnd="@+id/password"
+            android:layout_alignRight="@+id/password"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview_bg"
+            android:text="CANCEL"
+            android:textColor="#fff" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/logo_login_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="false"
+        android:layout_margin="10dp"
+        android:background="@mipmap/logo_transparent" />
+
+</LinearLayout>

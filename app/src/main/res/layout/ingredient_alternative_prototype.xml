@@ -1,36 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
-
-    <FrameLayout
-        android:id="@+id/placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp" />
-
-    <TextView
-        android:id="@+id/step_one_subtitle"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/step_one"
-        android:paddingTop="5dp"
-        android:text="@string/step_one_title"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.194" />
+    android:background="@mipmap/blue_lightning"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/step_one"
@@ -39,6 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_gravity="top"
         android:layout_marginTop="16dp"
         android:background="@drawable/textview_bg"
         android:padding="8dp"
@@ -53,146 +31,198 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.042" />
 
-
-    <Button
-        android:id="@+id/button_next"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/back_to_landing_page3"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_toLeftOf="@+id/salads_button"
-        android:layout_toStartOf="@+id/salads_button"
-        android:background="@drawable/ingredient_select_bg"
-        android:padding="8dp"
-        android:text="NEXT"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
-
-    <Button
-        android:id="@+id/buns_button"
-        android:layout_width="65dp"
-        android:layout_height="55dp"
+    <TextView
+        android:id="@+id/step_one_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/meats_button"
-        android:background="@drawable/textview_bg"
-        android:padding="8dp"
-        android:text="Buns"
+        android:layout_below="@+id/step_one"
+        android:layout_gravity="top"
+        android:paddingTop="5dp"
+        android:text="@string/step_one_title"
         android:textAlignment="center"
         android:textColor="#fff"
-        android:textSize="10sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
+        app:layout_constraintVertical_bias="0.194" />
 
-    <Button
-        android:id="@+id/meats_button"
-        android:layout_width="75dp"
-        android:layout_height="55dp"
-        android:layout_above="@+id/button_next"
-        android:layout_toEndOf="@+id/buns_button"
-        android:layout_toRightOf="@+id/buns_button"
-        android:background="@drawable/textview_bg"
-        android:padding="8dp"
-        android:text="Meat"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
-
-    <Button
-        android:id="@+id/cheese_button"
-        android:layout_width="65dp"
-        android:layout_height="55dp"
-        android:layout_above="@+id/button_next"
-        android:layout_toEndOf="@+id/meats_button"
-        android:layout_toRightOf="@+id/meats_button"
-        android:background="@drawable/textview_bg"
-        android:padding="8dp"
-        android:text="CHEESE"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
-
-    <Button
-        android:id="@+id/salads_button"
-        android:layout_width="65dp"
-        android:layout_height="55dp"
-        android:layout_above="@+id/button_next"
-        android:layout_marginLeft="14dp"
-        android:layout_marginStart="14dp"
-        android:layout_toEndOf="@+id/cheese_button"
-        android:layout_toRightOf="@+id/cheese_button"
-        android:background="@drawable/textview_bg"
-        android:padding="8dp"
-        android:text="SALADS"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
-
-    <Button
-        android:id="@+id/sauces_button"
-        android:layout_width="65dp"
-        android:layout_height="55dp"
-        android:layout_alignBottom="@+id/salads_button"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_toEndOf="@+id/salads_button"
-        android:layout_toRightOf="@+id/salads_button"
-        android:background="@drawable/textview_bg"
-        android:padding="8dp"
-        android:text="Sauce"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
-
-    <Button
-        android:id="@+id/back_to_landing_page3"
-        android:layout_width="100dp"
+    <FrameLayout
+        android:id="@+id/placeholder"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/button_next"
-        android:layout_toRightOf="@+id/button_next"
+        android:layout_marginTop="50dp">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/burger_choices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/ingredient_select_bg"
-        android:text="Cancel"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
-        tools:ignore="ButtonStyle,HardcodedText" />
+        android:baselineAligned="false"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cheese_button"
+            android:layout_width="65dp"
+            android:layout_height="55dp"
+            android:layout_above="@+id/button_next"
+            android:layout_toEndOf="@+id/meats_button"
+            android:layout_toRightOf="@+id/meats_button"
+            android:layout_weight="1"
+            android:background="@drawable/textview_bg"
+            android:padding="8dp"
+            android:text="CHEESE"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.983" />
+
+        <Button
+            android:id="@+id/buns_button"
+            android:layout_width="65dp"
+            android:layout_height="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/meats_button"
+            android:layout_weight="1"
+            android:background="@drawable/textview_bg"
+            android:padding="8dp"
+            android:text="Buns"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.983" />
+
+        <Button
+            android:id="@+id/salads_button"
+            android:layout_width="65dp"
+            android:layout_height="55dp"
+            android:layout_above="@+id/button_next"
+            android:layout_toEndOf="@+id/cheese_button"
+            android:layout_toRightOf="@+id/cheese_button"
+            android:layout_weight="1"
+            android:background="@drawable/textview_bg"
+            android:padding="8dp"
+            android:text="SALADS"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.983" />
+
+        <Button
+            android:id="@+id/meats_button"
+            android:layout_width="75dp"
+            android:layout_height="55dp"
+            android:layout_above="@+id/button_next"
+            android:layout_toEndOf="@+id/buns_button"
+            android:layout_toRightOf="@+id/buns_button"
+            android:layout_weight="1"
+            android:background="@drawable/textview_bg"
+            android:padding="8dp"
+            android:text="Meat"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.983" />
+
+        <Button
+            android:id="@+id/sauces_button"
+            android:layout_width="65dp"
+            android:layout_height="55dp"
+            android:layout_alignBottom="@+id/salads_button"
+            android:layout_toEndOf="@+id/salads_button"
+            android:layout_toRightOf="@+id/salads_button"
+            android:layout_weight="1"
+            android:background="@drawable/textview_bg"
+            android:padding="8dp"
+            android:text="Sauce"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.983" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cancel_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/back_to_landing_page3"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_toEndOf="@+id/button_next"
+            android:layout_toRightOf="@+id/button_next"
+            android:layout_weight="1"
+            android:background="@drawable/ingredient_select_bg"
+            android:text="Cancel"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/back_to_landing_page3"
+            android:layout_gravity="bottom"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/salads_button"
+            android:layout_toStartOf="@+id/salads_button"
+            android:layout_weight="1"
+            android:background="@drawable/ingredient_select_bg"
+            android:padding="8dp"
+            android:text="NEXT"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.983" />
+
+    </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

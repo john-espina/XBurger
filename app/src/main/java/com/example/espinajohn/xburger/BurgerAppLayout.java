@@ -277,7 +277,7 @@ public class BurgerAppLayout extends ListActivity{
         EditText expirydate = (EditText) activity.findViewById(R.id.expiry_date);
         EditText cvv = (EditText) activity.findViewById(R.id.cvv_number);
         Button confirmpayment = (Button) activity.findViewById(R.id.button_confirm);
-        Button editorder = (Button) activity.findViewById(R.id.button_edit);
+        Button editorder = (Button) activity.findViewById(R.id.button_edit2);
         Button back4 = (Button) activity.findViewById (R.id.back_to_landing_page4);
 
         String creditcard_string = creditcard.getText().toString();
@@ -390,8 +390,8 @@ public class BurgerAppLayout extends ListActivity{
                     char[] pword = passwordString.toCharArray ();
 
                     //Hash the password
-                    byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
-                    String hashpassString = hashpass.toString ();
+                    //byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
+                    String hashpassString = "";//hashpass.toString ();
 
                     //Other variables that are needed to construct a customer
                     String passpinString = "";
@@ -401,7 +401,6 @@ public class BurgerAppLayout extends ListActivity{
 
                     // Send this customer to the database to be added
                     // Connect to the API to send the customer
-                    // Need a Json query for this
 
                     //Alert dialog thanks for signing up
                     alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");

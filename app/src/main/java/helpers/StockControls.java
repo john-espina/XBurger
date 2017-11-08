@@ -1,8 +1,16 @@
 package helpers;
 
+import android.util.Log;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import api_communicators.Stock;
 
 /**
  * Created by Julian on 8/11/2017.
@@ -166,6 +174,38 @@ public class StockControls {
             return "Drink";
         } else {
             return "Special";
+        }
+    }
+
+
+    public static ArrayList <RadioButton> createRadioButtonList(RadioGroup rg){
+        int count = rg.getChildCount();
+        ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
+        for (int i=0;i<count;i++){
+            View o = rg.getChildAt(i);
+            if (o instanceof RadioButton){
+                radioButtonArrayList.add((RadioButton) o);
+            }
+        }
+        return radioButtonArrayList;
+    }
+
+
+    public static void updateStockView(ArrayList<Stock> buns, ArrayList<RadioButton>radioButtonArrayList){
+        ArrayList<String> ingredientNames = new ArrayList<>();
+        for (int i=0; i<buns.size();i++){
+            ingredientNames.add(buns.get(i).getIngredient_name());
+            Log.d("buns", buns.get(i).getIngredient_name());
+        }
+
+        for (int i=0; i<radioButtonArrayList.size();i++){
+            if (!ingredientNames.contains(radioButtonArrayList.get(i).getText().toString())) {
+                radioButtonArrayList.get(i).setEnabled(false);
+                radioButtonArrayList.get(i).setText(radioButtonArrayList.get(i).getText().toString() + "  ( Not Available )");
+
+            }
+
+            Log.d("radios", radioButtonArrayList.get(i).getText().toString());
         }
     }
 

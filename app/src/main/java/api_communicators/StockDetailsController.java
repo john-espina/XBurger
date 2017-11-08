@@ -17,6 +17,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import helpers.StockControls;
+
 
 /**
  * This Class connects to the API to retrieve available ingredients.
@@ -24,7 +28,7 @@ import java.util.ArrayList;
  * Created by espinajohn on 8/11/2017.
  */
 
-public class StockDetailsController extends AsyncTask<String, Integer, Stock>{
+public class StockDetailsController extends AsyncTask<String, Integer, HashMap >{
 
 
     int ingredient_id;
@@ -33,12 +37,17 @@ public class StockDetailsController extends AsyncTask<String, Integer, Stock>{
     int stock_level;
     double price;
     String img_file_name;
-    ArrayList<Stock> stocks;
+    ArrayList<Stock> buns= new ArrayList<>();
+    ArrayList<Stock> salads = new ArrayList<>();
+    ArrayList<Stock> patties = new ArrayList<>();
+    ArrayList<Stock> cheeses = new ArrayList<>();
+    ArrayList<Stock> sauces = new ArrayList<>();
+    HashMap<String, ArrayList> categoryHash = new HashMap<>();
     String ingredientURL= "http://project2-burgerx-database-api.herokuapp.com/ingredients/available";
 
 
     @Override
-    protected Stock doInBackground(String...args) {
+    protected HashMap<String, ArrayList> doInBackground(String...args) {
 
         try{
 
@@ -57,16 +66,36 @@ public class StockDetailsController extends AsyncTask<String, Integer, Stock>{
 
                 ingredient_id = ingredientObject.get("Stock_ID").getAsInt();
                 ingredient_name = ingredientObject.get("Ingredient_Name").getAsString();
-                //get categeory here;
+                category = StockControls.getItemCategory(ingredient_id);
                 stock_level = ingredientObject.get("Stock_Level").getAsInt();
                 price = ingredientObject.get("Price").getAsDouble();
-                img_file_name = ingredientObject.get("Img_File_Name").getAsString();
+                img_file_name = "";
 
                 // Create a new Stock object and add it to the list of stocks.
                 Stock stockItem = new Stock(ingredient_id,ingredient_name, category,stock_level,price,img_file_name);
-                stocks.add(stockItem);
+                if (category.equalsIgnoreCase("Bread")){
+                    buns.add(stockItem);
+                }
+                if (category.equalsIgnoreCase("Salad")){
+                    salads.add(stockItem);
+                }
+                if (category.equalsIgnoreCase("Meat")){
+                    patties.add(stockItem);
+                }
+                if (category.equalsIgnoreCase("Cheese")){
+                    cheeses.add(stockItem);
+                }
+                if (category.equalsIgnoreCase("sauce")){
+                    sauces.add(stockItem);
+                }
+
             }
 
+            categoryHash.put("bunCategory", buns);
+            categoryHash.put("saladCategory", salads);
+            categoryHash.put("pattieCategory", patties);
+            categoryHash.put("cheeseCategory", cheeses);
+            categoryHash.put("sauces", sauces);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -75,7 +104,7 @@ public class StockDetailsController extends AsyncTask<String, Integer, Stock>{
         }
 
 
-        return null;
+        return categoryHash;
     }
 
     protected void onProgressUpdate (Integer...progress){

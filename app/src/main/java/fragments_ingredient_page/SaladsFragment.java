@@ -12,6 +12,13 @@ import android.widget.RadioGroup;
 
 import com.example.espinajohn.xburger.R;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
+import api_communicators.Stock;
+import api_communicators.StockDetailsController;
+import helpers.StockControls;
 
 
 public class SaladsFragment extends Fragment {
@@ -28,6 +35,9 @@ public class SaladsFragment extends Fragment {
     RadioButton capsicum;
     RadioButton olives;
     RadioButton cucumber;
+    ArrayList<RadioButton> radioButtons;
+    HashMap<String, ArrayList> stocks;
+    ArrayList<Stock> salads;
 
 
     public SaladsFragment() {
@@ -53,6 +63,21 @@ public class SaladsFragment extends Fragment {
         olives = (RadioButton) rootView.findViewById(R.id.salad_olives);
         cucumber = (RadioButton) rootView.findViewById(R.id.salad_cucumber);
 
+        radioButtons = StockControls.createRadioButtonList(rg,rg2);
+
+
+        try{
+            //if statement here if previosly clicked so wont have to query databse again
+            stocks = new StockDetailsController().execute().get();
+            salads = stocks.get("cheeseCategory");
+
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        } catch (ExecutionException e){
+            e.printStackTrace();
+        }
+
+        StockControls.updateStockView(salads,radioButtons);
 
         return  rootView;
     }

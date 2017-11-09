@@ -2,14 +2,17 @@ package fragments_ingredient_page;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.espinajohn.xburger.MainActivity;
 import com.example.espinajohn.xburger.R;
 
 import java.util.ArrayList;
@@ -35,9 +38,12 @@ public class SaladsFragment extends Fragment {
     RadioButton capsicum;
     RadioButton olives;
     RadioButton cucumber;
-    ArrayList<RadioButton> radioButtons;
-    HashMap<String, ArrayList> stocks;
-    ArrayList<Stock> salads;
+    ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
+    HashMap<String, ArrayList> stocks = new HashMap<>();
+    ArrayList<Stock> salads = new ArrayList<>();
+    HashMap<String, ArrayList> allStocks = new HashMap<>();
+    ArrayList<Stock>allSalads = new ArrayList<>();
+
 
 
     public SaladsFragment() {
@@ -46,38 +52,47 @@ public class SaladsFragment extends Fragment {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_salads, container, false);
         rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_salad_choices);
-        rg2 = (RadioGroup) rootView.findViewById(R.id.radiogroup_salad_choices2);
-        lettuce = (RadioButton) rootView.findViewById(R.id.salad_lettuce);
-        tomato =(RadioButton) rootView.findViewById(R.id.salad_tomato);
-        onion = (RadioButton) rootView.findViewById(R.id.salad_onion);
-        redOnion =(RadioButton) rootView.findViewById(R.id.salad_red_onion);
-        beetroot = (RadioButton) rootView.findViewById(R.id.salad_beetroot);
-        pickle = (RadioButton) rootView.findViewById(R.id.salad_pickle);
-        capsicum = (RadioButton) rootView.findViewById(R.id.salad_capsicum);
-        olives = (RadioButton) rootView.findViewById(R.id.salad_olives);
-        cucumber = (RadioButton) rootView.findViewById(R.id.salad_cucumber);
+//        rg2 = (RadioGroup) rootView.findViewById(R.id.radiogroup_salad_choices2);
+//        lettuce = (RadioButton) rootView.findViewById(R.id.salad_lettuce);
+//        tomato =(RadioButton) rootView.findViewById(R.id.salad_tomato);
+//        onion = (RadioButton) rootView.findViewById(R.id.salad_onion);
+//        redOnion =(RadioButton) rootView.findViewById(R.id.salad_red_onion);
+//        beetroot = (RadioButton) rootView.findViewById(R.id.salad_beetroot);
+//        pickle = (RadioButton) rootView.findViewById(R.id.salad_pickle);
+//        capsicum = (RadioButton) rootView.findViewById(R.id.salad_capsicum);
+//        olives = (RadioButton) rootView.findViewById(R.id.salad_olives);
+//        cucumber = (RadioButton) rootView.findViewById(R.id.salad_cucumber);
 
-        radioButtons = StockControls.createRadioButtonList(rg,rg2);
+        try {
+            //if statement here if previously clicked so won't need to query the database again
+            allStocks = MainActivity.getStockHashMap();
+            stocks =  new StockDetailsController().execute().get();
+            allSalads = allStocks.get("saladCategory");
+            salads = stocks.get("saladCategory");
+
+            //Create and add radiobuttons to radiogroup from current stocks
+            radioButtonArrayList = StockControls.generateRadioButtonItem(rg,this, allSalads);
 
 
-        try{
-            //if statement here if previosly clicked so wont have to query databse again
-            stocks = new StockDetailsController().execute().get();
-            salads = stocks.get("cheeseCategory");
 
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (ExecutionException e){
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        StockControls.updateStockView(salads,radioButtons);
+        //create arraylist of radiobuttons
+        //radioButtonArrayList = StockControls.createRadioButtonList(rg);
+
+        //compare radiobuttonarraylist to available stocks
+        StockControls.updateStockView(salads, radioButtonArrayList );
 
         return  rootView;
     }

@@ -94,7 +94,7 @@ public class AllStockRetriever extends AsyncTask <String, Integer, HashMap >{
                 categoryHash.put("saladCategory", salads);
                 categoryHash.put("pattieCategory", patties);
                 categoryHash.put("cheeseCategory", cheeses);
-                categoryHash.put("sauces", sauces);
+                categoryHash.put("sauceCategory", sauces);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

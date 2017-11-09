@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.espinajohn.xburger.MainActivity;
 import com.example.espinajohn.xburger.R;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class BunsFragment extends Fragment {
     HashMap<String,ArrayList> stocks = new HashMap<>();
     HashMap<String,ArrayList> allStocks = new HashMap<>();
 
+
     public BunsFragment() {
         // Required empty public constructor
     }
@@ -66,17 +68,17 @@ public class BunsFragment extends Fragment {
 //        bunGlutenFree =(RadioButton) rootView.findViewById(R.id.bun_gluten_free);
 
 
-        radioButtonArrayList = StockControls.createRadioButtonList(rg);
+
 
         try {
             //if statement here if previously clicked so won't need to query the database again
-            allStocks = new StockDetailsController().execute().get();
+            allStocks = MainActivity.getStockHashMap();
             stocks =  new StockDetailsController().execute().get();
             allBuns = allStocks.get("bunCategory");
             buns = stocks.get("bunCategory");
 
-            StockControls.generateRadioButtons(rg,this, allBuns);
-
+            //Create and add radiobuttons to radiogroup from current stocks
+            radioButtonArrayList = StockControls.generateRadioButtonItem(rg,this, allBuns);
 
 
 
@@ -86,6 +88,10 @@ public class BunsFragment extends Fragment {
             e.printStackTrace();
         }
 
+        //create arraylist of radiobuttons
+        //radioButtonArrayList = StockControls.createRadioButtonList(rg);
+
+        //compare radiobuttonarraylist to available stocks
         StockControls.updateStockView(buns, radioButtonArrayList );
 
 

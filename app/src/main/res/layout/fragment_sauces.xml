@@ -4,7 +4,7 @@
     android:id="@+id/frag_meat"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="150dp"
+    android:layout_marginTop="45dp"
     android:background="#000"
     app:layout_constraintTop_toBottomOf="@id/step_one_subtitle"
     tools:context="com.example.espinajohn.xburger.fragments_ingredient_page.BunsFragment">
@@ -12,7 +12,7 @@
     <TextView
         android:id="@+id/title_sauce_options"
         android:layout_width="400dp"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/step_one_subtitle"
@@ -22,117 +22,19 @@
         android:paddingLeft="8dp"
         android:paddingTop="2dp"
         android:text="SAUCE OPTIONS"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:textSize="24sp" />
 
     <RadioGroup
         android:id="@+id/radiogroup_sauce_choices"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/title_bun_option"
         android:layout_marginTop="50dp"
         android:padding="8dp">
 
-        <RadioButton
-            android:id="@+id/sauce_halloumi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Halloumi"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/sauce_tomato_sauce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Tomato Sauce"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/sauce_aioli"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Aioli"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/sauce_mayonnaise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Mayonnaise"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/sauce_american_mustard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="American Mustard"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radiogroup_sauce_choices2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="50dp"
-        android:padding="8dp">
-
-        <RadioButton
-            android:id="@+id/sauce_dijon_mustard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Dijon Mustard"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/sauce_honey_mustard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Honey Mustard"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/sauce_mint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Mint Sauce"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/sauce_brown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Brown Sauce"
-            android:textColor="#fff"
-            android:textSize="12sp" />
     </RadioGroup>
 
 </FrameLayout>

@@ -4,14 +4,14 @@
     android:id="@+id/frag_salad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="150dp"
+    android:layout_marginTop="45dp"
     android:background="#000"
     app:layout_constraintTop_toBottomOf="@id/step_one_subtitle"
     tools:context="com.example.espinajohn.xburger.fragments_ingredient_page.BunsFragment">
 
     <RadioGroup
         android:id="@+id/radiogroup_salad_choices"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -19,61 +19,11 @@
         android:layout_marginTop="50dp"
         android:padding="8dp">
 
-        <RadioButton
-            android:id="@+id/salad_lettuce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Lettuce"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/salad_tomato"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Tomato"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/salad_onion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Onion"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/salad_red_onion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Red Onion"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/salad_beetroot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Beetroot"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
     </RadioGroup>
 
     <TextView
         android:id="@+id/title_salad_options"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="24dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -85,56 +35,6 @@
         android:paddingTop="2dp"
         android:text="@string/title_salad"
         android:textColor="#000" />
-
-    <RadioGroup
-        android:id="@+id/radiogroup_salad_choices2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="50dp"
-        android:padding="8dp">
-
-        <RadioButton
-            android:id="@+id/salad_pickle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:buttonTint="#fff"
-            android:text="Pickle"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <RadioButton
-            android:id="@+id/salad_capsicum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Capsicum"
-            android:textColor="#fff"
-            android:textSize="12sp"
-            android:buttonTint="#fff"/>
-
-        <RadioButton
-            android:id="@+id/salad_olives"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Olives"
-            android:textColor="#fff"
-            android:textSize="12sp"
-            android:buttonTint="#fff"/>
-
-        <RadioButton
-            android:id="@+id/salad_cucumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cucumber"
-            android:textColor="#fff"
-            android:textSize="12sp"
-            android:buttonTint="#fff"/>
-
-    </RadioGroup>
 
 </FrameLayout>
 

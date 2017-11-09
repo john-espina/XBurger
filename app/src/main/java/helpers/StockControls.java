@@ -187,6 +187,12 @@ public class StockControls {
     }
 
 
+    /**
+     * This method an ArrayList or Radiobuttons
+     * The list can be used to compare Radiobutton to corresponding java object
+     * @param rg
+     * @return
+     */
     public static ArrayList <RadioButton> createRadioButtonList(RadioGroup rg){
         int count = rg.getChildCount();
         ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
@@ -199,36 +205,12 @@ public class StockControls {
         return radioButtonArrayList;
     }
 
-    public static ArrayList <RadioButton> createRadioButtonList(RadioGroup rg, RadioGroup rg2){
 
-        int count = rg.getChildCount();
-
-        ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
-
-        for (int i=0;i<count;i++){
-            View o = rg.getChildAt(i);
-
-            if (o instanceof RadioButton){
-                radioButtonArrayList.add((RadioButton) o);
-            }
-        }
-
-        int count2 = rg2.getChildCount();
-
-        for (int i=0; i<count2;i++){
-            View m = rg2.getChildAt(i);
-
-            if (m instanceof RadioButton){
-                radioButtonArrayList.add((RadioButton)m);
-            }
-        }
-
-
-
-        return radioButtonArrayList;
-    }
-
-
+    /**
+     * This method updates the Fragment view of a category based on the available ingredients
+     * @param buns
+     * @param radioButtonArrayList
+     */
     public static void updateStockView(ArrayList<Stock> buns, ArrayList<RadioButton>radioButtonArrayList){
         ArrayList<String> ingredientNames = new ArrayList<>();
         for (int i=0; i<buns.size();i++){
@@ -246,10 +228,17 @@ public class StockControls {
         }
     }
 
-
+    /**
+     * This method generates Radiobuttons programatically based on on the elements inside an ArrayList of Stocks
+     * @param rg
+     * @param fragment
+     * @param stocks
+     * @return
+     */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void generateRadioButtons(RadioGroup rg, Fragment fragment, ArrayList<Stock> stocks){
+    public static ArrayList<RadioButton> generateRadioButtonItem(RadioGroup rg, Fragment fragment, ArrayList<Stock> stocks){
 
+        ArrayList<RadioButton> radioButtons = new ArrayList<>();
         for (int i=0; i<stocks.size(); i++){
 
             int categoryID = stocks.get(i).getCategoryID();
@@ -260,46 +249,24 @@ public class StockControls {
                 newRadioButton.setText((CharSequence) stocks.get(i).getIngredient_name());
                 newRadioButton.setTextColor(Color.WHITE);
                 newRadioButton.setButtonTintList(ColorStateList.valueOf(Color.WHITE));
+                rg.addView(newRadioButton);
 
         }
+        return radioButtons;
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void generateRadioButtons(RadioGroup rg, RadioGroup rg2, Fragment fragment, ArrayList<Stock> stocks){
-
-
-        int rID= 100;
-        int radioChildrenCount =0;
-
-
-        for (int i=0; i<stocks.size(); i++){
-
-            int resourceID = idBuilder(rID,stocks.get(i).getIngredient_id());
-
-            int categoryID = stocks.get(i).getCategoryID();
-
-
-
-            RadioButton newRadioButton = new RadioButton(fragment.getActivity());
-            newRadioButton.setId(resourceID);
-            newRadioButton.setText((CharSequence) stocks.get(i).getIngredient_name());
-            newRadioButton.setTextColor(Color.WHITE);
-            newRadioButton.setButtonTintList(ColorStateList.valueOf(Color.WHITE));
-            radioChildrenCount++;
-            if (radioChildrenCount==5){
-
-            }
-
-        }
-
-    }
 
     protected static int  getCategoryID (Stock stock){
         int categoryID = stock.getCategoryID();
         return categoryID;
     }
 
+    /**
+     * Helper method to build resource id for each radiobutton created
+     * @param categoryID
+     * @param ingredientID
+     * @return
+     */
     protected  static int idBuilder (int categoryID, int ingredientID){
 
         int id = Integer.valueOf(String.valueOf(categoryID)+ String.valueOf(ingredientID));

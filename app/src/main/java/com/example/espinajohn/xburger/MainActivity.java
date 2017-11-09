@@ -9,13 +9,11 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
-import fragments_ingredient_page.BunsFragment;
-import fragments_ingredient_page.CheeseFragment;
-import fragments_ingredient_page.MeatFragments;
-import fragments_ingredient_page.SaladsFragment;
+import api_communicators.AllStockRetriever;
+import api_communicators.Stock;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +22,15 @@ public class MainActivity extends AppCompatActivity {
     int currentLayout;
     ArrayList<Integer> burger_order;
     Boolean loggedin;
+    private static HashMap<String, ArrayList> stockHashMap = new HashMap<>();
+
+    public static HashMap<String, ArrayList> getStockHashMap() {
+        return stockHashMap;
+    }
+
+    public static void setStockHashMap(HashMap<String, ArrayList> stockHashMap) {
+        MainActivity.stockHashMap = stockHashMap;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
         //Get the preferences here
         loggedin = settings.getBoolean("logged_in", false);
 
+       //retrieve available ingredients from database
+        //this will return a hashmap of category with corresponding arraylist of Stock item as value
+        try {
+            setStockHashMap(new AllStockRetriever().execute().get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
 
         //Call the Burger Controller to set up the main screen
@@ -78,140 +94,140 @@ public class MainActivity extends AppCompatActivity {
         boolean checked = ((RadioButton)view).isChecked();
         String chosen = null;
         switch (view.getId()){
-            case R.id.bun_white:
-                if (checked){
-                    chosen = "white";
-                    Log.d("chosen:", chosen);
-                }
-            case R.id.bun_wholemeal:
-                if (checked){
-                    //code here
-                }
-            case R.id.bun_sourdough:
-                if (checked){
-                    //code here
-                }
-            case R.id.bun_gluten_free:
-                if (checked){
-                    //code here
-                }
-            case R.id.salad_lettuce:
-                if (checked){
-                    chosen = "white";
-                    Log.d("chosen:", chosen);
-                }
-            case R.id.salad_tomato:
-                if (checked){
-                    //code here
-                }
-            case R.id.salad_onion:
-                if (checked){
-                    //code here
-                }
-            case R.id.salad_red_onion:
-                if (checked){
-                    //code here
-                }
-            case R.id.salad_beetroot:
-                if (checked){
-                    chosen = "white";
-                    Log.d("chosen:", chosen);
-                }
-            case R.id.salad_pickle:
-                if (checked){
-                    //code here
-                }
-            case R.id.salad_capsicum:
-                if (checked){
-                    //code here
-                }
-            case R.id.salad_olives:
-                if (checked){
-                    //code here
-                }
-            case R.id.salad_cucumber:
-                if (checked){
-                    chosen = "white";
-                    Log.d("chosen:", chosen);
-                }
-            case R.id.pattie_beef:
-                if (checked){
-                    //code here
-                }
-            case R.id.pattie_chicken:
-                if (checked){
-                    //code here
-                }
-            case R.id.pattie_falafel:
-                if (checked){
-                    //code here
-                }
-            case R.id.pattie_tofu:
-                if (checked){
-                    chosen = "white";
-                    Log.d("chosen:", chosen);
-                }
-            case R.id.pattie_pork:
-                if (checked){
-                    //code here
-                }
-            case R.id.pattie_lamb:
-                if (checked){
-                    //code here
-                }
-            case R.id.cheese_smoke:
-                if (checked){
-                    //code here
-                }
-            case R.id.cheese_edam:
-                if (checked){
-                    chosen = "white";
-                    Log.d("chosen:", chosen);
-                }
-            case R.id.cheese_brie:
-                if (checked){
-                    //code here
-                    //Create stock object
-                    //Add it to item list
-                    //Add item to the order
-                }
-            case R.id.sauce_halloumi:
-                if (checked){
-                    //code here
-                }
-            case R.id.sauce_tomato_sauce:
-                if (checked){
-                    //code here
-                }
-            case R.id.sauce_aioli:
-                if (checked){
-                    //code here
-                }
-            case R.id.sauce_mayonnaise:
-                if (checked){
-                    //code here
-                }
-            case R.id.sauce_american_mustard:
-                if (checked){
-                    chosen = "white";
-                    Log.d("chosen:", chosen);
-                }
-            case R.id.sauce_dijon_mustard:
-                if (checked){
-                    //code here
-                }
-            case R.id.sauce_honey_mustard:
-                if (checked){
-                    //code here
-                }
-            case R.id.sauce_mint:
-                if (checked){
-                    //code here
-                }
-            case R.id.sauce_brown:
-                if (checked){
-                    //code here
-                }
+//            case R.id.bun_white:
+//                if (checked){
+//                    chosen = "white";
+//                    Log.d("chosen:", chosen);
+//                }
+//            case R.id.bun_wholemeal:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.bun_sourdough:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.bun_gluten_free:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.salad_lettuce:
+//                if (checked){
+//                    chosen = "white";
+//                    Log.d("chosen:", chosen);
+//                }
+//            case R.id.salad_tomato:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.salad_onion:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.salad_red_onion:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.salad_beetroot:
+//                if (checked){
+//                    chosen = "white";
+//                    Log.d("chosen:", chosen);
+//                }
+//            case R.id.salad_pickle:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.salad_capsicum:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.salad_olives:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.salad_cucumber:
+//                if (checked){
+//                    chosen = "white";
+//                    Log.d("chosen:", chosen);
+//                }
+//            case R.id.pattie_beef:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.pattie_chicken:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.pattie_falafel:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.pattie_tofu:
+//                if (checked){
+//                    chosen = "white";
+//                    Log.d("chosen:", chosen);
+//                }
+//            case R.id.pattie_pork:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.pattie_lamb:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.cheese_smoke:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.cheese_edam:
+//                if (checked){
+//                    chosen = "white";
+//                    Log.d("chosen:", chosen);
+//                }
+//            case R.id.cheese_brie:
+//                if (checked){
+//                    //code here
+//                    //Create stock object
+//                    //Add it to item list
+//                    //Add item to the order
+//                }
+//            case R.id.sauce_halloumi:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.sauce_tomato_sauce:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.sauce_aioli:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.sauce_mayonnaise:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.sauce_american_mustard:
+//                if (checked){
+//                    chosen = "white";
+//                    Log.d("chosen:", chosen);
+//                }
+//            case R.id.sauce_dijon_mustard:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.sauce_honey_mustard:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.sauce_mint:
+//                if (checked){
+//                    //code here
+//                }
+//            case R.id.sauce_brown:
+//                if (checked){
+//                    //code here
+//                }
 
 
         }

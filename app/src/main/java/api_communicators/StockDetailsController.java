@@ -34,6 +34,7 @@ public class StockDetailsController extends AsyncTask<String, Integer, HashMap >
     int ingredient_id;
     String ingredient_name;
     String category;
+    int categoryID;
     int stock_level;
     double price;
     String img_file_name;
@@ -67,12 +68,13 @@ public class StockDetailsController extends AsyncTask<String, Integer, HashMap >
                 ingredient_id = ingredientObject.get("Stock_ID").getAsInt();
                 ingredient_name = ingredientObject.get("Ingredient_Name").getAsString();
                 category = StockControls.getItemCategory(ingredient_id);
+                categoryID = ingredientObject.get("Category_ID").getAsInt();
                 stock_level = ingredientObject.get("Stock_Level").getAsInt();
                 price = ingredientObject.get("Price").getAsDouble();
                 img_file_name = "";
 
                 // Create a new Stock object and add it to the list of stocks.
-                Stock stockItem = new Stock(ingredient_id,ingredient_name, category,stock_level,price,img_file_name);
+                Stock stockItem = new Stock(ingredient_id,ingredient_name, category,categoryID,stock_level,price,img_file_name);
                 if (category.equalsIgnoreCase("Bread")){
                     buns.add(stockItem);
                 }
@@ -95,7 +97,7 @@ public class StockDetailsController extends AsyncTask<String, Integer, HashMap >
             categoryHash.put("saladCategory", salads);
             categoryHash.put("pattieCategory", patties);
             categoryHash.put("cheeseCategory", cheeses);
-            categoryHash.put("sauces", sauces);
+            categoryHash.put("sauceCategory", sauces);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

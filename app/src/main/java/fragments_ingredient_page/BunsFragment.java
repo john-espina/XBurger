@@ -32,10 +32,6 @@ import helpers.StockControls;
 public class BunsFragment extends Fragment {
 
     RadioGroup rg;
-    RadioButton bunWhite;
-    RadioButton bunWholemeal;
-    RadioButton bunSordough;
-    RadioButton bunGlutenFree;
     View rootView;
     ArrayList<Stock> buns = new ArrayList<>();
     ArrayList<Stock> allBuns = new ArrayList<>();
@@ -47,9 +43,9 @@ public class BunsFragment extends Fragment {
     public BunsFragment() {
         // Required empty public constructor
     }
+
     
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,29 +53,21 @@ public class BunsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_buns, container, false);
         rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_bun_choices);
 
+        //if statement here if previously clicked so won't need to query the database again
 
-
-        //create a version programatically
-
-
-//        bunWhite = (RadioButton) rootView.findViewById(R.id.bun_white);
-//        bunWholemeal = (RadioButton) rootView.findViewById(R.id.bun_wholemeal);
-//        bunSordough = (RadioButton) rootView.findViewById(R.id.bun_sourdough);
-//        bunGlutenFree =(RadioButton) rootView.findViewById(R.id.bun_gluten_free);
-
-
-
-
+        // Retrieve All stock from this category
+        // Retrieve Available stock from this category
+        // Compare the two
         try {
-            //if statement here if previously clicked so won't need to query the database again
-            allStocks = MainActivity.getStockHashMap();
-            stocks =  new StockDetailsController().execute().get();
-            allBuns = allStocks.get("bunCategory");
-            buns = stocks.get("bunCategory");
 
-            //Create and add radiobuttons to radiogroup from current stocks
+            allStocks = MainActivity.getStockHashMap(); // this is a HashMap of ALL of the stocks across all category (querried when app was started onCreate())
+            stocks =  new StockDetailsController().execute().get();  // also a HashMap of all Stocks, but only the available ones
+            allBuns = allStocks.get("bunCategory"); //this is a list of ALL the buns
+            buns = stocks.get("bunCategory"); // this is a list of Available buns
+
+
+            // Create and add Radiobuttons to the Radiogroup (rg) based on ALL current Stocks from this category
             radioButtonArrayList = StockControls.generateRadioButtonItem(rg,this, allBuns);
-
 
 
         } catch (InterruptedException e) {
@@ -88,16 +76,20 @@ public class BunsFragment extends Fragment {
             e.printStackTrace();
         }
 
-        //create arraylist of radiobuttons
-        //radioButtonArrayList = StockControls.createRadioButtonList(rg);
 
-        //compare radiobuttonarraylist to available stocks
+        // Compare RadiobuttonArrayList to available stocks from this category
+        // Update the Fragment View
         StockControls.updateStockView(buns, radioButtonArrayList );
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                //Add selected ingredient to Order
+            }
+        });
 
 
         return rootView;
     }
-
-
-
 }

@@ -94,6 +94,8 @@ public class SaladsFragment extends Fragment {
         //compare radiobuttonarraylist to available stocks
         StockControls.updateStockView(salads, radioButtonArrayList );
 
+
+
         return  rootView;
     }
 

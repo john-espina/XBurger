@@ -1,6 +1,5 @@
 package helpers;
 
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -8,16 +7,13 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import com.example.espinajohn.xburger.MainActivity;
-import com.example.espinajohn.xburger.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import api_communicators.Stock;
 
@@ -208,20 +204,44 @@ public class StockControls {
 
     /**
      * This method updates the Fragment view of a category based on the available ingredients
-     * @param buns
+     * @param stocks
      * @param radioButtonArrayList
      */
-    public static void updateStockView(ArrayList<Stock> buns, ArrayList<RadioButton>radioButtonArrayList){
+    public static void updateStockViewRadioButton(ArrayList<Stock> stocks, ArrayList<RadioButton>radioButtonArrayList){
         ArrayList<String> ingredientNames = new ArrayList<>();
-        for (int i=0; i<buns.size();i++){
-            ingredientNames.add(buns.get(i).getIngredient_name());
-            Log.d("buns", buns.get(i).getIngredient_name());
+        for (int i=0; i<stocks.size();i++){
+            ingredientNames.add(stocks.get(i).getIngredient_name());
+            Log.d("buns", stocks.get(i).getIngredient_name());
         }
 
         for (int i=0; i<radioButtonArrayList.size();i++){
             if (!ingredientNames.contains(radioButtonArrayList.get(i).getText().toString())) {
                 radioButtonArrayList.get(i).setEnabled(false);
                 radioButtonArrayList.get(i).setText(radioButtonArrayList.get(i).getText().toString() + "  ( Not Available )");
+
+            }
+
+        }
+    }
+
+
+
+    /**
+     * This method updates the Fragment view of a category based on the available ingredients
+     * @param buns
+     * @param checkBoxes
+     */
+    public static void updateStockView(ArrayList<Stock> buns, ArrayList<CheckBox>checkBoxes){
+        ArrayList<String> ingredientNames = new ArrayList<>();
+        for (int i=0; i<buns.size();i++){
+            ingredientNames.add(buns.get(i).getIngredient_name());
+            Log.d("buns", buns.get(i).getIngredient_name());
+        }
+
+        for (int i=0; i<checkBoxes.size();i++){
+            if (!ingredientNames.contains(checkBoxes.get(i).getText().toString())) {
+                checkBoxes.get(i).setEnabled(false);
+                checkBoxes.get(i).setText(checkBoxes.get(i).getText().toString() + "  ( Not Available )");
 
             }
 
@@ -247,8 +267,9 @@ public class StockControls {
                 RadioButton newRadioButton = new RadioButton(fragment.getActivity());
                 newRadioButton.setId(resourceID);
                 newRadioButton.setText((CharSequence) stocks.get(i).getIngredient_name());
-                newRadioButton.setTextColor(Color.WHITE);
-                newRadioButton.setButtonTintList(ColorStateList.valueOf(Color.WHITE));
+                newRadioButton.setTextColor(Color.BLACK);
+                newRadioButton.setButtonTintList(ColorStateList.valueOf(Color.BLACK));
+                newRadioButton.setTextSize(19);
                 rg.addView(newRadioButton);
 
         }
@@ -272,6 +293,27 @@ public class StockControls {
         int id = Integer.valueOf(String.valueOf(categoryID)+ String.valueOf(ingredientID));
         return id;
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static ArrayList<CheckBox> generateCheckBoxes(RadioGroup rg, Fragment fragment, ArrayList<Stock> stocks){
+
+        ArrayList<CheckBox> checkBoxes = new ArrayList<>();
+        for (int i=0; i<stocks.size(); i++){
+
+            int categoryID = stocks.get(i).getCategoryID();
+            int resourceID = idBuilder(categoryID,stocks.get(i).getIngredient_id());
+
+            CheckBox newCheckBox = new CheckBox(fragment.getActivity());
+            newCheckBox.setId(resourceID);
+            newCheckBox.setText((CharSequence) stocks.get(i).getIngredient_name());
+            newCheckBox.setTextColor(Color.BLACK);
+            newCheckBox.setButtonTintList(ColorStateList.valueOf(Color.BLACK));
+            newCheckBox.setTextSize(19);
+            rg.addView(newCheckBox);
+
+        }
+        return checkBoxes;
     }
 
 

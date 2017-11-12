@@ -9,6 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -28,17 +29,7 @@ public class SaladsFragment extends Fragment {
 
     View rootView;
     RadioGroup rg;
-    RadioGroup rg2;
-    RadioButton lettuce;
-    RadioButton tomato;
-    RadioButton onion;
-    RadioButton redOnion;
-    RadioButton beetroot;
-    RadioButton pickle;
-    RadioButton capsicum;
-    RadioButton olives;
-    RadioButton cucumber;
-    ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
+    ArrayList<CheckBox> radioButtonArrayList = new ArrayList<>();
     HashMap<String, ArrayList> stocks = new HashMap<>();
     ArrayList<Stock> salads = new ArrayList<>();
     HashMap<String, ArrayList> allStocks = new HashMap<>();
@@ -59,16 +50,6 @@ public class SaladsFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_salads, container, false);
         rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_salad_choices);
-//        rg2 = (RadioGroup) rootView.findViewById(R.id.radiogroup_salad_choices2);
-//        lettuce = (RadioButton) rootView.findViewById(R.id.salad_lettuce);
-//        tomato =(RadioButton) rootView.findViewById(R.id.salad_tomato);
-//        onion = (RadioButton) rootView.findViewById(R.id.salad_onion);
-//        redOnion =(RadioButton) rootView.findViewById(R.id.salad_red_onion);
-//        beetroot = (RadioButton) rootView.findViewById(R.id.salad_beetroot);
-//        pickle = (RadioButton) rootView.findViewById(R.id.salad_pickle);
-//        capsicum = (RadioButton) rootView.findViewById(R.id.salad_capsicum);
-//        olives = (RadioButton) rootView.findViewById(R.id.salad_olives);
-//        cucumber = (RadioButton) rootView.findViewById(R.id.salad_cucumber);
 
         try {
             //if statement here if previously clicked so won't need to query the database again
@@ -78,9 +59,7 @@ public class SaladsFragment extends Fragment {
             salads = stocks.get("saladCategory");
 
             //Create and add radiobuttons to radiogroup from current stocks
-            radioButtonArrayList = StockControls.generateRadioButtonItem(rg,this, allSalads);
-
-
+            radioButtonArrayList = StockControls.generateCheckBoxes(rg,this, allSalads);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -93,8 +72,6 @@ public class SaladsFragment extends Fragment {
 
         //compare radiobuttonarraylist to available stocks
         StockControls.updateStockView(salads, radioButtonArrayList );
-
-
 
         return  rootView;
     }

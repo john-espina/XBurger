@@ -79,7 +79,7 @@ public class BunsFragment extends Fragment {
 
         // Compare RadiobuttonArrayList to available stocks from this category
         // Update the Fragment View
-        StockControls.updateStockView(buns, radioButtonArrayList );
+        StockControls.updateStockViewRadioButton(buns, radioButtonArrayList );
 
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 

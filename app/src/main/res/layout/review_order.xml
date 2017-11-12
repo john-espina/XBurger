@@ -4,38 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/blue_lightning"
+    android:background="#000"
     android:gravity="center_horizontal"
     android:orientation="vertical">
     <!--android:background="@mipmap/blue_lightning">-->
 
     <TextView
         android:id="@+id/step_two"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/textview_bg"
-        android:padding="8dp"
-        android:text="@string/step_two"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036" />
+        android:layout_width="69dp"
+        android:layout_height="34dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@mipmap/logo_transparent"/>
 
     <TextView
         android:id="@+id/step_two_subtitle"
-        android:layout_width="346dp"
+        android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:layout_below="@+id/step_two"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="@string/step_two_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/step_one"
+        android:layout_gravity="top"
+        android:background="#007bff"
+        android:elevation="3dp"
+        android:padding="5dp"
+        android:paddingTop="5dp"
+        android:text="Review Your Order"
         android:textAlignment="center"
         android:textColor="#fff"
         android:textSize="24sp"
@@ -43,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.144" />
+        app:layout_constraintVertical_bias="0.194" />
 
     <TextView
         android:id="@+id/order_details"
@@ -51,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_confirm"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="78dp"
+        android:layout_margin="15dp"
         android:background="@drawable/order_details_bg"
         android:paddingTop="8dp"
         android:text="List of ingredients here...."
@@ -79,7 +77,7 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textview_bg"
+            android:background="@drawable/button_bg"
             android:text="Add to cart"
             android:textAlignment="center"
             android:textColor="#fff"
@@ -98,7 +96,7 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textview_bg"
+            android:background="@drawable/button_bg"
             android:text="@string/pay_now"
             android:textAlignment="center"
             android:textColor="#fff"
@@ -116,17 +114,30 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/back_to_landing_page5"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@+id/order_details"
+            android:layout_alignParentBottom="false"
+            android:layout_alignRight="@+id/order_details"
+            android:layout_weight="1"
+            android:background="@drawable/ingredient_select_bg"
+            android:text="Cancel"
+            android:textColor="#4100d8"
+            android:textSize="20sp"
+            tools:ignore="ButtonStyle,HardcodedText" />
+
+        <Button
             android:id="@+id/button_edit_order"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignLeft="@+id/order_details"
             android:layout_alignStart="@+id/order_details"
             android:layout_alignTop="@+id/back_to_landing_page5"
-            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/ingredient_select_bg"
             android:text="EDIT ORDER"
-            android:textColor="@android:color/black"
+            android:textColor="#4100d8"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,21 +145,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.935"
             tools:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/back_to_landing_page5"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/order_details"
-            android:layout_alignParentBottom="false"
-            android:layout_alignRight="@+id/order_details"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/ingredient_select_bg"
-            android:text="Cancel"
-            android:textColor="@android:color/black"
-            android:textSize="25sp"
-            tools:ignore="ButtonStyle,HardcodedText" />
 
     </LinearLayout>
 

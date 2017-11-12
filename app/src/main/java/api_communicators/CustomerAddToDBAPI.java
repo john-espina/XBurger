@@ -8,9 +8,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,10 +20,10 @@ import entity.Customer;
 
 /**
  * This class talks to the API to retrive customer details when a customer logs in to the app
- * Created by johnny on 11/4/2017.
+ * Created by stlaumade on 11/13/2017.
  */
 
-public class CustomerDetailsController extends AsyncTask<String, Integer, Customer> {
+public class CustomerAddToDBAPI extends AsyncTask<Customer, Integer, Customer> {
 
     private int customer_id;
     private String username;
@@ -33,40 +34,46 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
     private String passHash;
     private String passPin;
     private String cardToken;
-    private Customer customer;
+    private Customer customer = this.getCustomer ();
     static final String api_base_url = "http://project2-burgerx-database-api.herokuapp.com/customer/";
 
     @Override
-    protected Customer doInBackground(String...args) {
+    protected Customer doInBackground(Customer...args) {
 
+
+
+        //Create a Json object
+        JsonObject customer_json_object = args[0].createCustomerJson();
+
+        String url_string = api_base_url + "add";
         try {
 
-            URL url = new URL (api_base_url + args[0] + args[1]);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection ();
-            connection.connect ();
+            URL url = new URL(url_string);
+            HttpURLConnection request = (HttpURLConnection) url.openConnection();
 
-            JsonParser jp = new JsonParser ();
-            JsonElement root = jp.parse (new InputStreamReader ((InputStream) connection.getContent ()));
-            JsonObject customer_object = root.getAsJsonObject ();
-            Gson gson = new GsonBuilder ().serializeNulls ().create ();
+            request.setDoOutput(true);
+            request.setDoInput(true);
+            request.setRequestProperty("Content-Type", "application/json");
+            request.setRequestProperty("Accept", "application/json");
+            request.setRequestMethod("POST");
 
-            String usernaname = customer_object.get("Username").getAsString();
+            OutputStreamWriter out = new OutputStreamWriter(request.getOutputStream());
+            out.write(customer_json_object.toString());
+            out.flush();
 
-            if (!usernaname.equalsIgnoreCase("void")) {
-
-
-                setCustomer_id(customer_object.get("Customer_ID").getAsInt());
-                setUsername(customer_object.get("Username").getAsString());
-                setEmail(customer_object.get("Email").getAsString());
-                setPhone_number(customer_object.get("Phone_Number").getAsString());
-                setIterations(customer_object.get("Iterations").getAsInt());
-                setSalt(customer_object.get("Salt").getAsString());
-                setPassHash(customer_object.get("PassHash").getAsString());
-                setPassPin(customer_object.get("PassPin").getAsString());
-                setCardToken(customer_object.get("Card_Token").getAsString());
-                setCustomer(new Customer(getCustomer_id(), getUsername(), getEmail(), getPhone_number(), getIterations(), getSalt(), getPassHash(), getPassPin(), getCardToken()));
-
-                return getCustomer();
+            StringBuilder sb = new StringBuilder();
+            int HttpResult = request.getResponseCode();
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(request.getInputStream(), "utf-8"));
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                br.close();
+                System.out.println("" + sb.toString());
+            } else {
+                System.out.println(request.getResponseMessage());
             }
 
         } catch (MalformedURLException e) {
@@ -74,8 +81,9 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+    return null;
     }
+
 
     protected void onProgressUpdate (Integer...progress){
     }
@@ -83,7 +91,6 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
     protected  void onPostExecute (Customer c){
         //Do something in here
     }
-
 
     public Customer getCustomer(){
         return customer;

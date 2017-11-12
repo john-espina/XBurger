@@ -373,34 +373,40 @@ public class BurgerAppLayout extends ListActivity{
         Button signup = (Button) activity.findViewById(R.id.sign_up_button);
         Button back6 = (Button) activity.findViewById (R.id.back_to_landing_page6);
 
-        final String usernameString = signup_username.getText().toString();
-        final String passwordString = signup_password.getText ().toString ();
-        final String emailString = signup_email.getText().toString();
-        final String fnameString = signup_fname.getText().toString();
-        final String lnameString = signup_lname.getText().toString();
-        final String phoneString = signup_ph.getText ().toString ();
-
         signup.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+
+                String usernameString = signup_username.getText().toString();
+                String passwordString = signup_password.getText ().toString ();
+                String emailString = signup_email.getText().toString();
+                String fnameString = signup_fname.getText().toString();
+                String lnameString = signup_lname.getText().toString();
+                String phoneString = signup_ph.getText ().toString ();
+
                 //Send all the strings to the database
                 //Check if username is taken
+                //Will need to do some testing on this not validating properly
 
                 Customer check = CustomerControls.createCustomer(usernameString);
                 if (check != null){
                     alertDialogMessage ("Username Not Available", "Please select a different username");
                 } else {
+
                     //Get a new salt
                     byte[] salt = Passwords.getNextSalt (16);
-                    String saltString = salt.toString ();
+                    String saltString = Passwords.base64Encode (salt);
+                    Log.d("test", saltString);
 
                     //Get a new iteration
                     int iterationsInt = Passwords.getNextNumIterations ();
+                    Log.d("iterations", "" + iterationsInt);
 
                     //Get the password as char[]
                     char[] pword = passwordString.toCharArray ();
+                    Log.d("TEST", passwordString);
 
                     //Hash the password
-                    //byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
+                    byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
                     String hashpassString = "";//hashpass.toString ();
 
                     //Other variables that are needed to construct a customer
@@ -409,11 +415,13 @@ public class BurgerAppLayout extends ListActivity{
 
                     Customer customer = new Customer(usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString,passpinString, cardtokenString );
 
+                    Log.d("Customer", customer.getUsername ());
                     // Send this customer to the database to be added
                     // Connect to the API to send the customer
+                    CustomerControls.addCustomerToDB (customer);
 
                     //Alert dialog thanks for signing up
-                    alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
+                    //alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
 
                     //Then set up ingredient page
                     setUpIngredientPage();

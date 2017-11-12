@@ -2,6 +2,7 @@ package helpers;
 
 import java.util.concurrent.ExecutionException;
 
+import api_communicators.CustomerAddToDBAPI;
 import entity.Customer;
 import api_communicators.CustomerDetailsController;
 
@@ -43,5 +44,15 @@ public class CustomerControls {
 
         return null;
 
+    }
+
+    public static boolean addCustomerToDB(Customer customer){
+        CustomerAddToDBAPI addToDBAPI = new CustomerAddToDBAPI ();
+
+        //Need to get the customer and do something with it
+
+        addToDBAPI.execute(customer);
+
+        return false;
     }
 }

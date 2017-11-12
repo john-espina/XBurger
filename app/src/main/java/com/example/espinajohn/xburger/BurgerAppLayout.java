@@ -1,13 +1,17 @@
 package com.example.espinajohn.xburger;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import java.util.ArrayList;
 
@@ -134,16 +138,16 @@ public class BurgerAppLayout extends ListActivity{
         final EditText username = (EditText) activity.findViewById(R.id.username_);
         final EditText password = (EditText) activity.findViewById(R.id.password);
         Button login = (Button) activity.findViewById(R.id.homepage_login);
-        Button signup = (Button) activity.findViewById(R.id.homepage_signup);
-        Button back2 = (Button) activity.findViewById (R.id.back_to_landing_page2);
+        TextView signup = (TextView) activity.findViewById(R.id.homepage_signup);
+//        Button back2 = (Button) activity.findViewById (R.id.back_to_landing_page2);
 
-        back2.setOnClickListener (new View.OnClickListener (){
-
-            @Override
-            public void onClick(View view) {
-                setUpLandingPage ();
-            }
-        });
+//        back2.setOnClickListener (new View.OnClickListener (){
+//
+//            @Override
+//            public void onClick(View view) {
+//                setUpLandingPage ();
+//            }
+//        });
 
         // Connect to database to validate the username and ID
         // Method to be put in CustomerControls class?
@@ -183,13 +187,16 @@ public class BurgerAppLayout extends ListActivity{
         Log.d("CHECK", "ingredient page " + currentLayout);
         activity.setContentView(R.layout.ingredient_alternative_prototype);
 
+
         //Set the controls
+
+        TabLayout tabLayout = (TabLayout) activity.findViewById(R.id.tabs);
         Button next = (Button) activity.findViewById(R.id.button_next);
-        Button salads = (Button) activity.findViewById(R.id.salads_button);
-        Button buns = (Button) activity.findViewById(R.id.buns_button);
-        Button meats = (Button) activity.findViewById(R.id.meats_button);
-        Button cheese = (Button) activity.findViewById(R.id.cheese_button);
-        Button sauces = (Button) activity.findViewById(R.id.sauces_button);
+        TabItem salads = (TabItem) activity.findViewById(R.id.salads_button);
+        TabItem buns = (TabItem) activity.findViewById(R.id.buns_button);
+        TabItem meats = (TabItem) activity.findViewById(R.id.meats_button);
+        TabItem cheese = (TabItem) activity.findViewById(R.id.cheese_button);
+        TabItem sauces = (TabItem) activity.findViewById(R.id.sauces_button);
         Button back3 = (Button) activity.findViewById (R.id.back_to_landing_page3);
 
         back3.setOnClickListener (new View.OnClickListener (){
@@ -200,59 +207,69 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
 
-        buns.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
 
 
-                BunsFragment bunFragment = new BunsFragment();
-                activity.getFragmentManager().beginTransaction()
-                            .replace(R.id.placeholder, bunFragment)
-                            .commit();
+       tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+           @Override
+           public void onTabSelected(TabLayout.Tab tab) {
+
+               int selected = tab.getPosition();
+               switch (tab.getPosition()) {
 
 
-                }
+                   case 0:
+                       if (selected==0) {
+                       BunsFragment bunFragment = new BunsFragment();
+                       activity.getFragmentManager().beginTransaction()
+                               .replace(R.id.placeholder, bunFragment)
+                               .commit();
+                   }
+                   case 1:
+                   if (selected==1) {
+                       MeatFragments meatFragment = new MeatFragments();
+                       activity.getFragmentManager().beginTransaction()
+                               .replace(R.id.placeholder, meatFragment)
+                               .commit();
 
-        });
+                   }
+                   case 2:
+                   if (selected==2) {
+                       CheeseFragment cheeseFragment = new CheeseFragment();
+                       activity.getFragmentManager().beginTransaction()
+                               .replace(R.id.placeholder, cheeseFragment)
+                               .commit();
 
+                   }
+                   case 3:
+                   if (selected==3) {
+                       SaladsFragment saladsFragment = new SaladsFragment();
+                       activity.getFragmentManager().beginTransaction()
+                               .replace(R.id.placeholder, saladsFragment)
+                               .commit();
 
-        meats.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                MeatFragments meatFragment = new MeatFragments();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.placeholder, meatFragment)
-                        .commit();
-            }
-        });
+                   }
+                   case 4:
+                   if (selected==4) {
 
-        cheese.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                CheeseFragment cheeseFragment = new CheeseFragment();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.placeholder, cheeseFragment)
-                        .commit();
-            }
-        });
+                       SaucesFragment saucesFragment = new SaucesFragment();
+                       activity.getFragmentManager().beginTransaction()
+                               .replace(R.id.placeholder, saucesFragment)
+                               .commit();
+                   }
+               }
+           }
 
+           @Override
+           public void onTabUnselected(TabLayout.Tab tab) {
 
-        salads.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                SaladsFragment saladsFragment = new SaladsFragment();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.placeholder, saladsFragment)
-                        .commit();
+           }
 
-            }
-        });
+           @Override
+           public void onTabReselected(TabLayout.Tab tab) {
 
-        sauces.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                SaucesFragment saucesFragment = new SaucesFragment();
-                activity.getFragmentManager().beginTransaction()
-                        .replace(R.id.placeholder, saucesFragment)
-                        .commit();
+           }
+       });
 
-            }
-        });
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){

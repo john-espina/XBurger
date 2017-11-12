@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/blue_lightning"
+    android:background="@mipmap/lightningblue"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -12,13 +12,23 @@
 
     <!--app:srcCompat="@mipmap/burger_img2" />-->
 
+    <ImageView
+        android:id="@+id/logo_login_page"
+        android:layout_width="276dp"
+        android:layout_height="156dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="50dp"
+        android:background="@mipmap/logo_transparent" />
+
     <EditText
         android:id="@+id/username_"
-        android:layout_width="wrap_content"
+        android:layout_width="270dp"
         android:layout_height="40dp"
         android:layout_below="@+id/logo_login_page"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:background="@android:color/background_light"
         android:ems="10"
         android:hint="User Name or Email"
@@ -27,7 +37,7 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
+        android:layout_width="270dp"
         android:layout_height="40dp"
         android:layout_alignLeft="@+id/username_"
         android:layout_alignStart="@+id/username_"
@@ -39,63 +49,43 @@
         android:inputType="textPassword"
         android:paddingLeft="10dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/homepage_login"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button_bg"
+        android:text="LOG IN"
+        android:textColor="#fff" />
 
-        <Button
-            android:id="@+id/homepage_login"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/password"
-            android:layout_alignStart="@+id/password"
-            android:layout_below="@+id/password"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/textview_bg"
-            android:text="@string/button_login"
-            android:textColor="#fff" />
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:clickable="true"
+            android:text="No Account yet? "
+            android:textAlignment="center"
+            android:textColor="#adadff" />
 
-        <Button
+        <TextView
             android:id="@+id/homepage_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/homepage_login"
-            android:layout_alignBottom="@+id/homepage_login"
-            android:layout_alignEnd="@+id/password"
-            android:layout_alignRight="@+id/password"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/textview_bg"
-            android:text="@string/button_signup"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:clickable="true"
+            android:text="Sign Up here"
+            android:textAlignment="center"
             android:textColor="#fff" />
 
-        <Button
-            android:id="@+id/back_to_landing_page2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/homepage_login"
-            android:layout_alignBottom="@+id/homepage_login"
-            android:layout_alignEnd="@+id/password"
-            android:layout_alignRight="@+id/password"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/textview_bg"
-            android:text="CANCEL"
-            android:textColor="#fff" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/logo_login_page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false"
-        android:layout_alignParentTop="false"
-        android:layout_margin="10dp"
-        android:background="@mipmap/logo_transparent" />
 
 </LinearLayout>

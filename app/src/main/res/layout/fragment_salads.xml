@@ -4,8 +4,7 @@
     android:id="@+id/frag_salad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="45dp"
-    android:background="#000"
+    android:background="#fff"
     app:layout_constraintTop_toBottomOf="@id/step_one_subtitle"
     tools:context="com.example.espinajohn.xburger.fragments_ingredient_page.BunsFragment">
 
@@ -17,6 +16,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/title_bun_option"
         android:layout_marginTop="50dp"
+        android:background="#fff"
         android:padding="8dp">
 
     </RadioGroup>
@@ -24,17 +24,18 @@
     <TextView
         android:id="@+id/title_salad_options"
         android:layout_width="match_parent"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/step_one_subtitle"
         android:layout_weight="1"
-        android:background="@drawable/ingredient_select_bg"
-        android:paddingBottom="2dp"
-        android:paddingLeft="8dp"
-        android:paddingTop="2dp"
-        android:text="@string/title_salad"
-        android:textColor="#000" />
+        android:background="@drawable/headings_bg"
+        android:padding="5dp"
+        android:elevation="5dp"
+        android:text="SOMETHING HEALTHY"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="20sp" />
 
 </FrameLayout>
 

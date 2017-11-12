@@ -28,10 +28,6 @@ public class CheeseFragment extends Fragment {
 
     View rootView;
     RadioGroup rg;
-    RadioButton swiss;
-    RadioButton edam;
-    RadioButton smoked;
-    RadioButton brie;
     ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
     HashMap<String, ArrayList> stocks = new HashMap<>();
     ArrayList<Stock> cheeses = new ArrayList<>();
@@ -43,8 +39,6 @@ public class CheeseFragment extends Fragment {
     }
 
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,10 +46,6 @@ public class CheeseFragment extends Fragment {
         // Inflate the layout for this fragment
        rootView =inflater.inflate(R.layout.fragment_cheese, container, false);
        rg = (RadioGroup)rootView.findViewById(R.id.radiogroup_cheese_options);
-//       swiss = (RadioButton) rootView.findViewById(R.id.cheese_swiss);
-//       edam = (RadioButton) rootView.findViewById(R.id.cheese_edam);
-//       smoked = (RadioButton) rootView.findViewById(R.id.cheese_smoke);
-//       brie = (RadioButton) rootView.findViewById(R.id.cheese_brie);
 
         try {
             //if statement here if previously clicked so won't need to query the database again
@@ -67,8 +57,6 @@ public class CheeseFragment extends Fragment {
             //Create and add radiobuttons to radiogroup from current stocks
             radioButtonArrayList = StockControls.generateRadioButtonItem(rg,this, allCheese);
 
-
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -79,7 +67,7 @@ public class CheeseFragment extends Fragment {
         //radioButtonArrayList = StockControls.createRadioButtonList(rg);
 
         //compare radiobuttonarraylist to available stocks
-        StockControls.updateStockView(cheeses, radioButtonArrayList );
+        StockControls.updateStockViewRadioButton(cheeses, radioButtonArrayList );
 
        return rootView;
     }

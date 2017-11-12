@@ -4,38 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/blue_lightning"
+    android:background="#000000"
     android:orientation="vertical">
 
-    <TextView
+    <ImageView
         android:id="@+id/step_three"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/textview_bg"
-        android:padding="8dp"
-        android:text="@string/step_three"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.016" />
+        android:layout_width="69dp"
+        android:layout_height="34dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@mipmap/logo_transparent"  />
 
     <TextView
         android:id="@+id/price_confirmation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Price confirmation"
+        android:layout_height="46dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/step_one"
+        android:layout_gravity="top"
+        android:background="#007bff"
+        android:elevation="3dp"
+        android:padding="5dp"
+        android:paddingTop="5dp"
+        android:text="Confirm and Pay"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="50sp" />
+        android:textColor="#fff"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.194" />
 
     <TextView
         android:id="@+id/step_three_subtitle"
@@ -43,7 +47,7 @@
         android:layout_height="46dp"
         android:layout_below="@+id/step_three"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:text="@string/step_three_title"
         android:textAlignment="center"
         android:textColor="#fff"
@@ -59,6 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:text="Credit Card Number"
         android:textColor="@android:color/white" />
 
@@ -168,32 +173,22 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/button_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_bg"
+        android:text="CONFIRM"
+        android:textColor="#fff" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="85dp"
+        android:layout_weight="1"
         android:gravity="bottom"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_edit2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textView12"
-            android:layout_alignRight="@+id/textView12"
-            android:layout_alignTop="@+id/back_to_landing_page4"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/textview_bg"
-            android:text="EDIT ORDER"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.935"
-            tools:textAllCaps="false" />
 
         <Button
             android:id="@+id/back_to_landing_page4"
@@ -204,14 +199,14 @@
             android:layout_alignStart="@+id/cvv_number"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/textview_bg"
+            android:background="@drawable/ingredient_select_bg"
             android:text="Cancel"
-            android:textColor="@android:color/white"
+            android:textColor="#4100d8"
             android:textSize="18sp"
             tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
-            android:id="@+id/button_confirm"
+            android:id="@+id/button_edit2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/textView12"
@@ -219,9 +214,9 @@
             android:layout_alignTop="@+id/back_to_landing_page4"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/textview_bg"
-            android:text="CONFIRM"
-            android:textColor="@android:color/white"
+            android:background="@drawable/ingredient_select_bg"
+            android:text="EDIT ORDER"
+            android:textColor="#4100d8"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

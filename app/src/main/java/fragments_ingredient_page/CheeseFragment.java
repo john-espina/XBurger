@@ -1,7 +1,5 @@
 package fragments_ingredient_page;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
-import api_communicators.Stock;
+import entity.Stock;
 import api_communicators.StockDetailsController;
 import helpers.StockControls;
 

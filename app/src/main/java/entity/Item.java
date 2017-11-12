@@ -1,7 +1,9 @@
-package api_communicators;
+package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import entity.Stock;
 
 /**
  * This class talks to the API and retrieves ingredient list to be displayed on the ingredient screen

@@ -1,13 +1,10 @@
 package fragments_ingredient_page;
 
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
-import api_communicators.Stock;
+import entity.Stock;
 import api_communicators.StockDetailsController;
 import helpers.StockControls;
 

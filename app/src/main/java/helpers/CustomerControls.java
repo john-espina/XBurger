@@ -1,10 +1,8 @@
 package helpers;
 
-import android.util.Log;
-
 import java.util.concurrent.ExecutionException;
 
-import api_communicators.Customer;
+import entity.Customer;
 import api_communicators.CustomerDetailsController;
 
 /**

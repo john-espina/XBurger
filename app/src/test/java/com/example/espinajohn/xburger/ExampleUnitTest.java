@@ -1,12 +1,5 @@
 package com.example.espinajohn.xburger;
 
-import org.junit.Test;
-
-import api_communicators.Customer;
-import api_communicators.CustomerDetailsController;
-
-import static org.junit.Assert.*;
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *

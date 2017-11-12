@@ -1,7 +1,6 @@
 package api_communicators;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import entity.Stock;
 import helpers.StockControls;
 
 

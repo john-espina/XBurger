@@ -1,6 +1,4 @@
-package api_communicators;
-
-import android.content.ClipData;
+package entity;
 
 import java.io.Serializable;
 import java.text.DateFormat;

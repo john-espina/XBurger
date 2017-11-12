@@ -1,6 +1,5 @@
 package com.example.espinajohn.xburger;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -11,13 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-import api_communicators.Customer;
-import api_communicators.CustomerDetailsController;
-import api_communicators.NewCustomerController;
+import entity.Customer;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
@@ -25,8 +21,6 @@ import fragments_ingredient_page.SaladsFragment;
 import fragments_ingredient_page.SaucesFragment;
 import helpers.CustomerControls;
 import passwords.Passwords;
-
-import static helpers.CustomerControls.createCustomer;
 
 
 /**

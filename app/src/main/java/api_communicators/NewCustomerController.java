@@ -15,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import entity.Customer;
+
 /**
  * Post a customer to the database to get added
  * Created by espinajohn on 6/11/2017

@@ -1,4 +1,4 @@
-package api_communicators;
+package entity;
 import com.google.gson.*;
 import java.io.IOException;
 import java.io.InputStream;

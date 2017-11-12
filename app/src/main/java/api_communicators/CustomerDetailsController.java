@@ -1,7 +1,6 @@
 package api_communicators;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,6 +14,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import entity.Customer;
 
 /**
  * This class talks to the API to retrive customer details when a customer logs in to the app

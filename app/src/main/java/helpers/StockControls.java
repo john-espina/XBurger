@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import api_communicators.Stock;
+import entity.Stock;
 
 /**
  * Created by Julian on 8/11/2017.

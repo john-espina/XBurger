@@ -407,7 +407,7 @@ public class BurgerAppLayout extends ListActivity{
 
                     //Hash the password
                     byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
-                    String hashpassString = "";//hashpass.toString ();
+                    String hashpassString = Passwords.base64Encode (hashpass);
 
                     //Other variables that are needed to construct a customer
                     String passpinString = "";
@@ -421,7 +421,7 @@ public class BurgerAppLayout extends ListActivity{
                     CustomerControls.addCustomerToDB (customer);
 
                     //Alert dialog thanks for signing up
-                    //alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
+                    alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
 
                     //Then set up ingredient page
                     setUpIngredientPage();

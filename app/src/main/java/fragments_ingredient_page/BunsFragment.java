@@ -66,7 +66,7 @@ public class BunsFragment extends Fragment {
 
 
             // Create and add Radiobuttons to the Radiogroup (rg) based on ALL current Stocks from this category
-            radioButtonArrayList = StockControls.generateRadioButtonItem(rg,this, allBuns);
+            radioButtonArrayList = StockControls.generateRadioButtons(rg,this, allBuns);
 
 
         } catch (InterruptedException e) {

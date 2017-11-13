@@ -54,7 +54,7 @@ public class MeatFragments extends Fragment {
             patties = stocks.get("pattieCategory");
 
             //Create and add radiobuttons to radiogroup from current stocks
-            radioButtons = StockControls.generateRadioButtonItem(rg,this, allPatties);
+            radioButtons = StockControls.generateRadioButtons(rg,this, allPatties);
 
         } catch (InterruptedException e) {
             e.printStackTrace();

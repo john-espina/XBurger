@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -184,96 +185,83 @@ public class StockControls {
 
 
     /**
-     * This method an ArrayList or Radiobuttons
-     * The list can be used to compare Radiobutton to corresponding java object
-     * @param rg
-     * @return
-     */
-    public static ArrayList <RadioButton> createRadioButtonList(RadioGroup rg){
-        int count = rg.getChildCount();
-        ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
-        for (int i=0;i<count;i++){
-            View o = rg.getChildAt(i);
-            if (o instanceof RadioButton){
-                radioButtonArrayList.add((RadioButton) o);
-            }
-        }
-        return radioButtonArrayList;
-    }
-
-
-    /**
      * This method updates the Fragment view of a category based on the available ingredients
      * @param stocks
      * @param radioButtonArrayList
      */
-    public static void updateStockViewRadioButton(ArrayList<Stock> stocks, ArrayList<RadioButton>radioButtonArrayList){
+    public static void updateStockViewOfRadioButtons(ArrayList<Stock> stocks, ArrayList<RadioButton>radioButtonArrayList){
+
         ArrayList<String> ingredientNames = new ArrayList<>();
+
         for (int i=0; i<stocks.size();i++){
             ingredientNames.add(stocks.get(i).getIngredient_name());
-            Log.d("buns", stocks.get(i).getIngredient_name());
+            Log.d("available", stocks.get(i).getIngredient_name());
+            Log.d("rb", radioButtonArrayList.get(i).getText().toString());
         }
 
         for (int i=0; i<radioButtonArrayList.size();i++){
             if (!ingredientNames.contains(radioButtonArrayList.get(i).getText().toString())) {
                 radioButtonArrayList.get(i).setEnabled(false);
                 radioButtonArrayList.get(i).setText(radioButtonArrayList.get(i).getText().toString() + "  ( Not Available )");
-
+                radioButtonArrayList.get(i).setTextColor(Color.LTGRAY);
+                Log.d("all", radioButtonArrayList.get(i).getText().toString());
             }
 
         }
     }
-
 
 
     /**
      * This method updates the Fragment view of a category based on the available ingredients
-     * @param buns
+     * @param stocks
      * @param checkBoxes
      */
-    public static void updateStockView(ArrayList<Stock> buns, ArrayList<CheckBox>checkBoxes){
+    public static void updateStockViewOfCheckBoxes (ArrayList<Stock> stocks, ArrayList<CheckBox>checkBoxes){
         ArrayList<String> ingredientNames = new ArrayList<>();
-        for (int i=0; i<buns.size();i++){
-            ingredientNames.add(buns.get(i).getIngredient_name());
-            Log.d("buns", buns.get(i).getIngredient_name());
+
+        for (int i=0; i<stocks.size();i++){
+            ingredientNames.add(stocks.get(i).getIngredient_name());
+            Log.d("available", stocks.get(i).getIngredient_name());
         }
 
-        for (int i=0; i<checkBoxes.size();i++){
-            if (!ingredientNames.contains(checkBoxes.get(i).getText().toString())) {
-                checkBoxes.get(i).setEnabled(false);
-                checkBoxes.get(i).setText(checkBoxes.get(i).getText().toString() + "  ( Not Available )");
-
+        for (int j=0; j<checkBoxes.size();j++){
+            if (!ingredientNames.contains(checkBoxes.get(j).getText().toString())) {
+                checkBoxes.get(j).setEnabled(false);
+                checkBoxes.get(j).setText(checkBoxes.get(j).getText().toString() + "  ( Not Available )");
+                Log.d("all", checkBoxes.get(j).getText().toString());
             }
-
         }
     }
 
+
     /**
-     * This method generates Radiobuttons programatically based on on the elements inside an ArrayList of Stocks
-     * @param rg
+     * This method generates Radiobuttons programatically based on an ArrayList of Stocks
+     * This ArrayList of stocks is the same stocks found in the database, regardless of their stock levels.
+     * @param radioGroup
      * @param fragment
      * @param stocks
      * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static ArrayList<RadioButton> generateRadioButtonItem(RadioGroup rg, Fragment fragment, ArrayList<Stock> stocks){
+    public static ArrayList<RadioButton> generateRadioButtons (RadioGroup radioGroup, Fragment fragment, ArrayList<Stock> stocks){
 
         ArrayList<RadioButton> radioButtons = new ArrayList<>();
+
         for (int i=0; i<stocks.size(); i++){
 
-            int categoryID = stocks.get(i).getCategoryID();
-            int resourceID = idBuilder(categoryID,stocks.get(i).getIngredient_id());
+            int resourceId = stocks.get(i).getIngredient_id();
 
-                RadioButton newRadioButton = new RadioButton(fragment.getActivity());
-                newRadioButton.setId(resourceID);
-                newRadioButton.setText((CharSequence) stocks.get(i).getIngredient_name());
-                newRadioButton.setTextColor(Color.BLACK);
-                newRadioButton.setButtonTintList(ColorStateList.valueOf(Color.BLACK));
-                newRadioButton.setTextSize(19);
-                radioButtons.add (newRadioButton);
-                rg.addView(newRadioButton);
-
+            RadioButton newRadioButton = new RadioButton(fragment.getActivity());
+            newRadioButton.setId(resourceId);
+            newRadioButton.setText((CharSequence) stocks.get(i).getIngredient_name());
+            newRadioButton.setTextColor(Color.BLACK);
+            newRadioButton.setButtonTintList(ColorStateList.valueOf(Color.BLACK));
+            newRadioButton.setTextSize(19);
+            radioButtons.add (newRadioButton);
+            radioGroup.addView(newRadioButton);
+            radioButtons.add(newRadioButton);
         }
+
         return radioButtons;
     }
 
@@ -284,39 +272,41 @@ public class StockControls {
     }
 
     /**
-     * Helper method to build resource id for each radiobutton created
-     * @param categoryID
-     * @param ingredientID
+     * This method generates CheckBoxes programatically based on an ArrayList of Stocks.
+     * This ArrayList of stocks is the same stocks found in the database, regardless of their stock levels.
+     * @param linearLayout
+     * @param fragment
+     * @param stocks
      * @return
      */
-    protected  static int idBuilder (int categoryID, int ingredientID){
-
-        int id = Integer.valueOf(String.valueOf(categoryID)+ String.valueOf(ingredientID));
-        return id;
-
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static ArrayList<CheckBox> generateCheckBoxes(RadioGroup rg, Fragment fragment, ArrayList<Stock> stocks){
+    public static ArrayList<CheckBox> generateCheckBoxes(LinearLayout linearLayout, Fragment fragment, ArrayList<Stock> stocks){
 
-        ArrayList<CheckBox> checkBoxes = new ArrayList<>();
+        ArrayList <CheckBox> checkBoxes = new ArrayList<>();
+
         for (int i=0; i<stocks.size(); i++){
 
-            int categoryID = stocks.get(i).getCategoryID();
-            int resourceID = idBuilder(categoryID,stocks.get(i).getIngredient_id());
-
+            int resourceID = stocks.get(i).getIngredient_id();
             CheckBox newCheckBox = new CheckBox(fragment.getActivity());
             newCheckBox.setId(resourceID);
             newCheckBox.setText((CharSequence) stocks.get(i).getIngredient_name());
             newCheckBox.setTextColor(Color.BLACK);
             newCheckBox.setButtonTintList(ColorStateList.valueOf(Color.BLACK));
             newCheckBox.setTextSize(19);
-            rg.addView(newCheckBox);
+            newCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //code here for the click response associated with each checkboxes
+                    //i assume all checkboxes will have the same onClick response
+                    // hence we can assign the onClickListener as we generate them.
+                }
+            });
+
+            linearLayout.addView(newCheckBox);
+            checkBoxes.add(newCheckBox);
 
         }
         return checkBoxes;
     }
-
-
-
 }

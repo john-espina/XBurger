@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,7 @@ public class SaucesFragment extends Fragment {
         //radioButtonArrayList = StockControls.createRadioButtonList(rg);
 
         //compare radiobuttonarraylist to available stocks
-        StockControls.updateStockView(sauces, radioButtons );
+        StockControls.updateStockViewOfCheckBoxes(sauces, radioButtons );
 
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 

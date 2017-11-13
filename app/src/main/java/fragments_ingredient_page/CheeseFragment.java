@@ -54,7 +54,7 @@ public class CheeseFragment extends Fragment {
             cheeses = stocks.get("cheeseCategory");
 
             //Create and add radiobuttons to radiogroup from current stocks
-            radioButtonArrayList = StockControls.generateRadioButtonItem(rg,this, allCheese);
+            radioButtonArrayList = StockControls.generateRadioButtons(rg,this, allCheese);
 
         } catch (InterruptedException e) {
             e.printStackTrace();

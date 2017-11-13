@@ -1,5 +1,8 @@
 package entity;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -30,8 +33,31 @@ public class Order implements Serializable {
 
     public Order(int order_id, int customer_id, ArrayList<Item> items) {
         this.order_id = order_id;
-        this.staff = null;
+        this.items = items;
         this.customer = new Customer(customer_id, null, null, null, -1, null, null, null, null);
+    }
+
+    public JsonObject createOrderJson () {
+
+        JsonObject orderObject = new JsonObject();
+        JsonArray orderItems = new JsonArray();
+
+        for (int i = 0; i < items.size(); i++) {
+
+            Item item = items.get(i);
+
+            JsonArray item_ingredients = new JsonArray();
+            for (int j = 0; j < item.getIngredients().size(); j++) {
+                item_ingredients.add(item.getIngredients().get(j).getIngredient_id());
+            }
+
+            orderItems.add(item_ingredients);
+
+        }
+
+        orderObject.add("item_details_list", orderItems);
+
+        return orderObject;
     }
 
     public int getOrder_id() {
@@ -82,3 +108,7 @@ public class Order implements Serializable {
         this.items = items;
     }
 }
+
+
+
+

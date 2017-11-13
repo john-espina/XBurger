@@ -78,7 +78,7 @@ public class BunsFragment extends Fragment {
 
         // Compare RadiobuttonArrayList to available stocks from this category
         // Update the Fragment View
-        StockControls.updateStockViewRadioButton(buns, radioButtonArrayList );
+        StockControls.updateStockViewOfRadioButtons(buns, radioButtonArrayList );
 
         //Set the hashmap to true/false when button is clicked
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){

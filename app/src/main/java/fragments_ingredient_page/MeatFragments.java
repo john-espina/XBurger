@@ -88,7 +88,7 @@ public class MeatFragments extends Fragment {
         });
 
         //compare radiobuttonarraylist to available stocks
-        StockControls.updateStockViewRadioButton(patties, radioButtons );
+        StockControls.updateStockViewOfRadioButtons(patties, radioButtons );
 
         return rootView;
     }

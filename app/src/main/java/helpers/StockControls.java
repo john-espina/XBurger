@@ -300,6 +300,7 @@ public class StockControls {
                     //code here for the click response associated with each checkboxes
                     //i assume all checkboxes will have the same onClick response
                     // hence we can assign the onClickListener as we generate them.
+                    Log.d("selected", newCheckBox.getText().toString() + newCheckBox.getId());
                 }
             });
 

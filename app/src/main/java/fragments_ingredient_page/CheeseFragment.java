@@ -88,7 +88,7 @@ public class CheeseFragment extends Fragment {
         });
 
         //compare radiobuttonarraylist to available stocks
-        StockControls.updateStockViewRadioButton(cheeses, radioButtonArrayList );
+        StockControls.updateStockViewOfRadioButtons(cheeses, radioButtonArrayList );
 
        return rootView;
     }

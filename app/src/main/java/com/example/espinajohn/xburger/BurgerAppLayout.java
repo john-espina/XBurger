@@ -27,6 +27,7 @@ import fragments_ingredient_page.MeatFragments;
 import fragments_ingredient_page.SaladsFragment;
 import fragments_ingredient_page.SaucesFragment;
 import helpers.CustomerControls;
+import helpers.OrderControls;
 import helpers.StockControls;
 import passwords.Passwords;
 
@@ -527,6 +528,7 @@ public class BurgerAppLayout extends ListActivity{
         //This will need to be in a different method to allow for multiple burgers.
         //
         master_order = new Order(-1, customer_id, listofitems);
+        OrderControls.addOrderToDB (master_order);
 
     }
 }

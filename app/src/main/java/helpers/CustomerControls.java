@@ -48,9 +48,6 @@ public class CustomerControls {
 
     public static boolean addCustomerToDB(Customer customer){
         CustomerAddToDBAPI addToDBAPI = new CustomerAddToDBAPI ();
-
-        //Need to get the customer and do something with it
-
         addToDBAPI.execute(customer);
 
         return false;

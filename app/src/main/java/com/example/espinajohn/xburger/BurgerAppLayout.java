@@ -163,7 +163,6 @@ public class BurgerAppLayout extends ListActivity{
                 String passwordString = password.getText().toString();
 
                 Customer customer = CustomerControls.createCustomer(usernameString);
-                Log.d("Customer", customer.getUsername ());
 
                 if (customer !=null){
                     if (!passwordString.equals("") && customer.validateCustomerPassword (passwordString, customer.getPassHash (), customer.getSalt (), customer.getIterations ())) {

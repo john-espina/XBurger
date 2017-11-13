@@ -33,7 +33,7 @@ public class Order implements Serializable {
 
     public Order(int order_id, int customer_id, ArrayList<Item> items) {
         this.order_id = order_id;
-        this.staff = null;
+        this.items = items;
         this.customer = new Customer(customer_id, null, null, null, -1, null, null, null, null);
     }
 

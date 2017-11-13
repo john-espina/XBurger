@@ -73,9 +73,7 @@ public class SaladsFragment extends Fragment {
 
         //compare radiobuttonarraylist to available stocks
         StockControls.updateStockViewOfCheckBoxes(salads, radioButtonArrayList );
-
-
-
+        
         return  rootView;
     }
 

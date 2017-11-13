@@ -259,9 +259,9 @@ public class StockControls {
             newRadioButton.setTextColor(Color.BLACK);
             newRadioButton.setButtonTintList(ColorStateList.valueOf(Color.BLACK));
             newRadioButton.setTextSize(19);
-            radioGroup.addView(newRadioButton);
             radioButtons.add (newRadioButton);
-
+            radioGroup.addView(newRadioButton);
+            radioButtons.add(newRadioButton);
         }
 
         return radioButtons;
@@ -307,7 +307,7 @@ public class StockControls {
                     } else {
                         MainActivity.selectedStock.put (resourceID, true);
                     }
-                    Log.d("Change map", ""+ resourceID + MainActivity.selectedStock.get(resourceID).booleanValue ());
+                    Log.d("selected", newCheckBox.getText().toString() + newCheckBox.getId());
                 }
             });
 

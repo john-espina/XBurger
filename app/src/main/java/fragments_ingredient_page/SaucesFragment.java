@@ -69,20 +69,6 @@ public class SaucesFragment extends Fragment {
         //compare radiobuttonarraylist to available stocks
         StockControls.updateStockViewOfCheckBoxes(sauces, radioButtons );
 
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-//                int id = radioGroup.getCheckedRadioButtonId ();
-//                if (MainActivity.selectedStock.get (id)){
-//                    MainActivity.selectedStock.put (id, false);
-//                } else {
-//                    MainActivity.selectedStock.put (id, true);
-//                }
-//                Log.d("Change map", ""+ id + MainActivity.selectedStock.get(id).booleanValue ());
-            }
-        });
-
        return  rootView;
     }
 

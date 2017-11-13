@@ -202,9 +202,9 @@ public class StockControls {
         for (int i=0; i<radioButtonArrayList.size();i++){
             if (!ingredientNames.contains(radioButtonArrayList.get(i).getText().toString())) {
                 radioButtonArrayList.get(i).setEnabled(false);
-                radioButtonArrayList.get(i).setText(radioButtonArrayList.get(i).getText().toString() + "  ( Not Available )");
+                radioButtonArrayList.get(i).setText(radioButtonArrayList.get(i).getText()+ "  ( Not Available )");
                 radioButtonArrayList.get(i).setTextColor(Color.LTGRAY);
-                Log.d("all", radioButtonArrayList.get(i).getText().toString());
+               // Log.d("all", radioButtonArrayList.get(i).getText().toString());
             }
 
         }
@@ -227,7 +227,7 @@ public class StockControls {
         for (int j=0; j<checkBoxes.size();j++){
             if (!ingredientNames.contains(checkBoxes.get(j).getText().toString())) {
                 checkBoxes.get(j).setEnabled(false);
-                checkBoxes.get(j).setText(checkBoxes.get(j).getText().toString() + "  ( Not Available )");
+                checkBoxes.get(j).setText(checkBoxes.get(j).getText() + "  ( Not Available )");
                 Log.d("all", checkBoxes.get(j).getText().toString());
             }
         }

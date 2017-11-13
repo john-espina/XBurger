@@ -102,7 +102,6 @@ public class BunsFragment extends Fragment {
             }
         });
 
-
         return rootView;
     }
 }

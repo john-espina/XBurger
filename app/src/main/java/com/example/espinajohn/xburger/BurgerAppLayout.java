@@ -501,6 +501,7 @@ public class BurgerAppLayout extends ListActivity{
             }
         }
 
+        //This needs to happen when add to cart is pressed
         //Add to list of items
         if (!current_burger.isEmpty ()){
             listofitems.add (new Item(current_burger));
@@ -523,11 +524,9 @@ public class BurgerAppLayout extends ListActivity{
         }
 
         //Put the items in an order
-        //Need to check the correct defaults with the team
         //This will need to be in a different method to allow for multiple burgers.
-        //
-        master_order = new Order(-1, customer_id, listofitems);
+        //This needs to happen on confirm payment
+        master_order = new Order(customer_id, listofitems);
         OrderControls.addOrderToDB (master_order);
-
     }
 }

@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.espinajohn.xburger.MainActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -300,6 +302,11 @@ public class StockControls {
                     //code here for the click response associated with each checkboxes
                     //i assume all checkboxes will have the same onClick response
                     // hence we can assign the onClickListener as we generate them.
+                    if (MainActivity.selectedStock.get (resourceID)){
+                        MainActivity.selectedStock.put (resourceID, false);
+                    } else {
+                        MainActivity.selectedStock.put (resourceID, true);
+                    }
                     Log.d("selected", newCheckBox.getText().toString() + newCheckBox.getId());
                 }
             });

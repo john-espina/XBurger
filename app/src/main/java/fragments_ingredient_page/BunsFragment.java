@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,11 +79,26 @@ public class BunsFragment extends Fragment {
         // Update the Fragment View
         StockControls.updateStockViewRadioButton(buns, radioButtonArrayList );
 
+        //Set the hashmap to true/false when button is clicked
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                //Add selected ingredient to Order
+                int count = radioGroup.getChildCount();
+                int id = radioGroup.getCheckedRadioButtonId ();
+
+                //For all the other radio buttons in this group set the to false.
+                ArrayList<RadioButton> listOfRadioButtons = new ArrayList<RadioButton>();
+                for (int i = 0;i < count;i++) {
+                    View o = radioGroup.getChildAt(i);
+                    if (o instanceof RadioButton) {
+                        MainActivity.selectedStock.put(o.getId (), false);
+                        Log.d ("RG", "" + o.getId () + MainActivity.selectedStock.get(o.getId()));
+                    }
+                }
+
+                //Set the new selection to true
+                MainActivity.selectedStock.put (id, true);
             }
         });
 

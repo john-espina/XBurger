@@ -4,10 +4,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.espinajohn.xburger.MainActivity;
@@ -67,11 +69,27 @@ public class SaladsFragment extends Fragment {
         //create arraylist of radiobuttons
         //radioButtonArrayList = StockControls.createRadioButtonList(rg);
 
+
+
         //compare radiobuttonarraylist to available stocks
         StockControls.updateStockView(salads, radioButtonArrayList );
 
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if (MainActivity.selectedStock.get (checkedId) == Boolean.TRUE){
+                    MainActivity.selectedStock.put (checkedId, false);
+                } else {
+                    MainActivity.selectedStock.put (checkedId, true);
+                }
+                Log.d("Change map", ""+ checkedId + MainActivity.selectedStock.get(checkedId).booleanValue ());
+            }
+        });
+
         return  rootView;
     }
+
 
 
 }

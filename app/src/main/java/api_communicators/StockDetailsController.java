@@ -1,6 +1,7 @@
 package api_communicators;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,7 +47,6 @@ public class StockDetailsController extends AsyncTask<String, Integer, HashMap >
     HashMap<String, ArrayList> categoryHash = new HashMap<>();
     String ingredientURL= "http://project2-burgerx-database-api.herokuapp.com/ingredients/available";
 
-
     @Override
     protected HashMap<String, ArrayList> doInBackground(String...args) {
 
@@ -90,6 +90,7 @@ public class StockDetailsController extends AsyncTask<String, Integer, HashMap >
                 if (category.equalsIgnoreCase("sauce")){
                     sauces.add(stockItem);
                 }
+
 
             }
 

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
 
+import api_communicators.StockDetailsController;
 import entity.Customer;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
@@ -125,8 +126,6 @@ public class BurgerAppLayout extends ListActivity{
         currentLayout = R.layout.home_page;
         activity.setContentView(R.layout.home_page);
         app_logged_in = false;
-
-        //Set the shared preferences
 
         //Set the controls
         final EditText username = (EditText) activity.findViewById(R.id.username_);
@@ -267,6 +266,9 @@ public class BurgerAppLayout extends ListActivity{
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                for (int key: MainActivity.selectedStock.keySet ()){
+                    Log.d("Map", key + " " + MainActivity.selectedStock.get (key).booleanValue ());
+                }
                 //if (burger_order_ingredients == null){
                     // Commented out until ingredients are added to temp list
                     //alertDialogMessage("Error", "You have not selected any ingredients");

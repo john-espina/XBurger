@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import api_communicators.AllStockRetriever;
+import api_communicators.GetAllStockItems;
+import api_communicators.StockDetailsController;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> burger_order;
     Boolean loggedin;
     private static HashMap<String, ArrayList> stockHashMap = new HashMap<>();
+    public static HashMap<Integer, Boolean> selectedStock;
 
     public static HashMap<String, ArrayList> getStockHashMap() {
         return stockHashMap;
@@ -50,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        try {
+            selectedStock = new GetAllStockItems().execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace ();
+        } catch (ExecutionException e) {
+            e.printStackTrace ();
+        }
+
+        for (Integer key : selectedStock.keySet()) {
+            Log.d("HashMap", "" + key);
+        }
+
 
         //Call the Burger Controller to set up the main screen
         if (savedInstanceState != null) {
@@ -60,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
             if (loggedin !=null) {
                 control.app_logged_in = loggedin;
             }
-            //Do something with the burger ingredient list
-
 
         } else {
             control = new BurgerAppLayout(this, R.layout.activity_main);
@@ -72,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         //Put the saved instance state preferences here
         outState.putInt("current_layout", control.currentLayout);
-        //outState.putStringArrayList("burger_order", burger_order_ingredients);
+        outState.putBoolean ("logged_in", control.app_logged_in);
         super.onSaveInstanceState(outState);
     }
 

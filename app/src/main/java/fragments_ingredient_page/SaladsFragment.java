@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.example.espinajohn.xburger.MainActivity;
@@ -26,7 +27,7 @@ import helpers.StockControls;
 public class SaladsFragment extends Fragment {
 
     View rootView;
-    RadioGroup rg;
+    LinearLayout rg;
     ArrayList<CheckBox> radioButtonArrayList = new ArrayList<>();
     HashMap<String, ArrayList> stocks = new HashMap<>();
     ArrayList<Stock> salads = new ArrayList<>();
@@ -47,7 +48,7 @@ public class SaladsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_salads, container, false);
-        rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_salad_choices);
+        rg = (LinearLayout) rootView.findViewById(R.id.radiogroup_salad_choices);
 
         try {
             //if statement here if previously clicked so won't need to query the database again
@@ -73,18 +74,18 @@ public class SaladsFragment extends Fragment {
         //compare radiobuttonarraylist to available stocks
         StockControls.updateStockViewOfCheckBoxes(salads, radioButtonArrayList );
 
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                if (MainActivity.selectedStock.get (checkedId)){
-                    MainActivity.selectedStock.put (checkedId, false);
-                } else {
-                    MainActivity.selectedStock.put (checkedId, true);
-                }
-                Log.d("Change map", ""+ checkedId + MainActivity.selectedStock.get(checkedId).booleanValue ());
-            }
-        });
+//        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+//
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+//                if (MainActivity.selectedStock.get (checkedId)){
+//                    MainActivity.selectedStock.put (checkedId, false);
+//                } else {
+//                    MainActivity.selectedStock.put (checkedId, true);
+//                }
+//                Log.d("Change map", ""+ checkedId + MainActivity.selectedStock.get(checkedId).booleanValue ());
+//            }
+//        });
 
         return  rootView;
     }

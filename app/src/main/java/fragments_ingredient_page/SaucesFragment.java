@@ -74,13 +74,13 @@ public class SaucesFragment extends Fragment {
 
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                int id = radioGroup.getCheckedRadioButtonId ();
-                if (MainActivity.selectedStock.get (id) == Boolean.TRUE){
-                    MainActivity.selectedStock.put (id, false);
-                } else {
-                    MainActivity.selectedStock.put (id, true);
-                }
-                Log.d("Change map", ""+ id + MainActivity.selectedStock.get(id).booleanValue ());
+//                int id = radioGroup.getCheckedRadioButtonId ();
+//                if (MainActivity.selectedStock.get (id)){
+//                    MainActivity.selectedStock.put (id, false);
+//                } else {
+//                    MainActivity.selectedStock.put (id, true);
+//                }
+//                Log.d("Change map", ""+ id + MainActivity.selectedStock.get(id).booleanValue ());
             }
         });
 

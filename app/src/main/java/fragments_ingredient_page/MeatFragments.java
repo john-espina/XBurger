@@ -71,7 +71,6 @@ public class MeatFragments extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 int count = radioGroup.getChildCount();
-                int id = radioGroup.getCheckedRadioButtonId ();
 
                 //For all the other radio buttons in this group set the to false.
                 ArrayList<RadioButton> listOfRadioButtons = new ArrayList<RadioButton>();
@@ -84,7 +83,7 @@ public class MeatFragments extends Fragment {
                 }
 
                 //Set the new selection to true
-                MainActivity.selectedStock.put (id, true);
+                MainActivity.selectedStock.put (checkedId, true);
             }
         });
 

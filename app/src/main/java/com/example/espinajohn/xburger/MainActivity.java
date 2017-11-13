@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //Retrieves the list of all ingredients by ingredient_id
+        //Will be used to send orders to the database and for persistence
         try {
             selectedStock = new GetAllStockItems().execute().get();
         } catch (InterruptedException e) {
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for (Integer key : selectedStock.keySet()) {
-            Log.d("HashMap", "" + key);
+            Log.d("ActivityMain", "" + key + " " + selectedStock.get (key));
         }
 
 

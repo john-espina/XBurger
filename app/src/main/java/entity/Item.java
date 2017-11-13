@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import entity.Stock;
+import helpers.StockControls;
 
 /**
  * This class talks to the API and retrieves ingredient list to be displayed on the ingredient screen
@@ -29,6 +30,15 @@ public class Item implements Serializable {
         } else {
             this.item_type = "burger";
         }
+    }
+
+    public Item(ArrayList<Stock> ingredients) {
+
+        this.order_details_id = -1;
+        this.ingredients = ingredients;
+        this.order_id = -1;
+        //this.item_type = StockControls.getItemCategory(ingredients.get(0).getIngredient_id());
+
     }
 
     public int getOrder_details_id() {

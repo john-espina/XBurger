@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.espinajohn.xburger.BurgerAppLayout;
 import com.example.espinajohn.xburger.MainActivity;
 import com.example.espinajohn.xburger.R;
 
@@ -85,7 +86,6 @@ public class BunsFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 int count = radioGroup.getChildCount();
-                int id = radioGroup.getCheckedRadioButtonId ();
 
                 //For all the other radio buttons in this group set the to false.
                 ArrayList<RadioButton> listOfRadioButtons = new ArrayList<RadioButton>();
@@ -98,7 +98,7 @@ public class BunsFragment extends Fragment {
                 }
 
                 //Set the new selection to true
-                MainActivity.selectedStock.put (id, true);
+                BurgerAppLayout.selectedStock.put (checkedId, true);
             }
         });
 

@@ -78,12 +78,12 @@ public class SaladsFragment extends Fragment {
 
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                if (MainActivity.selectedStock.get (checkedId) == Boolean.TRUE){
-                    MainActivity.selectedStock.put (checkedId, false);
-                } else {
-                    MainActivity.selectedStock.put (checkedId, true);
-                }
-                Log.d("Change map", ""+ checkedId + MainActivity.selectedStock.get(checkedId).booleanValue ());
+//                if (MainActivity.selectedStock.get (checkedId)){
+//                    MainActivity.selectedStock.put (checkedId, false);
+//                } else {
+//                    MainActivity.selectedStock.put (checkedId, true);
+//                }
+//                Log.d("Change map", ""+ checkedId + MainActivity.selectedStock.get(checkedId).booleanValue ());
             }
         });
 

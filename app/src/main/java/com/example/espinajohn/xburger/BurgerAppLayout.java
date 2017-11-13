@@ -11,16 +11,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import api_communicators.StockDetailsController;
 import entity.Customer;
+import entity.Item;
+import entity.Order;
+import entity.Stock;
 import fragments_ingredient_page.BunsFragment;
 import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
 import fragments_ingredient_page.SaladsFragment;
 import fragments_ingredient_page.SaucesFragment;
 import helpers.CustomerControls;
+import helpers.StockControls;
 import passwords.Passwords;
 
 
@@ -32,11 +39,14 @@ public class BurgerAppLayout extends ListActivity{
 
     //Variables
     Activity activity;
+    Order master_order;
 
     //Things to remember for state
     Boolean app_logged_in;
+    int customer_id;
     int currentLayout;
     ArrayList<Integer> burger_order_ingredients;
+    public static HashMap<Integer, Boolean> selectedStock = MainActivity.selectedStock;
 
     //Constructor
     //Will need to add the shared preferences variables
@@ -150,14 +160,15 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 final String usernameString = username.getText().toString();
                 String passwordString = password.getText().toString();
-                String loginMethod ="";
 
                 Customer customer = CustomerControls.createCustomer(usernameString);
+                Log.d("Customer", customer.getUsername ());
 
                 if (customer !=null){
                     if (!passwordString.equals("") && customer.validateCustomerPassword (passwordString, customer.getPassHash (), customer.getSalt (), customer.getIterations ())) {
                             setUpIngredientPage ();
                             app_logged_in = true;
+                            customer_id = customer.getCustomer_id ();
                     } else {
                     alertDialogMessage ("Invalid Password", "Please check credentials");
                     }
@@ -180,9 +191,7 @@ public class BurgerAppLayout extends ListActivity{
         Log.d("CHECK", "ingredient page " + currentLayout);
         activity.setContentView(R.layout.ingredient_alternative_prototype);
 
-
         //Set the controls
-
         TabLayout tabLayout = (TabLayout) activity.findViewById(R.id.tabs);
         Button next = (Button) activity.findViewById(R.id.button_next);
         TabItem salads = (TabItem) activity.findViewById(R.id.salads_button);
@@ -199,8 +208,6 @@ public class BurgerAppLayout extends ListActivity{
                 setUpLandingPage ();
             }
         });
-
-
 
        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
            @Override
@@ -266,16 +273,9 @@ public class BurgerAppLayout extends ListActivity{
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                for (int key: MainActivity.selectedStock.keySet ()){
-                    Log.d("Map", key + " " + MainActivity.selectedStock.get (key).booleanValue ());
-                }
-                //if (burger_order_ingredients == null){
-                    // Commented out until ingredients are added to temp list
-                    //alertDialogMessage("Error", "You have not selected any ingredients");
-                //} else {
-                    setUpReviewOrder ();
-                //}
-            }
+                saveOrder ();
+                setUpReviewOrder ();
+              }
         });
     }
 
@@ -455,5 +455,76 @@ public class BurgerAppLayout extends ListActivity{
 
         AlertDialog alertDialog = alertDialogBuilder.create ();
         alertDialog.show ();
+    }
+
+    public void saveOrder(){
+        ArrayList<Item> listofitems = new ArrayList<Item>();
+        ArrayList<Stock> current_burger = new ArrayList<Stock> ();
+        ArrayList<Stock> current_sides = new ArrayList<Stock> ();
+        ArrayList<Stock> current_drinks = new ArrayList<Stock> ();
+        ArrayList<Stock> current_special = new ArrayList<Stock> ();
+
+        //Get the hashmap of true items
+
+        for (int key : selectedStock.keySet ()){
+
+            //This is my mistake. Want to check if value of key is true.
+            Boolean check = selectedStock.get (key);
+            Log.d("Check - Key", "" + key + " " + selectedStock.get (key));
+
+            //Check if they are an instance of burger, sides drink
+            if(check){
+                Log.d("BurgerApp - Boolean", "" + selectedStock.containsKey (key));
+                //Check if the stock item is an instance of burger, sides, or drinks
+                if (StockControls.getItemType (key).equals ("Burger")){
+                    //Put it in the burger arraylist
+                    Stock s = new Stock(key);
+                    Log.d("BurgerApp - Burger", "" + s.getIngredient_id () + s.getIngredient_name ());
+                    current_burger.add (s);
+                } else if (StockControls.getItemCategory(key).equals ("Side")){
+                    //Put it in a stock list for sides
+                    Stock s = new Stock(key);
+                    current_sides.add (s);
+                    Log.d("BurgerApp - Side", "" + s.getIngredient_id () + s.getIngredient_name ());
+                } else if (StockControls.getItemCategory(key).equals ("Drink")){
+                    //Put it in a stock list for drinks
+                    Stock s = new Stock(key);
+                    current_drinks.add (s);
+                    Log.d("BurgerApp - Drink", "" + s.getIngredient_id () + s.getIngredient_name ());
+                } else if (StockControls.getItemCategory(key).equals ("Special")){
+                    //Put it in a stock list for special
+                    Stock s = new Stock(key);
+                    current_special.add (s);
+                    Log.d("BurgerApp - Special", "" + s.getIngredient_id () + s.getIngredient_name ());
+                }
+
+            }
+        }
+
+        //Add to list of items
+        if (!current_burger.isEmpty ()){
+            listofitems.add (new Item(current_burger));
+            Log.d ("Check - Burger list", "" + listofitems.get (0));
+        }
+
+        if (!current_drinks.isEmpty ()) {
+            listofitems.add (new Item (current_drinks));
+            Log.d ("Check - Drink list", "" + listofitems.get (1));
+        }
+
+        if (!current_sides.isEmpty ()){
+            listofitems.add (new Item(current_sides));
+            Log.d ("Check - Side list", "" + listofitems.get (2));
+        }
+
+        if (!current_special.isEmpty ()) {
+            listofitems.add (new Item (current_special));
+            Log.d ("Check - Special list", "" + listofitems.get (3));
+        }
+
+        //Put the items in an order
+        //Need to check the correct defaults with the team
+        master_order = new Order(-1, customer_id, listofitems);
+
     }
 }

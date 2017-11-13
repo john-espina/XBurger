@@ -51,9 +51,8 @@ public class GetAllStockItems extends AsyncTask<String, Integer, HashMap > {
                     JsonObject ingredientObject = ingredientsArray.get (i).getAsJsonObject ();
                     ingredient_id = ingredientObject.get ("Stock_ID").getAsInt ();
                     selectedStock.put(ingredient_id, false);
+                    Log.d("GetAllStockItems", "" + selectedStock.get (ingredient_id));
                 }
-
-
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

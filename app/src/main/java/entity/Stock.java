@@ -2,6 +2,8 @@ package entity;
 
 import java.io.Serializable;
 
+import helpers.StockControls;
+
 /**
  * Created by stlaumade on 7/11/2017.
  */
@@ -23,6 +25,15 @@ public class Stock implements Serializable {
         this.stock_level = stock_level;
         this.price = price;
         this.img_file_name = img_file_name;
+    }
+
+    public Stock(int ingredient_id) {
+        this.ingredient_id = ingredient_id;
+        this.ingredient_name = StockControls.getIngredientName(ingredient_id);
+        this.category = StockControls.getItemCategory(ingredient_id);
+        this.stock_level = -1;
+        //this.price = StockControls.getIngredientPrice(ingredient_id);
+        this.img_file_name = "";
     }
 
     public int getIngredient_id() {

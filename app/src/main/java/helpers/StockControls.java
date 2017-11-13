@@ -189,17 +189,17 @@ public class StockControls {
      * @param rg
      * @return
      */
-//    public static ArrayList <RadioButton> createRadioButtonList(RadioGroup rg){
-//        int count = rg.getChildCount();
-//        ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
-//        for (int i=0;i<count;i++){
-//            View o = rg.getChildAt(i);
-//            if (o instanceof RadioButton){
-//                radioButtonArrayList.add((RadioButton) o);
-//            }
-//        }
-//        return radioButtonArrayList;
-//    }
+    public static ArrayList <RadioButton> createRadioButtonList(RadioGroup rg){
+        int count = rg.getChildCount();
+        ArrayList<RadioButton> radioButtonArrayList = new ArrayList<>();
+        for (int i=0;i<count;i++){
+            View o = rg.getChildAt(i);
+            if (o instanceof RadioButton){
+                radioButtonArrayList.add((RadioButton) o);
+            }
+        }
+        return radioButtonArrayList;
+    }
 
 
     /**

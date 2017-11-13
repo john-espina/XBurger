@@ -524,7 +524,8 @@ public class BurgerAppLayout extends ListActivity{
 
         //Put the items in an order
         //Need to check the correct defaults with the team
-        //This will need to be in a different method to allow for multiple orders.
+        //This will need to be in a different method to allow for multiple burgers.
+        //
         master_order = new Order(-1, customer_id, listofitems);
 
     }

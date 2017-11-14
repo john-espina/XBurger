@@ -39,6 +39,8 @@ public class AllStockRetriever extends AsyncTask <String, Integer, HashMap >{
     ArrayList<Stock> patties = new ArrayList<>();
     ArrayList<Stock> cheeses = new ArrayList<>();
     ArrayList<Stock> sauces = new ArrayList<>();
+    ArrayList<Stock> sides = new ArrayList<>();
+    ArrayList<Stock> drinks = new ArrayList<>();
     HashMap<String, ArrayList> categoryHash = new HashMap<>();
     String ingredientURL= "http://project2-burgerx-database-api.herokuapp.com/ingredients/all";
 
@@ -87,6 +89,12 @@ public class AllStockRetriever extends AsyncTask <String, Integer, HashMap >{
                     if (category.equalsIgnoreCase("sauce")){
                         sauces.add(stockItem);
                     }
+                    if (category.equalsIgnoreCase("side")){
+                        sides.add(stockItem);
+                    }
+                    if (category.equalsIgnoreCase("drink")){
+                        drinks.add(stockItem);
+                    }
 
                 }
 
@@ -95,6 +103,9 @@ public class AllStockRetriever extends AsyncTask <String, Integer, HashMap >{
                 categoryHash.put("pattieCategory", patties);
                 categoryHash.put("cheeseCategory", cheeses);
                 categoryHash.put("sauceCategory", sauces);
+                categoryHash.put("sideCategory", sides);
+                categoryHash.put("drinkCategory", drinks);
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

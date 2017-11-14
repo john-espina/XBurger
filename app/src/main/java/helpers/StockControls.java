@@ -1,5 +1,6 @@
 package helpers;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -7,16 +8,19 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.espinajohn.xburger.MainActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.LongUnaryOperator;
 
 import entity.Stock;
 
@@ -317,4 +321,162 @@ public class StockControls {
         }
         return checkBoxes;
     }
+
+    /**
+     * This method generates CheckBoxes programatically based on an ArrayList of Stocks.
+     * This ArrayList of stocks is the same stocks found in the database, regardless of their stock levels.
+     * @param linearLayout
+     * @param activity
+     * @param stocks
+     * @return
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static ArrayList<CheckBox> generateCheckBoxes(LinearLayout linearLayout, Activity activity, ArrayList<Stock> stocks){
+
+        ArrayList <CheckBox> checkBoxes = new ArrayList<>();
+
+        for (int i=0; i<stocks.size(); i++){
+
+            int resourceID = stocks.get(i).getIngredient_id();
+            CheckBox newCheckBox = new CheckBox(activity);
+            newCheckBox.setId(resourceID);
+            newCheckBox.setText((CharSequence) stocks.get(i).getIngredient_name());
+            newCheckBox.setTextColor(Color.BLACK);
+            newCheckBox.setButtonTintList(ColorStateList.valueOf(Color.BLACK));
+            newCheckBox.setTextSize(19);
+            newCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //code here for the click response associated with each checkboxes
+                    //i assume all checkboxes will have the same onClick response
+                    // hence we can assign the onClickListener as we generate them.
+                    if (MainActivity.selectedStock.get (resourceID)){
+                        MainActivity.selectedStock.put (resourceID, false);
+                    } else {
+                        MainActivity.selectedStock.put (resourceID, true);
+                    }
+                    Log.d("selected", newCheckBox.getText().toString() + newCheckBox.getId());
+                }
+            });
+
+            linearLayout.addView(newCheckBox);
+            checkBoxes.add(newCheckBox);
+
+        }
+        return checkBoxes;
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static ArrayList<TextView> generateDrinksSelection(Activity activity, LinearLayout linearLayoutVertical, ArrayList<Stock> allStocks){
+
+
+        ArrayList<TextView> textViews = new ArrayList<>();
+        int quantity = 0;
+
+        for (int i=0; i<allStocks.size(); i++){
+
+           int resourceId = allStocks.get(i).getIngredient_id();
+
+
+            LinearLayout linearLayoutHorizontal = new LinearLayout(activity);
+            linearLayoutHorizontal.setOrientation(LinearLayout.HORIZONTAL);
+            //add elements to the vertical linear layout
+            linearLayoutVertical.addView(linearLayoutHorizontal);
+            linearLayoutHorizontal.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+           //create textview for drinks
+            TextView textView = new TextView(activity);
+            textView.setText(allStocks.get(i).getIngredient_name());
+            textView.setId(resourceId);
+            textView.setTextSize(19);
+            linearLayoutHorizontal.addView(textView);
+            textView.setLayoutParams((new LinearLayout.LayoutParams(350, LinearLayout.LayoutParams.WRAP_CONTENT)));
+
+
+
+
+           //create downbutton
+           Button downButton = new Button(activity);
+           downButton.setText("-");
+           linearLayoutHorizontal.addView(downButton);
+            downButton.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+            //create textview for numbers
+            TextView itemQuantity = new TextView(activity);
+            itemQuantity.setId(resourceId);
+            itemQuantity.setText(String.valueOf(quantity));
+            itemQuantity.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            linearLayoutHorizontal.addView(itemQuantity);
+            itemQuantity.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+
+           //create up button
+           Button upButton = new Button(activity);
+           upButton.setText("+");
+           linearLayoutHorizontal.addView(upButton);
+           upButton.setLayoutParams(new LinearLayout.LayoutParams(100, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+
+           upButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                  increaseInteger(Integer.parseInt((String) itemQuantity.getText().toString()), itemQuantity);
+               }
+           });
+
+           downButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   decreaseInteger(Integer.parseInt(itemQuantity.getText().toString()),itemQuantity);
+               }
+           });
+           textViews.add(textView);
+       }
+       return textViews;
+    }
+
+    protected static void increaseInteger(int q, TextView textView){
+        int quantity= q;
+        quantity = q+1;
+        display(quantity, textView);
+
+    }
+
+    protected static void decreaseInteger (int q, TextView textView){
+        int quantity=q;
+        if (q!=0){
+            quantity =q-1;
+        }
+
+        display(quantity,textView);
+    }
+
+    protected static void display(int quantity, TextView textView){
+
+        textView.setText(String .valueOf(quantity));
+
+    }
+
+
+    public static void updateSelectionView(ArrayList<Stock> stocks, ArrayList<TextView> textViews){
+
+        ArrayList<String> ingredientNames = new ArrayList<>();
+
+        for (int i=0; i<stocks.size();i++){
+            ingredientNames.add(stocks.get(i).getIngredient_name());
+            Log.d("available", stocks.get(i).getIngredient_name());
+        }
+
+        for (int j=0; j<textViews.size();j++){
+            if (!ingredientNames.contains(textViews.get(j).getText().toString())) {
+                textViews.get(j).setEnabled(false);
+                textViews.get(j).setText(textViews.get(j).getText() + "  ( Not Available )");
+                Log.d("all", textViews.get(j).getText().toString());
+            }
+        }
+    }
+
 }

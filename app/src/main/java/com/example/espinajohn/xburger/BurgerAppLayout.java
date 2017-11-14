@@ -506,6 +506,11 @@ public class BurgerAppLayout extends ListActivity{
         Log.d("CHECK", "ingredient page " + currentLayout);
         activity.setContentView(R.layout.ingredient_alternative_prototype);
 
+        BunsFragment bunFragment = new BunsFragment();
+        activity.getFragmentManager().beginTransaction()
+                .replace(R.id.placeholder, bunFragment)
+                .commit();
+
         //Set the controls
         TabLayout tabLayout = (TabLayout) activity.findViewById(R.id.tabs);
         Button next = (Button) activity.findViewById(R.id.button_next);
@@ -525,6 +530,8 @@ public class BurgerAppLayout extends ListActivity{
         });
 
        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+
            @Override
            public void onTabSelected(TabLayout.Tab tab) {
 
@@ -533,11 +540,11 @@ public class BurgerAppLayout extends ListActivity{
 
 
                    case 0:
-                       if (selected==0 || tab.isSelected()) {
+                       if (selected==0 ) {
                        BunsFragment bunFragment = new BunsFragment();
-                       activity.getFragmentManager().beginTransaction()
-                               .replace(R.id.placeholder, bunFragment)
-                               .commit();
+                           activity.getFragmentManager().beginTransaction()
+                                   .replace(R.id.placeholder, bunFragment)
+                                   .commit();
                    }
                    break;
                    case 1:

@@ -265,7 +265,7 @@ public class StockControls {
             newRadioButton.setTextSize(19);
             radioButtons.add (newRadioButton);
             radioGroup.addView(newRadioButton);
-            radioButtons.add(newRadioButton);
+
         }
 
         return radioButtons;

@@ -44,6 +44,7 @@ import helpers.TokenGeneratorControls;
 import passwords.PasswordStrengthChecker;
 import passwords.Passwords;
 
+import static android.graphics.Color.BLUE;
 import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
 import static android.graphics.Color.WHITE;
@@ -148,12 +149,9 @@ public class BurgerAppLayout extends ListActivity{
         currentLayout = R.layout.previous_orders;
         activity.setContentView (R.layout.previous_orders);
 
-        Button reorder = (Button) activity.findViewById (R.id.reorder);
         Button back = (Button) activity.findViewById (R.id.back_to_landing_page);
 
         Log.d("Customer ID", customer_id + "");
-
-
 
         if (app_logged_in != null && app_logged_in){
 
@@ -161,12 +159,30 @@ public class BurgerAppLayout extends ListActivity{
             ListView list = (ListView) activity.findViewById(R.id.history_list);
 
             ArrayList<Order> orders = OrderControls.retrieveAllOrders (customer_id);
+            ArrayList<String> orderinfo = new ArrayList<> ();
 
-            if (orders != null) {
+            if (!orders.isEmpty ()) {
+                for (int i = 0; i < orders.size (); i++) {
+                    String to_save = "Order: " + orders.get (i).getOrder_id () + " Time: " + orders.get (i).getOrder_datetime () + " Status: ";
+                    if (orders.get (i).getStatus ().equals ("0")) {
+                        to_save = to_save + " Pending ";
+                    } else if (orders.get (i).getStatus ().equals ("1")) {
+                        to_save = to_save + " Making ";
+                    } else if (orders.get (i).getStatus ().equals ("2")) {
+                        to_save = to_save + " Completed ";
+                    } else if (orders.get (i).getStatus ().equals ("3")) {
+                        to_save = to_save + " Insufficient ingredients ";
+                    }
+                    to_save = to_save + " Price: $" + Math.round (orders.get (i).getPrice () * 100) / 100;
+                    orderinfo.add (to_save);
+                }
+            }
+
+            if (orderinfo != null) {
                 for (int i = 0; i < orders.size (); i++) {
                     //Populate the lists with this information
                     //Will also need to add a reorder button
-                    ArrayAdapter adapter = new ArrayAdapter(activity, android.R.layout.simple_list_item_1, orders);
+                    ArrayAdapter adapter = new ArrayAdapter(activity, android.R.layout.simple_list_item_1, orderinfo);
 
                     //Populate the list
 
@@ -175,12 +191,11 @@ public class BurgerAppLayout extends ListActivity{
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                           Order reorder = orders.get (position);
-                           ArrayList<Item> items = reorder.getItems ();
-                           for (int i = 0; i < items.size (); i++){
-                                listofitems.add (items.get (i));
-                           }
-                           v.setBackgroundColor (GREEN);
+                            if (v.getDrawingCacheBackgroundColor () == BLUE){
+                                v.setDrawingCacheBackgroundColor (WHITE);
+                            } else {
+                                v.setDrawingCacheBackgroundColor (BLUE);
+                            }
                         }
                     });
 
@@ -188,15 +203,6 @@ public class BurgerAppLayout extends ListActivity{
                 }
             }
         }
-
-        reorder.setOnClickListener (new View.OnClickListener (){
-
-            @Override
-            public void onClick(View view) {
-                master_order = new Order (customer_id, listofitems);
-                setUpPaymentPage ();
-            }
-        });
 
         back.setOnClickListener (new View.OnClickListener (){
 
@@ -237,7 +243,7 @@ public class BurgerAppLayout extends ListActivity{
 
                 if (customer !=null){
                     if (!passwordString.equals("") && customer.validateCustomerPassword (passwordString, customer.getPassHash (), customer.getSalt (), customer.getIterations ())) {
-                            setUpPreMadeBurgerPage();
+                            setUpLandingPage ();
                             app_logged_in = true;
                             customer_id = customer.getCustomer_id ();
                     } else {
@@ -272,73 +278,80 @@ public class BurgerAppLayout extends ListActivity{
         Button premadecancel = (Button) activity.findViewById (R.id.premade_cancel);
         CheckBox customise = (CheckBox) activity.findViewById (R.id.customise);
 
+        ArrayList<Stock> plainb = new ArrayList<> ();
+        ArrayList<Stock> hammyb = new ArrayList<> ();
+        ArrayList<Stock> cheesyb = new ArrayList<> ();
+        ArrayList<Stock> porkyb = new ArrayList<> ();
+        ArrayList<Stock> chickenyb = new ArrayList<> ();
+
+        final Boolean[] wantcustomburger = {false};
+
         customise.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                setUpIngredientPage ();
+                wantcustomburger[0] = true;
+            }
+        });
+
+        plain.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                plainb.add (new Stock(11));
             }
         });
 
         hammiest.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                ArrayList<Stock> stock = new ArrayList<> ();
-                stock.add (new Stock(11));
-                stock.add (new Stock(41));
-                stock.add (new Stock(51));
-                stock.add (new Stock(91));
-                stock.add (new Stock(131));
-                stock.add (new Stock(241));
-                stock.add (new Stock(261));
-                listofitems.add (new Item (stock));
+                hammyb.add (new Stock(11));
+                hammyb.add (new Stock(41));
+                hammyb.add (new Stock(51));
+                hammyb.add (new Stock(91));
+                hammyb.add (new Stock(131));
+                hammyb.add (new Stock(241));
+                hammyb.add (new Stock(261));
             }
         });
 
         cheesy.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                ArrayList<Stock> stock = new ArrayList<> ();
-                stock.add (new Stock(1));
-                stock.add (new Stock(41));
-                stock.add (new Stock(51));
-                stock.add (new Stock(91));
-                stock.add (new Stock(201));
-                stock.add (new Stock(131));
-                stock.add (new Stock(241));
-                stock.add (new Stock(261));
-                listofitems.add (new Item (stock));
+                cheesyb.add (new Stock(1));
+                cheesyb.add (new Stock(41));
+                cheesyb.add (new Stock(51));
+                cheesyb.add (new Stock(91));
+                cheesyb.add (new Stock(201));
+                cheesyb.add (new Stock(131));
+                cheesyb.add (new Stock(241));
+                cheesyb.add (new Stock(261));
             }
         });
 
         porky.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                ArrayList<Stock> stock = new ArrayList<> ();
-                stock.add (new Stock(21));
-                stock.add (new Stock(41));
-                stock.add (new Stock(51));
-                stock.add (new Stock(91));
-                stock.add (new Stock(201));
-                stock.add (new Stock(171));
-                stock.add (new Stock(241));
-                stock.add (new Stock(261));
-                listofitems.add (new Item (stock));
+                porkyb.add (new Stock(21));
+                porkyb.add (new Stock(41));
+                porkyb.add (new Stock(51));
+                porkyb.add (new Stock(91));
+                porkyb.add (new Stock(201));
+                porkyb.add (new Stock(171));
+                porkyb.add (new Stock(241));
+                porkyb.add (new Stock(261));
             }
         });
 
         chickeny.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                ArrayList<Stock> stock = new ArrayList<> ();
-                stock.add (new Stock(31));
-                stock.add (new Stock(41));
-                stock.add (new Stock(51));
-                stock.add (new Stock(91));
-                stock.add (new Stock(201));
-                stock.add (new Stock(141));
-                stock.add (new Stock(241));
-                stock.add (new Stock(261));
-                listofitems.add (new Item (stock));
+                chickenyb.add (new Stock(31));
+                chickenyb.add (new Stock(41));
+                chickenyb.add (new Stock(51));
+                chickenyb.add (new Stock(91));
+                chickenyb.add (new Stock(201));
+                chickenyb.add (new Stock(141));
+                chickenyb.add (new Stock(241));
+                chickenyb.add (new Stock(261));
             }
         });
 
@@ -354,7 +367,26 @@ public class BurgerAppLayout extends ListActivity{
         premadenext.setOnClickListener(new View.OnClickListener(){
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             public void onClick(View v){
-                setUpSidesPage();
+                if (!plainb.isEmpty ()){
+                    listofitems.add (new Item (plainb));
+                }
+                if (!hammyb.isEmpty ()){
+                    listofitems.add (new Item (hammyb));
+                }
+                if (!cheesyb.isEmpty ()){
+                    listofitems.add (new Item (cheesyb));
+                }
+                if (!porkyb.isEmpty ()){
+                    listofitems.add (new Item (porkyb));
+                }
+                if (!chickenyb.isEmpty ()){
+                    listofitems.add (new Item (chickenyb));
+                }
+                if(wantcustomburger[0]){
+                    setUpIngredientPage ();
+                } else {
+                    setUpSidesPage ();
+                }
             }
         });
 
@@ -410,7 +442,6 @@ public class BurgerAppLayout extends ListActivity{
 
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                saveOrder ();
                 setUpDrinksPage ();
             }
         });
@@ -565,9 +596,9 @@ public class BurgerAppLayout extends ListActivity{
 
 
         next.setOnClickListener(new View.OnClickListener(){
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             public void onClick(View v){
-                saveOrder ();
-                setUpReviewOrder ();
+                setUpSidesPage ();
               }
         });
     }

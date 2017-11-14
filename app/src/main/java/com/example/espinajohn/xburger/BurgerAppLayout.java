@@ -1,20 +1,26 @@
 package com.example.espinajohn.xburger;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 import api_communicators.StockDetailsController;
 import entity.Customer;
@@ -58,6 +64,7 @@ public class BurgerAppLayout extends ListActivity{
 
     //Constructor
     //Will need to add the shared preferences variables
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     BurgerAppLayout(Activity act, int layout) {
         activity = act;
         currentLayout = layout;
@@ -68,6 +75,12 @@ public class BurgerAppLayout extends ListActivity{
                 break;
             case R.layout.home_page:
                 setUpHomePage();
+                break;
+            case R.layout.sides_page:
+                setUpSidesPage();
+                break;
+            case  R.layout.drinks_page:
+                setUpDrinksPage();
                 break;
             case R.layout.ingredient_alternative_prototype:
                 setUpIngredientPage();
@@ -174,6 +187,7 @@ public class BurgerAppLayout extends ListActivity{
         // If successful go to login page
         login.setOnClickListener(new View.OnClickListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             public void onClick(View v){
                 final String usernameString = username.getText().toString();
                 String passwordString = password.getText().toString();
@@ -182,7 +196,7 @@ public class BurgerAppLayout extends ListActivity{
 
                 if (customer !=null){
                     if (!passwordString.equals("") && customer.validateCustomerPassword (passwordString, customer.getPassHash (), customer.getSalt (), customer.getIterations ())) {
-                            setUpIngredientPage ();
+                            setUpPreMadeBurgerPage();
                             app_logged_in = true;
                             customer_id = customer.getCustomer_id ();
                     } else {
@@ -199,6 +213,140 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
     }
+
+    public void setUpPreMadeBurgerPage(){
+
+        currentLayout = R.layout.premade_burger_page;
+        activity.setContentView(R.layout.premade_burger_page);
+        Button next = (Button) activity.findViewById(R.id.button_next);
+        LinearLayout linearLayout = (LinearLayout)activity.findViewById(R.id.premade_holder);
+
+
+        next.setOnClickListener(new View.OnClickListener(){
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            public void onClick(View v){
+
+                saveOrder ();
+                setUpSidesPage();
+            }
+        });
+
+
+    }
+
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void setUpSidesPage(){
+
+        //set the layout
+        currentLayout = R.layout.sides_page;
+        activity.setContentView(R.layout.sides_page);
+
+        ArrayList <CheckBox> checkBoxes = new ArrayList<>();
+        ArrayList<Stock> sides = new ArrayList<>();
+        ArrayList<Stock> allSides = new ArrayList<>();
+        HashMap<String,ArrayList> allStocks = new HashMap<>();
+        HashMap<String,ArrayList> stocks = new HashMap<>();
+        LinearLayout sidesHolder = (LinearLayout) activity.findViewById(R.id.sides_holder);
+
+        //set the controls
+        Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page3);
+        Button next = (Button) activity.findViewById(R.id.button_next);
+
+        //Generate the CheckBoxes
+        try {
+            //if statement here if previously clicked so won't need to query the database again
+            allStocks = MainActivity.getStockHashMap();
+            stocks =  new StockDetailsController().execute().get();
+            allSides = allStocks.get("sideCategory");
+            sides = stocks.get("sideCategory");
+
+            //Create and add checkboxes to radiogroup from current stocks
+            checkBoxes = StockControls.generateCheckBoxes(sidesHolder,activity, allSides);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        StockControls.updateStockViewOfCheckBoxes(sides, checkBoxes);
+
+
+        back3.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
+
+
+        next.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                saveOrder ();
+                setUpDrinksPage ();
+            }
+        });
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void setUpDrinksPage(){
+        //set the layout
+        currentLayout = R.layout.drinks_page;
+        activity.setContentView(R.layout.drinks_page);
+
+        ArrayList <CheckBox> checkBoxes = new ArrayList<>();
+        ArrayList<Stock> drinks = new ArrayList<>();
+        ArrayList<Stock> allDrinks = new ArrayList<>();
+        HashMap<String,ArrayList> allStocks = new HashMap<>();
+        HashMap<String,ArrayList> stocks = new HashMap<>();
+        LinearLayout drinksHolder = (LinearLayout) activity.findViewById(R.id.drinks_holder);
+
+        //set the controls
+        Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page3);
+        Button next = (Button) activity.findViewById(R.id.button_next);
+
+        //Generate the CheckBoxes
+        try {
+            //if statement here if previously clicked so won't need to query the database again
+            allStocks = MainActivity.getStockHashMap();
+            stocks =  new StockDetailsController().execute().get();
+            allDrinks = allStocks.get("drinkCategory");
+            drinks = stocks.get("drinkCategory");
+
+            //Create and add checkboxes to radiogroup from current stocks
+            checkBoxes = StockControls.generateCheckBoxes(drinksHolder,activity, allDrinks);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        StockControls.updateStockViewOfCheckBoxes(drinks, checkBoxes);
+
+
+        back3.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
+
+
+        next.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                saveOrder ();
+                setUpReviewOrder ();
+            }
+        });
+    }
+
 
     public void setUpIngredientPage(){
 
@@ -240,6 +388,7 @@ public class BurgerAppLayout extends ListActivity{
                                .replace(R.id.placeholder, bunFragment)
                                .commit();
                    }
+                   break;
                    case 1:
                    if (selected==1) {
                        MeatFragments meatFragment = new MeatFragments();
@@ -248,6 +397,7 @@ public class BurgerAppLayout extends ListActivity{
                                .commit();
 
                    }
+                   break;
                    case 2:
                    if (selected==2) {
                        CheeseFragment cheeseFragment = new CheeseFragment();
@@ -256,6 +406,7 @@ public class BurgerAppLayout extends ListActivity{
                                .commit();
 
                    }
+                   break;
                    case 3:
                    if (selected==3) {
                        SaladsFragment saladsFragment = new SaladsFragment();
@@ -264,6 +415,7 @@ public class BurgerAppLayout extends ListActivity{
                                .commit();
 
                    }
+                   break;
                    case 4:
                    if (selected==4) {
 
@@ -272,6 +424,7 @@ public class BurgerAppLayout extends ListActivity{
                                .replace(R.id.placeholder, saucesFragment)
                                .commit();
                    }
+                   break;
                }
            }
 

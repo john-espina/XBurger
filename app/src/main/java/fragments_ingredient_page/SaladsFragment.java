@@ -34,8 +34,6 @@ public class SaladsFragment extends Fragment {
     HashMap<String, ArrayList> allStocks = new HashMap<>();
     ArrayList<Stock>allSalads = new ArrayList<>();
 
-
-
     public SaladsFragment() {
         // Required empty public constructor
     }

@@ -3,7 +3,7 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/sides_layout"
+    android:id="@+id/drinks_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
@@ -62,13 +62,13 @@
             android:paddingTop="20dp">
 
             <LinearLayout
-                android:id="@+id/sides_holder"
+                android:id="@+id/drinks_holder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:background="#fff"
                 android:orientation="vertical"
-                android:paddingTop="5dp"></LinearLayout>
+                android:padding="10dp"></LinearLayout>
 
 
         </ScrollView>

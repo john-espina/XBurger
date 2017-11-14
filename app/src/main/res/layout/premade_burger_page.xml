@@ -3,7 +3,7 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ingredient_page"
+    android:id="@+id/premade_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
@@ -45,6 +45,7 @@
         app:layout_constraintVertical_bias="0.194" />
 
     <LinearLayout
+        android:id="@+id/premade_holder"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
@@ -54,16 +55,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top|bottom"
-            android:layout_weight="15">
+            android:layout_marginBottom="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/burgers_holder"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
                 android:background="#fff"
                 android:orientation="vertical"
                 android:paddingTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/custom_burger"
+                        android:layout_width="280dp"
+                        android:layout_height="120dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@mipmap/customized" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Add" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,6 +108,7 @@
                         android:text="Add" />
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -167,10 +191,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="-50dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="0dp"
             android:layout_weight="0"
-            android:gravity="bottom"
-            android:background="#fff">
+            android:background="#fff"
+            android:gravity="bottom">
 
             <Button
                 android:id="@+id/back_to_landing_page3"
@@ -213,9 +238,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>

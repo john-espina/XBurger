@@ -1,21 +1,31 @@
 package com.example.espinajohn.xburger;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
-
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
+import api_communicators.AllStockRetriever;
+import api_communicators.GetAllStockItems;
 import api_communicators.StockDetailsController;
 import entity.Customer;
 import entity.Item;
@@ -29,7 +39,14 @@ import fragments_ingredient_page.SaucesFragment;
 import helpers.CustomerControls;
 import helpers.OrderControls;
 import helpers.StockControls;
+import helpers.TokenGeneratorControls;
+import passwords.PasswordStrengthChecker;
 import passwords.Passwords;
+
+import static android.graphics.Color.GREEN;
+import static android.graphics.Color.RED;
+import static android.graphics.Color.WHITE;
+import static android.graphics.Color.YELLOW;
 
 
 /**
@@ -58,6 +75,8 @@ public class BurgerAppLayout extends ListActivity{
 
     //Constructor
     //Will need to add the shared preferences variables
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     BurgerAppLayout(Activity act, int layout) {
         activity = act;
         currentLayout = layout;
@@ -68,6 +87,12 @@ public class BurgerAppLayout extends ListActivity{
                 break;
             case R.layout.home_page:
                 setUpHomePage();
+                break;
+            case R.layout.sides_page:
+                setUpSidesPage();
+                break;
+            case  R.layout.drinks_page:
+                setUpDrinksPage();
                 break;
             case R.layout.ingredient_alternative_prototype:
                 setUpIngredientPage();
@@ -109,7 +134,11 @@ public class BurgerAppLayout extends ListActivity{
         order_history.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //Open the list layout with order history
-                setUpOrderHistory ();
+                if (app_logged_in != null && app_logged_in) {
+                    setUpOrderHistory ();
+                } else {
+                    alertDialogMessage ("Please Log In", "Log in to review previous orders");
+                }
             }
         });
     }
@@ -128,12 +157,32 @@ public class BurgerAppLayout extends ListActivity{
         if (app_logged_in != null && app_logged_in){
 
             //Get the list of orders
+            ListView list = (ListView) activity.findViewById(R.id.history_list);
+
             ArrayList<Order> orders = OrderControls.retrieveAllOrders (customer_id);
 
             if (orders != null) {
                 for (int i = 0; i < orders.size (); i++) {
                     //Populate the lists with this information
                     //Will also need to add a reorder button
+                    ArrayAdapter adapter = new ArrayAdapter(activity, android.R.layout.simple_list_item_1, orders);
+
+                    //Populate the list
+
+                    list.setAdapter(adapter);
+
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                           Order reorder = orders.get (position);
+                           ArrayList<Item> items = reorder.getItems ();
+                           for (int i = 0; i < items.size (); i++){
+                                listofitems.add (items.get (i));
+                           }
+                           v.setBackgroundColor (GREEN);
+                        }
+                    });
+
                     Log.d("Order " + i, orders.get (i).toString ());
                 }
             }
@@ -143,7 +192,8 @@ public class BurgerAppLayout extends ListActivity{
 
             @Override
             public void onClick(View view) {
-                //Do what needs to be done to reorder
+                master_order = new Order (customer_id, listofitems);
+                setUpPaymentPage ();
             }
         });
 
@@ -166,6 +216,9 @@ public class BurgerAppLayout extends ListActivity{
         //Set the controls
         final EditText username = (EditText) activity.findViewById(R.id.username_);
         final EditText password = (EditText) activity.findViewById(R.id.password);
+
+        String pword = password.getText ().toString ();
+
         Button login = (Button) activity.findViewById(R.id.homepage_login);
         TextView signup = (TextView) activity.findViewById(R.id.homepage_signup);
 
@@ -174,6 +227,7 @@ public class BurgerAppLayout extends ListActivity{
         // If successful go to login page
         login.setOnClickListener(new View.OnClickListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             public void onClick(View v){
                 final String usernameString = username.getText().toString();
                 String passwordString = password.getText().toString();
@@ -182,7 +236,7 @@ public class BurgerAppLayout extends ListActivity{
 
                 if (customer !=null){
                     if (!passwordString.equals("") && customer.validateCustomerPassword (passwordString, customer.getPassHash (), customer.getSalt (), customer.getIterations ())) {
-                            setUpIngredientPage ();
+                            setUpPreMadeBurgerPage();
                             app_logged_in = true;
                             customer_id = customer.getCustomer_id ();
                     } else {
@@ -199,6 +253,140 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
     }
+
+    public void setUpPreMadeBurgerPage(){
+
+        currentLayout = R.layout.premade_burger_page;
+        activity.setContentView(R.layout.premade_burger_page);
+        Button next = (Button) activity.findViewById(R.id.button_next);
+        LinearLayout linearLayout = (LinearLayout)activity.findViewById(R.id.premade_holder);
+
+
+        next.setOnClickListener(new View.OnClickListener(){
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            public void onClick(View v){
+
+                saveOrder ();
+                setUpSidesPage();
+            }
+        });
+
+
+    }
+
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void setUpSidesPage(){
+
+        //set the layout
+        currentLayout = R.layout.sides_page;
+        activity.setContentView(R.layout.sides_page);
+
+        ArrayList <CheckBox> checkBoxes = new ArrayList<>();
+        ArrayList<Stock> sides = new ArrayList<>();
+        ArrayList<Stock> allSides = new ArrayList<>();
+        HashMap<String,ArrayList> allStocks = new HashMap<>();
+        HashMap<String,ArrayList> stocks = new HashMap<>();
+        LinearLayout sidesHolder = (LinearLayout) activity.findViewById(R.id.sides_holder);
+
+        //set the controls
+        Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page3);
+        Button next = (Button) activity.findViewById(R.id.button_next);
+
+        //Generate the CheckBoxes
+        try {
+            //if statement here if previously clicked so won't need to query the database again
+            allStocks = MainActivity.getStockHashMap();
+            stocks =  new StockDetailsController().execute().get();
+            allSides = allStocks.get("sideCategory");
+            sides = stocks.get("sideCategory");
+
+            //Create and add checkboxes to radiogroup from current stocks
+            checkBoxes = StockControls.generateCheckBoxes(sidesHolder,activity, allSides);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        StockControls.updateStockViewOfCheckBoxes(sides, checkBoxes);
+
+
+        back3.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
+
+
+        next.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                saveOrder ();
+                setUpDrinksPage ();
+            }
+        });
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void setUpDrinksPage(){
+        //set the layout
+        currentLayout = R.layout.drinks_page;
+        activity.setContentView(R.layout.drinks_page);
+
+        ArrayList <CheckBox> checkBoxes = new ArrayList<>();
+        ArrayList<Stock> drinks = new ArrayList<>();
+        ArrayList<Stock> allDrinks = new ArrayList<>();
+        HashMap<String,ArrayList> allStocks = new HashMap<>();
+        HashMap<String,ArrayList> stocks = new HashMap<>();
+        LinearLayout drinksHolder = (LinearLayout) activity.findViewById(R.id.drinks_holder);
+
+        //set the controls
+        Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page3);
+        Button next = (Button) activity.findViewById(R.id.button_next);
+
+        //Generate the CheckBoxes
+        try {
+            //if statement here if previously clicked so won't need to query the database again
+            allStocks = MainActivity.getStockHashMap();
+            stocks =  new StockDetailsController().execute().get();
+            allDrinks = allStocks.get("drinkCategory");
+            drinks = stocks.get("drinkCategory");
+
+            //Create and add checkboxes to radiogroup from current stocks
+            checkBoxes = StockControls.generateCheckBoxes(drinksHolder,activity, allDrinks);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        StockControls.updateStockViewOfCheckBoxes(drinks, checkBoxes);
+
+
+        back3.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
+
+
+        next.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                saveOrder ();
+                setUpReviewOrder ();
+            }
+        });
+    }
+
 
     public void setUpIngredientPage(){
 
@@ -240,6 +428,7 @@ public class BurgerAppLayout extends ListActivity{
                                .replace(R.id.placeholder, bunFragment)
                                .commit();
                    }
+                   break;
                    case 1:
                    if (selected==1) {
                        MeatFragments meatFragment = new MeatFragments();
@@ -248,6 +437,7 @@ public class BurgerAppLayout extends ListActivity{
                                .commit();
 
                    }
+                   break;
                    case 2:
                    if (selected==2) {
                        CheeseFragment cheeseFragment = new CheeseFragment();
@@ -256,6 +446,7 @@ public class BurgerAppLayout extends ListActivity{
                                .commit();
 
                    }
+                   break;
                    case 3:
                    if (selected==3) {
                        SaladsFragment saladsFragment = new SaladsFragment();
@@ -264,6 +455,7 @@ public class BurgerAppLayout extends ListActivity{
                                .commit();
 
                    }
+                   break;
                    case 4:
                    if (selected==4) {
 
@@ -272,6 +464,7 @@ public class BurgerAppLayout extends ListActivity{
                                .replace(R.id.placeholder, saucesFragment)
                                .commit();
                    }
+                   break;
                }
            }
 
@@ -312,10 +505,18 @@ public class BurgerAppLayout extends ListActivity{
         String expirydate_string = expirydate.getText().toString();
         String cvv_String = cvv.getText().toString();
 
+        //Display the price of the order
+        TextView pricetotal = (TextView) activity.findViewById (R.id.priceTotal);
+        pricetotal.setTextColor (WHITE);
+        double getPrice = Math.round (master_order.getPrice());
+        pricetotal.setText ("Your total price is " + getPrice);
+
         back4.setOnClickListener (new View.OnClickListener (){
 
             @Override
             public void onClick(View view) {
+                alertDialogMessage ("Cancel Order", "All items will be deleted!");
+                master_order = new Order (customer_id, null);
                 setUpLandingPage ();
             }
         });
@@ -328,11 +529,14 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 //Will connect with the payment provided to confirm card details and validity.
                 //If payment is successful do the code below.
-                //Else will need to pop up a diallog message saying that the order is not successful
+                //Payment will be passed on to the authorised retailer and credentials checked
+                //A token will be returned && saved in the database
+                //Else, alert that payment is not successful, alert unsuccessful payment.
+
+                TokenGeneratorControls.generateToken ();
 
                 //Put the items in an order
                 //Sends the order to the database
-                master_order = new Order(customer_id, listofitems);
                 OrderControls.addOrderToDB (master_order);
 
                 alertDialogMessage ("Order Successful", "Thank you for ordering with XBurger!");
@@ -354,8 +558,6 @@ public class BurgerAppLayout extends ListActivity{
         currentLayout = R.layout.review_order;
         activity.setContentView(R.layout.review_order);
 
-        //Set the shared preferences
-
         //Set the controls
         TextView ingredient_list = (TextView) activity.findViewById(R.id.order_details);
         Button paynow = (Button) activity.findViewById(R.id.button_confirm);
@@ -364,6 +566,17 @@ public class BurgerAppLayout extends ListActivity{
         Button addtocart = (Button) activity.findViewById (R.id.button_addtocart);
 
         //Set all the ingredients in the textview based on the shared preferences
+        //This is not working
+        String text = "Your order contains ";
+        for(int key: selectedStock.keySet()){
+            Boolean check = selectedStock.get (key);
+            if (check){
+                Stock s = new Stock(key);
+                text = text + s.getIngredient_name () + ", ";
+            }
+        }
+        ingredient_list.setText (text);
+
 
         paynow.setOnClickListener(new View.OnClickListener(){
 
@@ -389,7 +602,11 @@ public class BurgerAppLayout extends ListActivity{
                     Log.d ("Check - Special list", "" + listofitems.get (3));
                 }
 
-                selectedStock.clear ();
+                for (int key: selectedStock.keySet ()){
+                    selectedStock.put (key, false);
+                }
+
+                master_order = new Order(customer_id, listofitems);
                 setUpPaymentPage();
             }
         });
@@ -433,7 +650,10 @@ public class BurgerAppLayout extends ListActivity{
                     Log.d ("Check - Special list", "" + listofitems.get (3));
                 }
 
-                selectedStock.clear ();
+                for (int key: selectedStock.keySet ()){
+                    selectedStock.put (key, false);
+                }
+
                 setUpIngredientPage ();
             }
         });
@@ -451,6 +671,7 @@ public class BurgerAppLayout extends ListActivity{
         EditText signup_fname = (EditText) activity.findViewById(R.id.signup_fname);
         EditText signup_lname = (EditText) activity.findViewById(R.id.signup_lname);
         EditText signup_ph = (EditText) activity.findViewById (R.id.signup_phnum);
+        EditText signup_pin = (EditText) activity.findViewById (R.id.signup_pin2);
         Button signup = (Button) activity.findViewById(R.id.sign_up_button);
         Button back6 = (Button) activity.findViewById (R.id.back_to_landing_page6);
 
@@ -463,6 +684,7 @@ public class BurgerAppLayout extends ListActivity{
                 String fnameString = signup_fname.getText().toString();
                 String lnameString = signup_lname.getText().toString();
                 String phoneString = signup_ph.getText ().toString ();
+                String pinString = signup_pin.getText().toString ();
 
                 //Send all the strings to the database
                 //Check if username is taken
@@ -473,39 +695,25 @@ public class BurgerAppLayout extends ListActivity{
                     alertDialogMessage ("Username Not Available", "Please select a different username");
                 } else {
 
-                    //Get a new salt
-                    byte[] salt = Passwords.getNextSalt (16);
-                    String saltString = Passwords.base64Encode (salt);
-                    Log.d("test", saltString);
+                    PasswordStrengthChecker p = new PasswordStrengthChecker ();
+                    int password_strength = p.pwordStrength (passwordString);
+                    Log.d ("Password", "" + password_strength);
 
-                    //Get a new iteration
-                    int iterationsInt = Passwords.getNextNumIterations ();
-                    Log.d("iterations", "" + iterationsInt);
+                    if (password_strength < 2) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is very weak would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
 
-                    //Get the password as char[]
-                    char[] pword = passwordString.toCharArray ();
-                    Log.d("TEST", passwordString);
+                    } else if (password_strength < 3) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is weak would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
 
-                    //Hash the password
-                    byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
-                    String hashpassString = Passwords.base64Encode (hashpass);
+                    } else if (password_strength < 4) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is moderate would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
 
-                    //Other variables that are needed to construct a customer
-                    String passpinString = "";
-                    String cardtokenString = "";
+                    } else if (password_strength < 5) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is strong, would you like to change it?", passwordString, usernameString, emailString, phoneString, pinString);
 
-                    Customer customer = new Customer(usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString,passpinString, cardtokenString );
-
-                    Log.d("Customer", customer.getUsername ());
-                    // Send this customer to the database to be added
-                    // Connect to the API to send the customer
-                    CustomerControls.addCustomerToDB (customer);
-
-                    //Alert dialog thanks for signing up
-                    alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
-
-                    //Then set up ingredient page
-                    setUpIngredientPage();
+                    } else if (password_strength > 4) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is very strong, would you like to change it?", passwordString, usernameString, emailString, phoneString, pinString);
+                    }
                 }
             }
         });
@@ -529,6 +737,33 @@ public class BurgerAppLayout extends ListActivity{
         alertDialogBuilder.setPositiveButton ("OK", new DialogInterface.OnClickListener () {
             public void onClick(DialogInterface dialog, int id) {
                 finish ();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create ();
+        alertDialog.show ();
+    }
+
+    public void alertDialogMessageCancel (String title, String message, String passwordString, String usernameString, String emailString, String phoneString, String stringPin) {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder (activity);
+
+        //Title & message
+        alertDialogBuilder.setMessage (message).setTitle (title);
+
+        //Action button ok
+        alertDialogBuilder.setPositiveButton ("No", new DialogInterface.OnClickListener () {
+            public void onClick(DialogInterface dialog, int id) {
+                createCustomer (passwordString, usernameString, emailString, phoneString, stringPin);
+                alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
+                setUpIngredientPage ();
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton ("Yes", new DialogInterface.OnClickListener (){
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                finish();
             }
         });
 
@@ -578,5 +813,40 @@ public class BurgerAppLayout extends ListActivity{
 
             }
         }
+    }
+
+    public void createCustomer(String passwordString, String usernameString, String emailString, String phoneString, String stringPin){
+        //Get a new salt
+        byte[] salt = Passwords.getNextSalt (16);
+        String saltString = Passwords.base64Encode (salt);
+        Log.d ("test", saltString);
+
+        //Get a new iteration
+        int iterationsInt = Passwords.getNextNumIterations ();
+        Log.d ("iterations", "" + iterationsInt);
+
+        //Get the password as char[]
+        char[] pword = passwordString.toCharArray ();
+        Log.d ("TEST", passwordString);
+
+        //Hash the password
+        byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
+        String hashpassString = Passwords.base64Encode (hashpass);
+
+        //Hash the pin
+        char[] pin = stringPin.toCharArray ();
+        byte[] hashpin = Passwords.hash (pin, salt, iterationsInt);
+        String hashpinString = Passwords.base64Encode (hashpin);
+
+        //Other variables that are needed to construct a customer
+        String cardtokenString = "";
+
+        Customer customer = new Customer (usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString, hashpinString, cardtokenString);
+
+        Log.d ("Customer", customer.getUsername ());
+
+        // Send this customer to the database to be added
+        // Connect to the API to send the customer
+        CustomerControls.addCustomerToDB (customer);
     }
 }

@@ -485,6 +485,7 @@ public class BurgerAppLayout extends ListActivity{
         EditText signup_fname = (EditText) activity.findViewById(R.id.signup_fname);
         EditText signup_lname = (EditText) activity.findViewById(R.id.signup_lname);
         EditText signup_ph = (EditText) activity.findViewById (R.id.signup_phnum);
+        EditText signup_pin = (EditText) activity.findViewById (R.id.signup_pin2);
         Button signup = (Button) activity.findViewById(R.id.sign_up_button);
         Button back6 = (Button) activity.findViewById (R.id.back_to_landing_page6);
 
@@ -497,6 +498,7 @@ public class BurgerAppLayout extends ListActivity{
                 String fnameString = signup_fname.getText().toString();
                 String lnameString = signup_lname.getText().toString();
                 String phoneString = signup_ph.getText ().toString ();
+                String pinString = signup_pin.getText().toString ();
 
                 //Send all the strings to the database
                 //Check if username is taken
@@ -512,19 +514,19 @@ public class BurgerAppLayout extends ListActivity{
                     Log.d ("Password", "" + password_strength);
 
                     if (password_strength < 2) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is very weak would you like to review it?", passwordString, usernameString, emailString, phoneString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is very weak would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
 
                     } else if (password_strength < 3) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is weak would you like to review it?", passwordString, usernameString, emailString, phoneString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is weak would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
 
                     } else if (password_strength < 4) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is moderate would you like to review it?", passwordString, usernameString, emailString, phoneString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is moderate would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
 
                     } else if (password_strength < 5) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is strong, would you like to change it?", passwordString, usernameString, emailString, phoneString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is strong, would you like to change it?", passwordString, usernameString, emailString, phoneString, pinString);
 
                     } else if (password_strength > 4) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is very strong, would you like to change it?", passwordString, usernameString, emailString, phoneString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is very strong, would you like to change it?", passwordString, usernameString, emailString, phoneString, pinString);
                     }
                 }
             }
@@ -556,7 +558,7 @@ public class BurgerAppLayout extends ListActivity{
         alertDialog.show ();
     }
 
-    public void alertDialogMessageCancel (String title, String message, String passwordString, String usernameString, String emailString, String phoneString) {
+    public void alertDialogMessageCancel (String title, String message, String passwordString, String usernameString, String emailString, String phoneString, String stringPin) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder (activity);
 
         //Title & message
@@ -565,7 +567,7 @@ public class BurgerAppLayout extends ListActivity{
         //Action button ok
         alertDialogBuilder.setPositiveButton ("No", new DialogInterface.OnClickListener () {
             public void onClick(DialogInterface dialog, int id) {
-                createCustomer (passwordString, usernameString, emailString, phoneString);
+                createCustomer (passwordString, usernameString, emailString, phoneString, stringPin);
                 alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
                 setUpIngredientPage ();
             }
@@ -627,7 +629,7 @@ public class BurgerAppLayout extends ListActivity{
         }
     }
 
-    public void createCustomer(String passwordString, String usernameString, String emailString, String phoneString){
+    public void createCustomer(String passwordString, String usernameString, String emailString, String phoneString, String stringPin){
         //Get a new salt
         byte[] salt = Passwords.getNextSalt (16);
         String saltString = Passwords.base64Encode (salt);
@@ -645,13 +647,18 @@ public class BurgerAppLayout extends ListActivity{
         byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
         String hashpassString = Passwords.base64Encode (hashpass);
 
+        //Hash the pin
+        char[] pin = stringPin.toCharArray ();
+        byte[] hashpin = Passwords.hash (pin, salt, iterationsInt);
+        String hashpinString = Passwords.base64Encode (hashpin);
+
         //Other variables that are needed to construct a customer
-        String passpinString = "";
         String cardtokenString = "";
 
-        Customer customer = new Customer (usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString, passpinString, cardtokenString);
+        Customer customer = new Customer (usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString, hashpinString, cardtokenString);
 
         Log.d ("Customer", customer.getUsername ());
+
         // Send this customer to the database to be added
         // Connect to the API to send the customer
         CustomerControls.addCustomerToDB (customer);

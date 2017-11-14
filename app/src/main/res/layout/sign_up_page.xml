@@ -208,6 +208,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_lname" />
 
+    <TextView
+        android:id="@+id/signup_pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/signup_fname"
+        android:layout_alignStart="@+id/signup_fname"
+        android:layout_below="@+id/signup_fname"
+        android:layout_margin="10dp"
+        android:text="Pin"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="299dp" />
+
+    <EditText
+        android:id="@+id/signup_pin2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_lname"
+        android:layout_alignStart="@+id/text_lname"
+        android:layout_below="@+id/text_lname"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_lname" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

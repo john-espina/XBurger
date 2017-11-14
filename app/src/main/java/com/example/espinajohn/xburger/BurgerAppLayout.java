@@ -15,7 +15,10 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
+import api_communicators.AllStockRetriever;
+import api_communicators.GetAllStockItems;
 import api_communicators.StockDetailsController;
 import entity.Customer;
 import entity.Item;
@@ -354,8 +357,6 @@ public class BurgerAppLayout extends ListActivity{
         currentLayout = R.layout.review_order;
         activity.setContentView(R.layout.review_order);
 
-        //Set the shared preferences
-
         //Set the controls
         TextView ingredient_list = (TextView) activity.findViewById(R.id.order_details);
         Button paynow = (Button) activity.findViewById(R.id.button_confirm);
@@ -364,6 +365,17 @@ public class BurgerAppLayout extends ListActivity{
         Button addtocart = (Button) activity.findViewById (R.id.button_addtocart);
 
         //Set all the ingredients in the textview based on the shared preferences
+        //This is not working
+        String text = "Your order contains ";
+        for(int key: selectedStock.keySet()){
+            Boolean check = selectedStock.get (key);
+            if (check){
+                Stock s = new Stock(key);
+                text = text + s.getIngredient_name () + ", ";
+            }
+        }
+        ingredient_list.setText (text);
+
 
         paynow.setOnClickListener(new View.OnClickListener(){
 
@@ -389,7 +401,10 @@ public class BurgerAppLayout extends ListActivity{
                     Log.d ("Check - Special list", "" + listofitems.get (3));
                 }
 
-                selectedStock.clear ();
+                for (int key: selectedStock.keySet ()){
+                    selectedStock.put (key, false);
+                }
+
                 setUpPaymentPage();
             }
         });
@@ -433,7 +448,10 @@ public class BurgerAppLayout extends ListActivity{
                     Log.d ("Check - Special list", "" + listofitems.get (3));
                 }
 
-                selectedStock.clear ();
+                for (int key: selectedStock.keySet ()){
+                    selectedStock.put (key, false);
+                }
+
                 setUpIngredientPage ();
             }
         });

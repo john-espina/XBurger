@@ -41,6 +41,7 @@ import passwords.Passwords;
 
 import static android.graphics.Color.GREEN;
 import static android.graphics.Color.RED;
+import static android.graphics.Color.WHITE;
 import static android.graphics.Color.YELLOW;
 
 
@@ -327,6 +328,12 @@ public class BurgerAppLayout extends ListActivity{
         String expirydate_string = expirydate.getText().toString();
         String cvv_String = cvv.getText().toString();
 
+        //Display the price of the order
+        TextView pricetotal = (TextView) activity.findViewById (R.id.priceTotal);
+        pricetotal.setTextColor (WHITE);
+        double getPrice = Math.round (master_order.getPrice());
+        pricetotal.setText ("Your total price is " + getPrice);
+
         back4.setOnClickListener (new View.OnClickListener (){
 
             @Override
@@ -351,7 +358,6 @@ public class BurgerAppLayout extends ListActivity{
 
                 //Put the items in an order
                 //Sends the order to the database
-                master_order = new Order(customer_id, listofitems);
                 OrderControls.addOrderToDB (master_order);
 
                 alertDialogMessage ("Order Successful", "Thank you for ordering with XBurger!");
@@ -421,6 +427,7 @@ public class BurgerAppLayout extends ListActivity{
                     selectedStock.put (key, false);
                 }
 
+                master_order = new Order(customer_id, listofitems);
                 setUpPaymentPage();
             }
         });

@@ -81,6 +81,7 @@
                         android:src="@mipmap/customized" />
 
                     <CheckBox
+                        android:id="@+id/customise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -102,6 +103,7 @@
                         android:src="@mipmap/plain_burger" />
 
                     <CheckBox
+                        android:id="@+id/plainburger"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -122,6 +124,7 @@
                         android:src="@mipmap/hamburger" />
 
                     <CheckBox
+                        android:id="@+id/hammiest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -141,6 +144,7 @@
                         android:src="@mipmap/cheese_burger" />
 
                     <CheckBox
+                        android:id="@+id/cheesy"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
@@ -161,6 +165,7 @@
                         android:src="@mipmap/pork_burger" />
 
                     <CheckBox
+                        android:id="@+id/porky"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
@@ -179,6 +184,7 @@
                         android:src="@mipmap/chicken_burger" />
 
                     <CheckBox
+                        android:id="@+id/chickeny"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
@@ -198,7 +204,7 @@
             android:gravity="bottom">
 
             <Button
-                android:id="@+id/back_to_landing_page3"
+                android:id="@+id/premade_cancel"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
@@ -215,7 +221,7 @@
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
-                android:id="@+id/button_next"
+                android:id="@+id/premade_next"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/back_to_landing_page3"

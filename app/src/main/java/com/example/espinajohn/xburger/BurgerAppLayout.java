@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -124,7 +125,7 @@ public class BurgerAppLayout extends ListActivity{
             @Override
             public void onClick(View v) {
                if (app_logged_in != null && app_logged_in) {
-                   setUpIngredientPage();
+                   setUpPreMadeBurgerPage ();
                 } else {
                     setUpHomePage();
                 }
@@ -258,24 +259,107 @@ public class BurgerAppLayout extends ListActivity{
 
         currentLayout = R.layout.premade_burger_page;
         activity.setContentView(R.layout.premade_burger_page);
-        Button next = (Button) activity.findViewById(R.id.button_next);
+        //Button next = (Button) activity.findViewById(R.id.button_next);
         LinearLayout linearLayout = (LinearLayout)activity.findViewById(R.id.premade_holder);
 
+        CheckBox plain = (CheckBox) activity.findViewById (R.id.plainburger);
+        CheckBox hammiest = (CheckBox) activity.findViewById (R.id.hammiest);
+        CheckBox cheesy = (CheckBox) activity.findViewById (R.id.cheesy);
+        CheckBox porky = (CheckBox) activity.findViewById (R.id.porky);
+        CheckBox chickeny = (CheckBox) activity.findViewById (R.id.chickeny);
 
-        next.setOnClickListener(new View.OnClickListener(){
+        Button premadenext = (Button) activity.findViewById (R.id.premade_next);
+        Button premadecancel = (Button) activity.findViewById (R.id.premade_cancel);
+        CheckBox customise = (CheckBox) activity.findViewById (R.id.customise);
+
+        customise.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                setUpIngredientPage ();
+            }
+        });
+
+        hammiest.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                ArrayList<Stock> stock = new ArrayList<> ();
+                stock.add (new Stock(11));
+                stock.add (new Stock(41));
+                stock.add (new Stock(51));
+                stock.add (new Stock(91));
+                stock.add (new Stock(131));
+                stock.add (new Stock(241));
+                stock.add (new Stock(261));
+                listofitems.add (new Item (stock));
+            }
+        });
+
+        cheesy.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                ArrayList<Stock> stock = new ArrayList<> ();
+                stock.add (new Stock(1));
+                stock.add (new Stock(41));
+                stock.add (new Stock(51));
+                stock.add (new Stock(91));
+                stock.add (new Stock(201));
+                stock.add (new Stock(131));
+                stock.add (new Stock(241));
+                stock.add (new Stock(261));
+                listofitems.add (new Item (stock));
+            }
+        });
+
+        porky.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                ArrayList<Stock> stock = new ArrayList<> ();
+                stock.add (new Stock(21));
+                stock.add (new Stock(41));
+                stock.add (new Stock(51));
+                stock.add (new Stock(91));
+                stock.add (new Stock(201));
+                stock.add (new Stock(171));
+                stock.add (new Stock(241));
+                stock.add (new Stock(261));
+                listofitems.add (new Item (stock));
+            }
+        });
+
+        chickeny.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                ArrayList<Stock> stock = new ArrayList<> ();
+                stock.add (new Stock(31));
+                stock.add (new Stock(41));
+                stock.add (new Stock(51));
+                stock.add (new Stock(91));
+                stock.add (new Stock(201));
+                stock.add (new Stock(141));
+                stock.add (new Stock(241));
+                stock.add (new Stock(261));
+                listofitems.add (new Item (stock));
+            }
+        });
+
+        premadecancel.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+                setUpLandingPage ();
+            }
+        });
+
+
+        premadenext.setOnClickListener(new View.OnClickListener(){
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             public void onClick(View v){
-
-                saveOrder ();
                 setUpSidesPage();
             }
         });
 
 
     }
-
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void setUpSidesPage(){
@@ -513,6 +597,7 @@ public class BurgerAppLayout extends ListActivity{
 
         back4.setOnClickListener (new View.OnClickListener (){
 
+
             @Override
             public void onClick(View view) {
                 alertDialogMessage ("Cancel Order", "All items will be deleted!");
@@ -568,12 +653,8 @@ public class BurgerAppLayout extends ListActivity{
         //Set all the ingredients in the textview based on the shared preferences
         //This is not working
         String text = "Your order contains ";
-        for(int key: selectedStock.keySet()){
-            Boolean check = selectedStock.get (key);
-            if (check){
-                Stock s = new Stock(key);
-                text = text + s.getIngredient_name () + ", ";
-            }
+        for(int i = 0; i < listofitems.size(); i++){
+            text = text + listofitems.get (i).getItem_type ();
         }
         ingredient_list.setText (text);
 

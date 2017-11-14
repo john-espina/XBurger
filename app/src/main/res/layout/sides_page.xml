@@ -82,7 +82,7 @@
             android:gravity="bottom">
 
             <Button
-                android:id="@+id/back_to_landing_page3"
+                android:id="@+id/back_to_landing_page5"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
@@ -102,7 +102,7 @@
                 android:id="@+id/button_next"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_alignTop="@+id/back_to_landing_page3"
+                android:layout_alignTop="@+id/back_to_landing_page5"
                 android:layout_gravity="bottom"
                 android:layout_toLeftOf="@+id/salads_button"
                 android:layout_toStartOf="@+id/salads_button"

@@ -20,13 +20,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import java.text.DateFormat;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
-import api_communicators.AllStockRetriever;
-import api_communicators.GetAllStockItems;
 import api_communicators.StockDetailsController;
 import entity.Customer;
 import entity.Item;
@@ -46,9 +44,7 @@ import passwords.Passwords;
 
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.GREEN;
-import static android.graphics.Color.RED;
 import static android.graphics.Color.WHITE;
-import static android.graphics.Color.YELLOW;
 
 
 /**
@@ -408,7 +404,7 @@ public class BurgerAppLayout extends ListActivity{
         LinearLayout sidesHolder = (LinearLayout) activity.findViewById(R.id.sides_holder);
 
         //set the controls
-        Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page3);
+        Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page5);
         Button next = (Button) activity.findViewById(R.id.button_next);
 
         //Generate the CheckBoxes
@@ -462,7 +458,7 @@ public class BurgerAppLayout extends ListActivity{
         LinearLayout drinksHolder = (LinearLayout) activity.findViewById(R.id.drinks_holder);
 
         //set the controls
-        Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page3);
+        Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page5);
         Button next = (Button) activity.findViewById(R.id.button_next);
 
         //Generate the CheckBoxes
@@ -518,7 +514,7 @@ public class BurgerAppLayout extends ListActivity{
         TabItem meats = (TabItem) activity.findViewById(R.id.meats_button);
         TabItem cheese = (TabItem) activity.findViewById(R.id.cheese_button);
         TabItem sauces = (TabItem) activity.findViewById(R.id.sauces_button);
-        Button back3 = (Button) activity.findViewById (R.id.back_to_landing_page3);
+        Button back3 = (Button) activity.findViewById (R.id.back_to_landing_page5);
 
         back3.setOnClickListener (new View.OnClickListener (){
 
@@ -537,7 +533,7 @@ public class BurgerAppLayout extends ListActivity{
 
 
                    case 0:
-                       if (selected==0) {
+                       if (selected==0 || tab.isSelected()) {
                        BunsFragment bunFragment = new BunsFragment();
                        activity.getFragmentManager().beginTransaction()
                                .replace(R.id.placeholder, bunFragment)
@@ -675,7 +671,7 @@ public class BurgerAppLayout extends ListActivity{
         activity.setContentView(R.layout.review_order);
 
         //Set the controls
-        TextView ingredient_list = (TextView) activity.findViewById(R.id.order_details);
+        ListView ingredient_list = (ListView) activity.findViewById(R.id.review_holder);
         Button paynow = (Button) activity.findViewById(R.id.button_confirm);
         Button editorder2 = (Button) activity.findViewById(R.id.button_edit_order);
         Button back5 = (Button) activity.findViewById (R.id.back_to_landing_page5);
@@ -683,11 +679,11 @@ public class BurgerAppLayout extends ListActivity{
 
         //Set all the ingredients in the textview based on the shared preferences
         //This is not working
-        String text = "Your order contains ";
-        for(int i = 0; i < listofitems.size(); i++){
-            text = text + listofitems.get (i).getItem_type ();
-        }
-        ingredient_list.setText (text);
+//        String text = "Your order contains ";
+//        for(int i = 0; i < listofitems.size(); i++){
+//            text = text + listofitems.get (i);
+//        }
+//        ingredient_list.setText (text);
 
 
         paynow.setOnClickListener(new View.OnClickListener(){

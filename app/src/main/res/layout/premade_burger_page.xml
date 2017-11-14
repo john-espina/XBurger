@@ -107,6 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:tag="Just Burger"
                         android:text="Add" />
 
                 </LinearLayout>
@@ -197,7 +198,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="43dp"
             android:layout_marginTop="0dp"
             android:layout_weight="0"
             android:background="#fff"
@@ -224,7 +225,7 @@
                 android:id="@+id/premade_next"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_alignTop="@+id/back_to_landing_page3"
+                android:layout_alignTop="@+id/back_to_landing_page5"
                 android:layout_gravity="bottom"
                 android:layout_toLeftOf="@+id/salads_button"
                 android:layout_toStartOf="@+id/salads_button"

@@ -4,7 +4,7 @@
     android:id="@+id/order_history"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/blue_lightning"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <TextView
@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
+        android:contextClickable="true"
         android:scrollbars="none"
         tools:style="@style/Widget.AppCompat.ListView">
 

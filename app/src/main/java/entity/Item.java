@@ -38,7 +38,7 @@ public class Item implements Serializable {
         this.order_details_id = -1;
         this.ingredients = ingredients;
         this.order_id = -1;
-        //this.item_type = StockControls.getItemCategory(ingredients.get(0).getIngredient_id());
+        this.item_type = StockControls.getItemType(ingredients.get(0).getIngredient_id());
 
     }
 

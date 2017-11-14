@@ -49,6 +49,13 @@ public class BurgerAppLayout extends ListActivity{
     ArrayList<Integer> burger_order_ingredients;
     public static HashMap<Integer, Boolean> selectedStock = MainActivity.selectedStock;
 
+    //Things to remembers for orders
+    ArrayList<Item> listofitems = new ArrayList<Item>();
+    ArrayList<Stock> current_burger;
+    ArrayList<Stock> current_sides;
+    ArrayList<Stock> current_drinks;
+    ArrayList<Stock> current_special;
+
     //Constructor
     //Will need to add the shared preferences variables
     BurgerAppLayout(Activity act, int layout) {
@@ -114,6 +121,24 @@ public class BurgerAppLayout extends ListActivity{
         Button reorder = (Button) activity.findViewById (R.id.reorder);
         Button back = (Button) activity.findViewById (R.id.back_to_landing_page);
 
+        Log.d("Customer ID", customer_id + "");
+
+
+
+        if (app_logged_in != null && app_logged_in){
+
+            //Get the list of orders
+            ArrayList<Order> orders = OrderControls.retrieveAllOrders (customer_id);
+
+            if (orders != null) {
+                for (int i = 0; i < orders.size (); i++) {
+                    //Populate the lists with this information
+                    //Will also need to add a reorder button
+                    Log.d("Order " + i, orders.get (i).toString ());
+                }
+            }
+        }
+
         reorder.setOnClickListener (new View.OnClickListener (){
 
             @Override
@@ -143,15 +168,6 @@ public class BurgerAppLayout extends ListActivity{
         final EditText password = (EditText) activity.findViewById(R.id.password);
         Button login = (Button) activity.findViewById(R.id.homepage_login);
         TextView signup = (TextView) activity.findViewById(R.id.homepage_signup);
-//        Button back2 = (Button) activity.findViewById (R.id.back_to_landing_page2);
-
-//        back2.setOnClickListener (new View.OnClickListener (){
-//
-//            @Override
-//            public void onClick(View view) {
-//                setUpLandingPage ();
-//            }
-//        });
 
         // Connect to database to validate the username and ID
         // Method to be put in CustomerControls class?
@@ -310,6 +326,15 @@ public class BurgerAppLayout extends ListActivity{
         //On click of confirm payment, if payment details are successful
         confirmpayment.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                //Will connect with the payment provided to confirm card details and validity.
+                //If payment is successful do the code below.
+                //Else will need to pop up a diallog message saying that the order is not successful
+
+                //Put the items in an order
+                //Sends the order to the database
+                master_order = new Order(customer_id, listofitems);
+                OrderControls.addOrderToDB (master_order);
+
                 alertDialogMessage ("Order Successful", "Thank you for ordering with XBurger!");
                 setUpLandingPage ();
             }
@@ -336,11 +361,35 @@ public class BurgerAppLayout extends ListActivity{
         Button paynow = (Button) activity.findViewById(R.id.button_confirm);
         Button editorder2 = (Button) activity.findViewById(R.id.button_edit_order);
         Button back5 = (Button) activity.findViewById (R.id.back_to_landing_page5);
+        Button addtocart = (Button) activity.findViewById (R.id.button_addtocart);
 
         //Set all the ingredients in the textview based on the shared preferences
 
         paynow.setOnClickListener(new View.OnClickListener(){
+
             public void onClick(View v){
+                if (!current_burger.isEmpty ()){
+
+                    listofitems.add (new Item(current_burger));
+                    Log.d ("Check - Burger list", "" + listofitems.get (0));
+                }
+
+                if (!current_drinks.isEmpty ()) {
+                    listofitems.add (new Item (current_drinks));
+                    Log.d ("Check - Drink list", "" + listofitems.get (1));
+                }
+
+                if (!current_sides.isEmpty ()){
+                    listofitems.add (new Item(current_sides));
+                    Log.d ("Check - Side list", "" + listofitems.get (2));
+                }
+
+                if (!current_special.isEmpty ()) {
+                    listofitems.add (new Item (current_special));
+                    Log.d ("Check - Special list", "" + listofitems.get (3));
+                }
+
+                selectedStock.clear ();
                 setUpPaymentPage();
             }
         });
@@ -352,10 +401,40 @@ public class BurgerAppLayout extends ListActivity{
         });
 
         back5.setOnClickListener (new View.OnClickListener (){
-
             @Override
             public void onClick(View view) {
                 setUpLandingPage ();
+            }
+        });
+
+        addtocart.setOnClickListener (new View.OnClickListener (){
+
+            @Override
+            public void onClick(View view) {
+
+                //Add to list of items
+                if (!current_burger.isEmpty ()){
+                    listofitems.add (new Item(current_burger));
+                    Log.d ("Check - Burger list", "" + listofitems.get (0));
+                }
+
+                if (!current_drinks.isEmpty ()) {
+                    listofitems.add (new Item (current_drinks));
+                    Log.d ("Check - Drink list", "" + listofitems.get (1));
+                }
+
+                if (!current_sides.isEmpty ()){
+                    listofitems.add (new Item(current_sides));
+                    Log.d ("Check - Side list", "" + listofitems.get (2));
+                }
+
+                if (!current_special.isEmpty ()) {
+                    listofitems.add (new Item (current_special));
+                    Log.d ("Check - Special list", "" + listofitems.get (3));
+                }
+
+                selectedStock.clear ();
+                setUpIngredientPage ();
             }
         });
     }
@@ -458,17 +537,16 @@ public class BurgerAppLayout extends ListActivity{
     }
 
     public void saveOrder(){
-        ArrayList<Item> listofitems = new ArrayList<Item>();
-        ArrayList<Stock> current_burger = new ArrayList<Stock> ();
-        ArrayList<Stock> current_sides = new ArrayList<Stock> ();
-        ArrayList<Stock> current_drinks = new ArrayList<Stock> ();
-        ArrayList<Stock> current_special = new ArrayList<Stock> ();
+
+        current_burger = new ArrayList<>();
+        current_sides = new ArrayList<> ();
+        current_drinks = new ArrayList<> ();
+        current_special = new ArrayList<> ();
 
         //Get the hashmap of true items
 
         for (int key : selectedStock.keySet ()){
 
-            //This is my mistake. Want to check if value of key is true.
             Boolean check = selectedStock.get (key);
             Log.d("Check - Key", "" + key + " " + selectedStock.get (key));
 
@@ -500,33 +578,5 @@ public class BurgerAppLayout extends ListActivity{
 
             }
         }
-
-        //This needs to happen when add to cart is pressed
-        //Add to list of items
-        if (!current_burger.isEmpty ()){
-            listofitems.add (new Item(current_burger));
-            Log.d ("Check - Burger list", "" + listofitems.get (0));
-        }
-
-        if (!current_drinks.isEmpty ()) {
-            listofitems.add (new Item (current_drinks));
-            Log.d ("Check - Drink list", "" + listofitems.get (1));
-        }
-
-        if (!current_sides.isEmpty ()){
-            listofitems.add (new Item(current_sides));
-            Log.d ("Check - Side list", "" + listofitems.get (2));
-        }
-
-        if (!current_special.isEmpty ()) {
-            listofitems.add (new Item (current_special));
-            Log.d ("Check - Special list", "" + listofitems.get (3));
-        }
-
-        //Put the items in an order
-        //This will need to be in a different method to allow for multiple burgers.
-        //This needs to happen on confirm payment
-        master_order = new Order(customer_id, listofitems);
-        OrderControls.addOrderToDB (master_order);
     }
 }

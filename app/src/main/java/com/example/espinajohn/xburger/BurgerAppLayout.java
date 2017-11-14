@@ -10,8 +10,11 @@ import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -122,7 +125,11 @@ public class BurgerAppLayout extends ListActivity{
         order_history.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //Open the list layout with order history
-                setUpOrderHistory ();
+                if (app_logged_in != null && app_logged_in) {
+                    setUpOrderHistory ();
+                } else {
+                    alertDialogMessage ("Please Log In", "Log in to review previous orders");
+                }
             }
         });
     }
@@ -141,12 +148,32 @@ public class BurgerAppLayout extends ListActivity{
         if (app_logged_in != null && app_logged_in){
 
             //Get the list of orders
+            ListView list = (ListView) activity.findViewById(R.id.history_list);
+
             ArrayList<Order> orders = OrderControls.retrieveAllOrders (customer_id);
 
             if (orders != null) {
                 for (int i = 0; i < orders.size (); i++) {
                     //Populate the lists with this information
                     //Will also need to add a reorder button
+                    ArrayAdapter adapter = new ArrayAdapter(activity, android.R.layout.simple_list_item_1, orders);
+
+                    //Populate the list
+
+                    list.setAdapter(adapter);
+
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                           Order reorder = orders.get (position);
+                           ArrayList<Item> items = reorder.getItems ();
+                           for (int i = 0; i < items.size (); i++){
+                                listofitems.add (items.get (i));
+                           }
+                           v.setBackgroundColor (GREEN);
+                        }
+                    });
+
                     Log.d("Order " + i, orders.get (i).toString ());
                 }
             }
@@ -156,7 +183,8 @@ public class BurgerAppLayout extends ListActivity{
 
             @Override
             public void onClick(View view) {
-                //Do what needs to be done to reorder
+                master_order = new Order (customer_id, listofitems);
+                setUpPaymentPage ();
             }
         });
 
@@ -338,6 +366,8 @@ public class BurgerAppLayout extends ListActivity{
 
             @Override
             public void onClick(View view) {
+                alertDialogMessage ("Cancel Order", "All items will be deleted!");
+                master_order = new Order (customer_id, null);
                 setUpLandingPage ();
             }
         });

@@ -71,7 +71,7 @@ public class AllStockRetriever extends AsyncTask <String, Integer, HashMap >{
                     img_file_name = "";
 
                     // Create a new Stock object and add it to the list of stocks.
-                    Stock stockItem = new Stock(ingredient_id,ingredient_name, category, categoryID, stock_level,price,img_file_name);
+                    Stock stockItem = new Stock(ingredient_id,ingredient_name, category, stock_level,price,img_file_name);
                     if (category.equalsIgnoreCase("Bread")){
                         buns.add(stockItem);
                     }

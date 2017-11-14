@@ -18,10 +18,11 @@ public class Item implements Serializable {
     int order_id;
     String item_type;
 
-    public Item(int order_details_id, ArrayList<Stock> ingredients, int order_id) {
+    public Item(int order_details_id, int order_id, ArrayList<Stock> ingredients, String item_type) {
         this.order_details_id = order_details_id;
         this.ingredients = ingredients;
         this.order_id = order_id;
+        this.item_type = item_type;
 
         if(this.ingredients.get(0).getCategory().equals("Side")) {
             this.item_type = "side";

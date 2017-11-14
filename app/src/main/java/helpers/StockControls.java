@@ -149,7 +149,7 @@ public class StockControls {
         return stockHash.get(ingredient_id);
     }
 
-    public static double getIngredientPrice(double ingredient_id) {
+    public static double getIngredientPrice(int ingredient_id) {
         return stockPrice.get(ingredient_id);
     }
 

@@ -18,7 +18,7 @@ public class Stock implements Serializable {
     double price;
     String img_file_name;
 
-    public Stock(int ingredient_id, String ingredient_name, String category,int categoryID, int stock_level, double price, String img_file_name) {
+    public Stock(int ingredient_id, String ingredient_name, String category, int stock_level, double price, String img_file_name) {
         this.ingredient_id = ingredient_id;
         this.ingredient_name = ingredient_name;
         this.category = category;

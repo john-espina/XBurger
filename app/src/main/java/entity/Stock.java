@@ -32,7 +32,7 @@ public class Stock implements Serializable {
         this.ingredient_name = StockControls.getIngredientName(ingredient_id);
         this.category = StockControls.getItemCategory(ingredient_id);
         this.stock_level = -1;
-        //this.price = StockControls.getIngredientPrice(ingredient_id);
+        this.price = StockControls.getIngredientPrice(ingredient_id);
         this.img_file_name = "";
     }
 

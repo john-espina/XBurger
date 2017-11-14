@@ -1,5 +1,7 @@
 package entity;
 
+import android.util.Log;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -61,9 +63,10 @@ public class Order implements Serializable {
         double price = 0.0;
 
         for (Item item : items) {
+            Log.d ("Get Price - Items", "Inside items loop");
 
             for (Stock ingredient : item.getIngredients()) {
-
+                Log.d ("Get Price - Stock", "Inside stock loop");
                 price += ingredient.getPrice();
 
             }

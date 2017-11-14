@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -32,7 +35,13 @@ import fragments_ingredient_page.SaucesFragment;
 import helpers.CustomerControls;
 import helpers.OrderControls;
 import helpers.StockControls;
+import helpers.TokenGeneratorControls;
+import passwords.PasswordStrengthChecker;
 import passwords.Passwords;
+
+import static android.graphics.Color.GREEN;
+import static android.graphics.Color.RED;
+import static android.graphics.Color.YELLOW;
 
 
 /**
@@ -169,6 +178,9 @@ public class BurgerAppLayout extends ListActivity{
         //Set the controls
         final EditText username = (EditText) activity.findViewById(R.id.username_);
         final EditText password = (EditText) activity.findViewById(R.id.password);
+
+        String pword = password.getText ().toString ();
+
         Button login = (Button) activity.findViewById(R.id.homepage_login);
         TextView signup = (TextView) activity.findViewById(R.id.homepage_signup);
 
@@ -331,7 +343,11 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(View v){
                 //Will connect with the payment provided to confirm card details and validity.
                 //If payment is successful do the code below.
-                //Else will need to pop up a diallog message saying that the order is not successful
+                //Payment will be passed on to the authorised retailer and credentials checked
+                //A token will be returned && saved in the database
+                //Else, alert that payment is not successful, alert unsuccessful payment.
+
+                TokenGeneratorControls.generateToken ();
 
                 //Put the items in an order
                 //Sends the order to the database
@@ -491,39 +507,25 @@ public class BurgerAppLayout extends ListActivity{
                     alertDialogMessage ("Username Not Available", "Please select a different username");
                 } else {
 
-                    //Get a new salt
-                    byte[] salt = Passwords.getNextSalt (16);
-                    String saltString = Passwords.base64Encode (salt);
-                    Log.d("test", saltString);
+                    PasswordStrengthChecker p = new PasswordStrengthChecker ();
+                    int password_strength = p.pwordStrength (passwordString);
+                    Log.d ("Password", "" + password_strength);
 
-                    //Get a new iteration
-                    int iterationsInt = Passwords.getNextNumIterations ();
-                    Log.d("iterations", "" + iterationsInt);
+                    if (password_strength < 2) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is very weak would you like to review it?", passwordString, usernameString, emailString, phoneString);
 
-                    //Get the password as char[]
-                    char[] pword = passwordString.toCharArray ();
-                    Log.d("TEST", passwordString);
+                    } else if (password_strength < 3) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is weak would you like to review it?", passwordString, usernameString, emailString, phoneString);
 
-                    //Hash the password
-                    byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
-                    String hashpassString = Passwords.base64Encode (hashpass);
+                    } else if (password_strength < 4) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is moderate would you like to review it?", passwordString, usernameString, emailString, phoneString);
 
-                    //Other variables that are needed to construct a customer
-                    String passpinString = "";
-                    String cardtokenString = "";
+                    } else if (password_strength < 5) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is strong, would you like to change it?", passwordString, usernameString, emailString, phoneString);
 
-                    Customer customer = new Customer(usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString,passpinString, cardtokenString );
-
-                    Log.d("Customer", customer.getUsername ());
-                    // Send this customer to the database to be added
-                    // Connect to the API to send the customer
-                    CustomerControls.addCustomerToDB (customer);
-
-                    //Alert dialog thanks for signing up
-                    alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
-
-                    //Then set up ingredient page
-                    setUpIngredientPage();
+                    } else if (password_strength > 4) {
+                        alertDialogMessageCancel ("Password Alert", "Your password is very strong, would you like to change it?", passwordString, usernameString, emailString, phoneString);
+                    }
                 }
             }
         });
@@ -547,6 +549,33 @@ public class BurgerAppLayout extends ListActivity{
         alertDialogBuilder.setPositiveButton ("OK", new DialogInterface.OnClickListener () {
             public void onClick(DialogInterface dialog, int id) {
                 finish ();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create ();
+        alertDialog.show ();
+    }
+
+    public void alertDialogMessageCancel (String title, String message, String passwordString, String usernameString, String emailString, String phoneString) {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder (activity);
+
+        //Title & message
+        alertDialogBuilder.setMessage (message).setTitle (title);
+
+        //Action button ok
+        alertDialogBuilder.setPositiveButton ("No", new DialogInterface.OnClickListener () {
+            public void onClick(DialogInterface dialog, int id) {
+                createCustomer (passwordString, usernameString, emailString, phoneString);
+                alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
+                setUpIngredientPage ();
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton ("Yes", new DialogInterface.OnClickListener (){
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int id) {
+                finish();
             }
         });
 
@@ -596,5 +625,35 @@ public class BurgerAppLayout extends ListActivity{
 
             }
         }
+    }
+
+    public void createCustomer(String passwordString, String usernameString, String emailString, String phoneString){
+        //Get a new salt
+        byte[] salt = Passwords.getNextSalt (16);
+        String saltString = Passwords.base64Encode (salt);
+        Log.d ("test", saltString);
+
+        //Get a new iteration
+        int iterationsInt = Passwords.getNextNumIterations ();
+        Log.d ("iterations", "" + iterationsInt);
+
+        //Get the password as char[]
+        char[] pword = passwordString.toCharArray ();
+        Log.d ("TEST", passwordString);
+
+        //Hash the password
+        byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
+        String hashpassString = Passwords.base64Encode (hashpass);
+
+        //Other variables that are needed to construct a customer
+        String passpinString = "";
+        String cardtokenString = "";
+
+        Customer customer = new Customer (usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString, passpinString, cardtokenString);
+
+        Log.d ("Customer", customer.getUsername ());
+        // Send this customer to the database to be added
+        // Connect to the API to send the customer
+        CustomerControls.addCustomerToDB (customer);
     }
 }

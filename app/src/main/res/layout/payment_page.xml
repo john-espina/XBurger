@@ -181,12 +181,22 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/save_card_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:buttonTint="@android:color/white"
+        android:text="Save Card"
+        android:textColor="@android:color/white" />
+
     <Button
         android:id="@+id/button_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_bg"
         android:text="CONFIRM"
         android:textColor="#fff" />
@@ -212,26 +222,6 @@
             android:textColor="#4100d8"
             android:textSize="18sp"
             tools:ignore="ButtonStyle,HardcodedText" />
-
-        <Button
-            android:id="@+id/button_edit2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textView12"
-            android:layout_alignRight="@+id/textView12"
-            android:layout_alignTop="@+id/back_to_landing_page4"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/ingredient_select_bg"
-            android:text="EDIT ORDER"
-            android:textColor="#4100d8"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.935"
-            tools:textAllCaps="false" />
 
     </LinearLayout>
 

@@ -43,7 +43,6 @@ import passwords.PasswordStrengthChecker;
 import passwords.Passwords;
 
 import static android.graphics.Color.BLUE;
-import static android.graphics.Color.GREEN;
 import static android.graphics.Color.WHITE;
 
 
@@ -61,7 +60,6 @@ public class BurgerAppLayout extends ListActivity{
     Boolean app_logged_in;
     int customer_id;
     int currentLayout;
-    ArrayList<Integer> burger_order_ingredients;
     public static HashMap<Integer, Boolean> selectedStock = MainActivity.selectedStock;
 
     //Things to remembers for orders
@@ -72,8 +70,6 @@ public class BurgerAppLayout extends ListActivity{
     ArrayList<Stock> current_special;
 
     //Constructor
-    //Will need to add the shared preferences variables
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     BurgerAppLayout(Activity act, int layout) {
         activity = act;
@@ -118,6 +114,7 @@ public class BurgerAppLayout extends ListActivity{
         Button order = (Button) activity.findViewById(R.id.button_make_order);
         Button order_history = (Button) activity.findViewById(R.id.button_order_history);
 
+
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,10 +152,13 @@ public class BurgerAppLayout extends ListActivity{
             ListView list = (ListView) activity.findViewById(R.id.history_list);
 
             ArrayList<Order> orders = OrderControls.retrieveAllOrders (customer_id);
+
+            Log.d ("ORDER LIST", "IS IT REFRESHING?");
+
             ArrayList<String> orderinfo = new ArrayList<> ();
 
             if (!orders.isEmpty ()) {
-                for (int i = 0; i < orders.size (); i++) {
+                for (int i = orders.size ()-1; i >= 0; i--) {
                     String to_save = "Order: " + orders.get (i).getOrder_id () + " Time: " + orders.get (i).getOrder_datetime () + " Status: ";
                     if (orders.get (i).getStatus ().equals ("0")) {
                         to_save = to_save + " Pending ";
@@ -405,7 +405,7 @@ public class BurgerAppLayout extends ListActivity{
 
         //set the controls
         Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page5);
-        Button next = (Button) activity.findViewById(R.id.button_next);
+        Button next = (Button) activity.findViewById(R.id.drinks_addtocart);
 
         //Generate the CheckBoxes
         try {
@@ -459,7 +459,7 @@ public class BurgerAppLayout extends ListActivity{
 
         //set the controls
         Button back3 = (Button)activity.findViewById(R.id.back_to_landing_page5);
-        Button next = (Button) activity.findViewById(R.id.button_next);
+        Button next = (Button) activity.findViewById(R.id.drinks_addtocart);
 
         //Generate the CheckBoxes
         try {
@@ -493,11 +493,61 @@ public class BurgerAppLayout extends ListActivity{
         next.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 saveOrder ();
-                setUpReviewOrder ();
+
+                if (!current_burger.isEmpty ()){
+
+                    listofitems.add (new Item(current_burger));
+                    //Log.d ("Check - Burger list", "" + listofitems.get (0));
+                }
+
+                if (!current_drinks.isEmpty ()) {
+                    listofitems.add (new Item (current_drinks));
+                    //Log.d ("Check - Drink list", "" + listofitems.get (1));
+                }
+
+                if (!current_sides.isEmpty ()){
+                    listofitems.add (new Item(current_sides));
+                    //Log.d ("Check - Side list", "" + listofitems.get (2));
+                }
+
+                if (!current_special.isEmpty ()) {
+                    listofitems.add (new Item (current_special));
+                    //Log.d ("Check - Special list", "" + listofitems.get (3));
+                }
+
+                for (int key: selectedStock.keySet ()){
+                    selectedStock.put (key, false);
+                }
+
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder (activity);
+
+                //Title & message
+                alertDialogBuilder.setMessage ("Would you like to add more items to your order?").setTitle ("Items Added To Cart");
+
+                //Action button ok
+                alertDialogBuilder.setPositiveButton ("No", new DialogInterface.OnClickListener () {
+                    public void onClick(DialogInterface dialog, int id) {
+                        master_order = new Order(customer_id, listofitems);
+
+                        Log.d ("MASTER ORDER", "" + master_order.getItems ().size ());
+
+                        setUpReviewOrder ();
+                    }
+                });
+
+                alertDialogBuilder.setNegativeButton ("Yes", new DialogInterface.OnClickListener (){
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int id) {
+                       setUpPreMadeBurgerPage ();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create ();
+                alertDialog.show ();
             }
         });
     }
-
 
     public void setUpIngredientPage(){
 
@@ -513,7 +563,7 @@ public class BurgerAppLayout extends ListActivity{
 
         //Set the controls
         TabLayout tabLayout = (TabLayout) activity.findViewById(R.id.tabs);
-        Button next = (Button) activity.findViewById(R.id.button_next);
+        Button next = (Button) activity.findViewById(R.id.drinks_addtocart);
         TabItem salads = (TabItem) activity.findViewById(R.id.salads_button);
         TabItem buns = (TabItem) activity.findViewById(R.id.buns_button);
         TabItem meats = (TabItem) activity.findViewById(R.id.meats_button);
@@ -616,12 +666,13 @@ public class BurgerAppLayout extends ListActivity{
         EditText expirydate = (EditText) activity.findViewById(R.id.expiry_date);
         EditText cvv = (EditText) activity.findViewById(R.id.cvv_number);
         Button confirmpayment = (Button) activity.findViewById(R.id.button_confirm);
-        Button editorder = (Button) activity.findViewById(R.id.button_edit2);
         Button back4 = (Button) activity.findViewById (R.id.back_to_landing_page4);
 
         String creditcard_string = creditcard.getText().toString();
         String expirydate_string = expirydate.getText().toString();
         String cvv_String = cvv.getText().toString();
+
+        CheckBox savecard = (CheckBox) activity.findViewById (R.id.save_card_checkbox);
 
         //Display the price of the order
         TextView pricetotal = (TextView) activity.findViewById (R.id.priceTotal);
@@ -642,10 +693,9 @@ public class BurgerAppLayout extends ListActivity{
 
         //Connect with the database and Customer Control methods to validate the numbers
         //Connect with external payment provider
-
-        //On click of confirm payment, if payment details are successful
-        confirmpayment.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        savecard.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 //Will connect with the payment provided to confirm card details and validity.
                 //If payment is successful do the code below.
                 //Payment will be passed on to the authorised retailer and credentials checked
@@ -654,6 +704,12 @@ public class BurgerAppLayout extends ListActivity{
 
                 TokenGeneratorControls.generateToken ();
 
+            }
+        });
+
+        //On click of confirm payment, if payment details are successful
+        confirmpayment.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
                 //Put the items in an order
                 //Sends the order to the database
                 OrderControls.addOrderToDB (master_order);
@@ -662,13 +718,6 @@ public class BurgerAppLayout extends ListActivity{
                 setUpLandingPage ();
             }
         });
-
-        editorder.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-               setUpIngredientPage();
-            }
-        });
-
     }
 
     public void setUpReviewOrder(){
@@ -682,53 +731,38 @@ public class BurgerAppLayout extends ListActivity{
         Button paynow = (Button) activity.findViewById(R.id.button_confirm);
         Button editorder2 = (Button) activity.findViewById(R.id.button_edit_order);
         Button back5 = (Button) activity.findViewById (R.id.back_to_landing_page5);
-        Button addtocart = (Button) activity.findViewById (R.id.button_addtocart);
 
-        //Set all the ingredients in the textview based on the shared preferences
-        //This is not working
-//        String text = "Your order contains ";
-//        for(int i = 0; i < listofitems.size(); i++){
-//            text = text + listofitems.get (i);
-//        }
-//        ingredient_list.setText (text);
+        ArrayList<Order> orders = OrderControls.retrieveAllOrders (customer_id);
+        ArrayList<String> orderinfo = new ArrayList<> ();
+        String master = "";
 
+        if (master_order != null) {
+            master = master + "\nYour order is pending!";
+            master = master + "\nYour total price is: $" + Math.round (master_order.getPrice ()) + "\n";
+
+            for (int i = 0; i < master_order.getItems ().size (); i++){
+                master = master + "\nItem " + (i+1) + ": " + master_order.getItems ().get (i).getItem_type () + "\n";
+                for (int j = 0; j < master_order.getItems ().get (i).getIngredients ().size (); j++){
+                    if (j == master_order.getItems ().get (i).getIngredients ().size ()-1){
+                        master = master + master_order.getItems ().get (i).getIngredients ().get (j).getIngredient_name ();
+                    } else {
+                        master = master + master_order.getItems ().get (i).getIngredients ().get (j).getIngredient_name () + ", ";
+                    }
+                }
+                master = master + "\n";
+            }
+            orderinfo.add (master);
+        }
+
+        if (orderinfo != null) {
+            ArrayAdapter adapter = new ArrayAdapter (activity, android.R.layout.simple_list_item_1, orderinfo);
+            ingredient_list.setAdapter (adapter);
+        }
 
         paynow.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
-                if (!current_burger.isEmpty ()){
-
-                    listofitems.add (new Item(current_burger));
-                    Log.d ("Check - Burger list", "" + listofitems.get (0));
-                }
-
-                if (!current_drinks.isEmpty ()) {
-                    listofitems.add (new Item (current_drinks));
-                    Log.d ("Check - Drink list", "" + listofitems.get (1));
-                }
-
-                if (!current_sides.isEmpty ()){
-                    listofitems.add (new Item(current_sides));
-                    Log.d ("Check - Side list", "" + listofitems.get (2));
-                }
-
-                if (!current_special.isEmpty ()) {
-                    listofitems.add (new Item (current_special));
-                    Log.d ("Check - Special list", "" + listofitems.get (3));
-                }
-
-                for (int key: selectedStock.keySet ()){
-                    selectedStock.put (key, false);
-                }
-
-                master_order = new Order(customer_id, listofitems);
                 setUpPaymentPage();
-            }
-        });
-
-        editorder2.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                setUpIngredientPage();
             }
         });
 
@@ -739,39 +773,6 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
 
-        addtocart.setOnClickListener (new View.OnClickListener (){
-
-            @Override
-            public void onClick(View view) {
-
-                //Add to list of items
-                if (!current_burger.isEmpty ()){
-                    listofitems.add (new Item(current_burger));
-                    Log.d ("Check - Burger list", "" + listofitems.get (0));
-                }
-
-                if (!current_drinks.isEmpty ()) {
-                    listofitems.add (new Item (current_drinks));
-                    Log.d ("Check - Drink list", "" + listofitems.get (1));
-                }
-
-                if (!current_sides.isEmpty ()){
-                    listofitems.add (new Item(current_sides));
-                    Log.d ("Check - Side list", "" + listofitems.get (2));
-                }
-
-                if (!current_special.isEmpty ()) {
-                    listofitems.add (new Item (current_special));
-                    Log.d ("Check - Special list", "" + listofitems.get (3));
-                }
-
-                for (int key: selectedStock.keySet ()){
-                    selectedStock.put (key, false);
-                }
-
-                setUpIngredientPage ();
-            }
-        });
     }
 
     public void setUpSignUpPage(){
@@ -870,7 +871,7 @@ public class BurgerAppLayout extends ListActivity{
             public void onClick(DialogInterface dialog, int id) {
                 createCustomer (passwordString, usernameString, emailString, phoneString, stringPin);
                 alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
-                setUpIngredientPage ();
+                setUpPreMadeBurgerPage ();
             }
         });
 

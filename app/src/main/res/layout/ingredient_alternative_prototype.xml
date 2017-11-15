@@ -121,8 +121,8 @@
                 android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom"
-                android:layout_toEndOf="@+id/button_next"
-                android:layout_toRightOf="@+id/button_next"
+                android:layout_toEndOf="@+id/drinks_addtocart"
+                android:layout_toRightOf="@+id/drinks_addtocart"
                 android:layout_weight="1"
                 android:background="@drawable/ingredient_select_bg"
                 android:padding="2dp"
@@ -132,7 +132,7 @@
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
-                android:id="@+id/button_next"
+                android:id="@+id/drinks_addtocart"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/back_to_landing_page5"

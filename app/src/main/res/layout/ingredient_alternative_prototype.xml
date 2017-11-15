@@ -31,7 +31,7 @@
         android:layout_below="@+id/step_one"
         android:layout_gravity="top"
         android:background="#007bff"
-        android:elevation="3dp"
+        android:elevation="5dp"
         android:padding="5dp"
         android:paddingTop="5dp"
         android:text="Customise Your Ingredients"
@@ -44,35 +44,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.194" />
 
-    <FrameLayout
-        android:id="@+id/placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="#fff">
-
-    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="bottom"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:gravity="bottom"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:weightSum="10">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:background="#fff"
             android:elevation="0dp"
             app:tabGravity="fill"
             app:tabIndicatorColor="#007bff"
             app:tabSelectedTextColor="#007bff"
-            app:tabTextColor="#fff">
+            app:tabTextColor="#000">
 
             <android.support.design.widget.TabItem
                 android:id="@+id/buns_button"
@@ -104,6 +92,17 @@
                 android:layout_height="wrap_content"
                 android:text="SAUCES" />
         </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="9"
+            android:background="#fff">
+
+        </android.support.v4.view.ViewPager>
+
 
         <LinearLayout
             android:id="@+id/cancel_next"
@@ -154,6 +153,8 @@
                 app:layout_constraintVertical_bias="0.983" />
 
         </LinearLayout>
+
+
     </LinearLayout>
 
 

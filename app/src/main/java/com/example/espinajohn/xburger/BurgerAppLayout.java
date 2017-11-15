@@ -9,6 +9,8 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
+import android.support.v13.app.FragmentTabHost;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +37,7 @@ import fragments_ingredient_page.CheeseFragment;
 import fragments_ingredient_page.MeatFragments;
 import fragments_ingredient_page.SaladsFragment;
 import fragments_ingredient_page.SaucesFragment;
+import fragments_ingredient_page.ViewPageAdapter;
 import helpers.CustomerControls;
 import helpers.OrderControls;
 import helpers.StockControls;
@@ -137,6 +140,7 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
     }
+
 
     public void setUpOrderHistory(){
         currentLayout = R.layout.previous_orders;
@@ -566,6 +570,13 @@ public class BurgerAppLayout extends ListActivity{
         TabItem sauces = (TabItem) activity.findViewById(R.id.sauces_button);
         Button back3 = (Button) activity.findViewById (R.id.back_to_landing_page5);
 
+        ViewPager viewPager = (ViewPager) activity.findViewById(R.id.viewpager);
+        ViewPageAdapter viewPageAdapter = new ViewPageAdapter(activity.getFragmentManager());
+        viewPager.setAdapter(viewPageAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+
         back3.setOnClickListener (new View.OnClickListener (){
 
             @Override
@@ -574,71 +585,71 @@ public class BurgerAppLayout extends ListActivity{
             }
         });
 
-       tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-           @Override
-           public void onTabSelected(TabLayout.Tab tab) {
-
-               int selected = tab.getPosition();
-               switch (tab.getPosition()) {
-
-
-                   case 0:
-                       if (selected==0 || tab.isSelected()) {
-                       BunsFragment bunFragment = new BunsFragment();
-                       activity.getFragmentManager().beginTransaction()
-                               .replace(R.id.placeholder, bunFragment)
-                               .commit();
-                   }
-                   break;
-                   case 1:
-                   if (selected==1) {
-                       MeatFragments meatFragment = new MeatFragments();
-                       activity.getFragmentManager().beginTransaction()
-                               .replace(R.id.placeholder, meatFragment)
-                               .commit();
-
-                   }
-                   break;
-                   case 2:
-                   if (selected==2) {
-                       CheeseFragment cheeseFragment = new CheeseFragment();
-                       activity.getFragmentManager().beginTransaction()
-                               .replace(R.id.placeholder, cheeseFragment)
-                               .commit();
-
-                   }
-                   break;
-                   case 3:
-                   if (selected==3) {
-                       SaladsFragment saladsFragment = new SaladsFragment();
-                       activity.getFragmentManager().beginTransaction()
-                               .replace(R.id.placeholder, saladsFragment)
-                               .commit();
-
-                   }
-                   break;
-                   case 4:
-                   if (selected==4) {
-
-                       SaucesFragment saucesFragment = new SaucesFragment();
-                       activity.getFragmentManager().beginTransaction()
-                               .replace(R.id.placeholder, saucesFragment)
-                               .commit();
-                   }
-                   break;
-               }
-           }
-
-           @Override
-           public void onTabUnselected(TabLayout.Tab tab) {
-
-           }
-
-           @Override
-           public void onTabReselected(TabLayout.Tab tab) {
-
-           }
-       });
+//       tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//           @Override
+//           public void onTabSelected(TabLayout.Tab tab) {
+//
+//               int selected = tab.getPosition();
+//               switch (tab.getPosition()) {
+//
+//
+//                   case 0:
+//                       if (selected==0 || tab.isSelected()) {
+//                       BunsFragment bunFragment = new BunsFragment();
+//                       activity.getFragmentManager().beginTransaction()
+//                               .replace(R.id.placeholder, bunFragment)
+//                               .commit();
+//                   }
+//                   break;
+//                   case 1:
+//                   if (selected==1) {
+//                       MeatFragments meatFragment = new MeatFragments();
+//                       activity.getFragmentManager().beginTransaction()
+//                               .replace(R.id.placeholder, meatFragment)
+//                               .commit();
+//
+//                   }
+//                   break;
+//                   case 2:
+//                   if (selected==2) {
+//                       CheeseFragment cheeseFragment = new CheeseFragment();
+//                       activity.getFragmentManager().beginTransaction()
+//                               .replace(R.id.placeholder, cheeseFragment)
+//                               .commit();
+//
+//                   }
+//                   break;
+//                   case 3:
+//                   if (selected==3) {
+//                       SaladsFragment saladsFragment = new SaladsFragment();
+//                       activity.getFragmentManager().beginTransaction()
+//                               .replace(R.id.placeholder, saladsFragment)
+//                               .commit();
+//
+//                   }
+//                   break;
+//                   case 4:
+//                   if (selected==4) {
+//
+//                       SaucesFragment saucesFragment = new SaucesFragment();
+//                       activity.getFragmentManager().beginTransaction()
+//                               .replace(R.id.placeholder, saucesFragment)
+//                               .commit();
+//                   }
+//                   break;
+//               }
+//           }
+//
+//           @Override
+//           public void onTabUnselected(TabLayout.Tab tab) {
+//
+//           }
+//
+//           @Override
+//           public void onTabReselected(TabLayout.Tab tab) {
+//
+//           }
+//       });
 
 
         next.setOnClickListener(new View.OnClickListener(){

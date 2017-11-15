@@ -107,7 +107,7 @@ public class GetOrderListFromDB extends AsyncTask <Integer, Integer, ArrayList<O
                     String item_type = "";
 
                     JsonArray ingredient_array = entry.getValue ().getAsJsonArray ();
-                    Log.d ("JSON ARRAY", ingredient_array.toString ());
+                    //Log.d ("JSON ARRAY", ingredient_array.toString ());
 
                     for (int i = 0; i < ingredient_array.size (); i++) {
 

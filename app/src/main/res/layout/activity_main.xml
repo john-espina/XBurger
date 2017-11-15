@@ -83,4 +83,24 @@
         app:layout_constraintTop_toBottomOf="@+id/burger_img"
         app:layout_constraintVertical_bias="0.46" />
 
+    <Button
+        android:id="@+id/testbutton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/button_make_order"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button_bg"
+        android:padding="10dp"
+        android:text="Destroy App"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/burger_img"
+        app:layout_constraintVertical_bias="0.46" />
+
 </LinearLayout>

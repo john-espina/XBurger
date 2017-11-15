@@ -76,7 +76,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="51dp"
             android:layout_weight="1"
             android:background="#ffffff"
             android:gravity="center_vertical"
@@ -129,28 +129,6 @@
                 android:textColor="#4100d8"
                 android:textSize="20sp"
                 tools:ignore="ButtonStyle,HardcodedText" />
-
-            <Button
-                android:id="@+id/button_edit_order"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignTop="@+id/back_to_landing_page5"
-                android:layout_gravity="bottom"
-                android:layout_toLeftOf="@+id/salads_button"
-                android:layout_toStartOf="@+id/salads_button"
-                android:layout_weight="1"
-                android:background="@drawable/ingredient_select_bg"
-                android:padding="2dp"
-                android:text="NEXT"
-                android:textAlignment="center"
-                android:textColor="#4100d8"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.983" />
 
         </LinearLayout>
 

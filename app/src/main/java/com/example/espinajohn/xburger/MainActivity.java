@@ -80,11 +80,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-        //Retrieves the list of all ingredients by ingredient_id
-        //Will be used to send orders to the database and for persistence
-
-
         //Call the Burger Controller to set up the main screen
         if (savedInstanceState != null) {
             // Remember the layout
@@ -136,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         editor.putBoolean("logged_in", control.app_logged_in);
         editor.putInt ("customer_id", control.customer_id);
         editor.putInt ("current_layout", control.currentLayout);
-        //arraylist
 
         editor.commit();
         super.onStop();
@@ -146,5 +140,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy(){
         Log.d ("CHECK", "on destroy");
         super.onDestroy ();
+    }
+
+    @Override
+    public void onStart(){
+        Log.d("CHECK", "On Start");
+
+        for (int key: control.selectedStock.keySet()){
+            Log.d("SavedInstance NotNull", ""+ key + " " + control.selectedStock.get(key));
+        }
+        super.onStart();
     }
 }

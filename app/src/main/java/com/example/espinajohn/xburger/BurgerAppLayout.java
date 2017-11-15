@@ -520,10 +520,10 @@ public class BurgerAppLayout extends ListActivity{
                 final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder (activity);
 
                 //Title & message
-                alertDialogBuilder.setMessage ("Would you like to add more items to your order?").setTitle ("Items Added To Cart");
+                alertDialogBuilder.setMessage ("Items Added to Cart! \n To proceed to Checkout press 'Yes'. To add more items press 'Add More Items'.").setTitle ("Proceed to Checkout?");
 
                 //Action button ok
-                alertDialogBuilder.setPositiveButton ("No", new DialogInterface.OnClickListener () {
+                alertDialogBuilder.setPositiveButton ("Yes", new DialogInterface.OnClickListener () {
                     public void onClick(DialogInterface dialog, int id) {
                         master_order = new Order(customer_id, listofitems);
 
@@ -533,7 +533,7 @@ public class BurgerAppLayout extends ListActivity{
                     }
                 });
 
-                alertDialogBuilder.setNegativeButton ("Yes", new DialogInterface.OnClickListener (){
+                alertDialogBuilder.setNegativeButton ("Add More Items", new DialogInterface.OnClickListener (){
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
@@ -616,8 +616,9 @@ public class BurgerAppLayout extends ListActivity{
 
             @Override
             public void onClick(View view) {
-                alertDialogMessage ("Cancel Order", "All items will be deleted!");
+                alertDialogMessage ("Cancel Order", "All items have been deleted!");
                 master_order = new Order (customer_id, null);
+                listofitems.clear();
                 setUpLandingPage ();
             }
         });

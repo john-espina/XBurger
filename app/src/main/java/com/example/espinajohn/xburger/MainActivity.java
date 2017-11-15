@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
@@ -82,17 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Retrieves the list of all ingredients by ingredient_id
         //Will be used to send orders to the database and for persistence
-        try {
-            selectedStock = new GetAllStockItems().execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace ();
-        } catch (ExecutionException e) {
-            e.printStackTrace ();
-        }
-
-        for (Integer key : selectedStock.keySet()) {
-            Log.d("ActivityMain", "" + key + " " + selectedStock.get (key));
-        }
 
 
         //Call the Burger Controller to set up the main screen
@@ -101,13 +91,29 @@ public class MainActivity extends AppCompatActivity {
             currentLayout = savedInstanceState.getInt("current_layout");
             control = new BurgerAppLayout(this, currentLayout);
 
-
             if (loggedin !=null) {
                 control.app_logged_in = loggedin;
                 control.customer_id = customerid;
+                control.selectedStock = (HashMap<Integer,Boolean>) savedInstanceState.getSerializable("FoodMap");
+
+                for (int key: control.selectedStock.keySet()){
+                    Log.d("SavedInstance NotNull", ""+ key + " " + control.selectedStock.get(key));
+                }
             }
 
         } else {
+            try {
+                selectedStock = new GetAllStockItems().execute().get();
+            } catch (InterruptedException e) {
+                e.printStackTrace ();
+            } catch (ExecutionException e) {
+                e.printStackTrace ();
+            }
+
+            for (Integer key : selectedStock.keySet()) {
+                Log.d("AM SavedInsSt Null", "" + key + " " + selectedStock.get (key));
+            }
+
             control = new BurgerAppLayout(this, R.layout.activity_main);
         }
     }
@@ -117,10 +123,12 @@ public class MainActivity extends AppCompatActivity {
         //Put the saved instance state preferences here
         outState.putInt("current_layout", control.currentLayout);
         outState.putBoolean ("logged_in", control.app_logged_in);
+        outState.putSerializable("FoodMap", control.selectedStock);
         outState.putInt ("customer_id", control.customer_id);
         super.onSaveInstanceState(outState);
     }
 
+    @Override
     protected void onStop(){
         Log.d("CHECK", "on stop");
         SharedPreferences settings = getSharedPreferences("BurgerPreferences", Context.MODE_PRIVATE);
@@ -134,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @Override
     protected void onDestroy(){
         Log.d ("CHECK", "on destroy");
         super.onDestroy ();

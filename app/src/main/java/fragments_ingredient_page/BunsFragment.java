@@ -16,7 +16,6 @@ import com.example.espinajohn.xburger.BurgerAppLayout;
 import com.example.espinajohn.xburger.MainActivity;
 import com.example.espinajohn.xburger.R;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
@@ -60,23 +59,15 @@ public class BunsFragment extends Fragment {
         // Retrieve All stock from this category
         // Retrieve Available stock from this category
         // Compare the two
-        try {
 
-            allStocks = MainActivity.getStockHashMap(); // this is a HashMap of ALL of the stocks across all category (querried when app was started onCreate())
-            stocks =  new StockDetailsController().execute().get();  // also a HashMap of all Stocks, but only the available ones
-            allBuns = allStocks.get("bunCategory"); //this is a list of ALL the buns
-            buns = stocks.get("bunCategory"); // this is a list of Available buns
-
-
-            // Create and add Radiobuttons to the Radiogroup (rg) based on ALL current Stocks from this category
-            radioButtonArrayList = StockControls.generateRadioButtons(rg,this, allBuns);
+        allStocks = MainActivity.getAllStockHashMap(); // this is a HashMap of ALL of the stocks across all category (querried when app was started onCreate())
+        stocks =  MainActivity.getAvailableStocksHashMap(); // also a HashMap of all Stocks, but only the available ones
+        allBuns = allStocks.get("bunCategory"); //this is a list of ALL the buns
+        buns = stocks.get("bunCategory"); // this is a list of Available buns
 
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        // Create and add Radiobuttons to the Radiogroup (rg) based on ALL current Stocks from this category
+        radioButtonArrayList = StockControls.generateRadioButtons(rg,this, allBuns);
 
 
         // Compare RadiobuttonArrayList to available stocks from this category
@@ -108,19 +99,19 @@ public class BunsFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//
+//        try {
+//            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+//            childFragmentManager.setAccessible(true);
+//            childFragmentManager.set(this, null);
+//
+//        } catch (NoSuchFieldException e) {
+//            throw new RuntimeException(e);
+//        } catch (IllegalAccessException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

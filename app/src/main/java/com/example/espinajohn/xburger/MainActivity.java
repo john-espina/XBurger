@@ -27,15 +27,24 @@ public class MainActivity extends AppCompatActivity {
     Boolean loggedin;
     int customerid;
 
-    private static HashMap<String, ArrayList> stockHashMap = new HashMap<>();
+    private static HashMap<String, ArrayList> allStockHashMap = new HashMap<>();
     public static HashMap<Integer, Boolean> selectedStock;
+    private static  HashMap<String, ArrayList> availableStocksHashMap = new HashMap<>();
 
-    public static HashMap<String, ArrayList> getStockHashMap() {
-        return stockHashMap;
+    public static HashMap<String, ArrayList> getAllStockHashMap() {
+        return allStockHashMap;
     }
 
-    public static void setStockHashMap(HashMap<String, ArrayList> stockHashMap) {
-        MainActivity.stockHashMap = stockHashMap;
+    public static void setAllStockHashMap(HashMap<String, ArrayList> allStockHashMap) {
+        MainActivity.allStockHashMap = allStockHashMap;
+    }
+
+    public static HashMap<String, ArrayList> getAvailableStocksHashMap() {
+        return availableStocksHashMap;
+    }
+
+    public static void setAvailableStocksHashMap(HashMap<String, ArrayList> availableStocksHashMap) {
+        MainActivity.availableStocksHashMap = availableStocksHashMap;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -55,12 +64,21 @@ public class MainActivity extends AppCompatActivity {
        //retrieve available ingredients from database
         //this will return a hashmap of category with corresponding arraylist of Stock item as value
         try {
-            setStockHashMap(new AllStockRetriever().execute().get());
+            setAllStockHashMap(new AllStockRetriever().execute().get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+        try {
+            setAvailableStocksHashMap(new StockDetailsController().execute().get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
 
         //Retrieves the list of all ingredients by ingredient_id
         //Will be used to send orders to the database and for persistence
@@ -110,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putBoolean("logged_in", control.app_logged_in);
         editor.putInt ("customer_id", control.customer_id);
         editor.putInt ("current_layout", control.currentLayout);
+        //arraylist
 
         editor.commit();
         super.onStop();

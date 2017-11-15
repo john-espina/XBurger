@@ -9,7 +9,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
-import android.support.v13.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -32,11 +31,6 @@ import entity.Customer;
 import entity.Item;
 import entity.Order;
 import entity.Stock;
-import fragments_ingredient_page.BunsFragment;
-import fragments_ingredient_page.CheeseFragment;
-import fragments_ingredient_page.MeatFragments;
-import fragments_ingredient_page.SaladsFragment;
-import fragments_ingredient_page.SaucesFragment;
 import fragments_ingredient_page.ViewPageAdapter;
 import helpers.CustomerControls;
 import helpers.OrderControls;
@@ -414,7 +408,7 @@ public class BurgerAppLayout extends ListActivity{
         //Generate the CheckBoxes
         try {
             //if statement here if previously clicked so won't need to query the database again
-            allStocks = MainActivity.getStockHashMap();
+            allStocks = MainActivity.getAllStockHashMap();
             stocks =  new StockDetailsController().execute().get();
             allSides = allStocks.get("sideCategory");
             sides = stocks.get("sideCategory");
@@ -468,7 +462,7 @@ public class BurgerAppLayout extends ListActivity{
         //Generate the CheckBoxes
         try {
             //if statement here if previously clicked so won't need to query the database again
-            allStocks = MainActivity.getStockHashMap();
+            allStocks = MainActivity.getAllStockHashMap();
             stocks =  new StockDetailsController().execute().get();
             allDrinks = allStocks.get("drinkCategory");
             drinks = stocks.get("drinkCategory");
@@ -584,73 +578,6 @@ public class BurgerAppLayout extends ListActivity{
                 setUpLandingPage ();
             }
         });
-
-//       tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//           @Override
-//           public void onTabSelected(TabLayout.Tab tab) {
-//
-//               int selected = tab.getPosition();
-//               switch (tab.getPosition()) {
-//
-//
-//                   case 0:
-//                       if (selected==0 || tab.isSelected()) {
-//                       BunsFragment bunFragment = new BunsFragment();
-//                       activity.getFragmentManager().beginTransaction()
-//                               .replace(R.id.placeholder, bunFragment)
-//                               .commit();
-//                   }
-//                   break;
-//                   case 1:
-//                   if (selected==1) {
-//                       MeatFragments meatFragment = new MeatFragments();
-//                       activity.getFragmentManager().beginTransaction()
-//                               .replace(R.id.placeholder, meatFragment)
-//                               .commit();
-//
-//                   }
-//                   break;
-//                   case 2:
-//                   if (selected==2) {
-//                       CheeseFragment cheeseFragment = new CheeseFragment();
-//                       activity.getFragmentManager().beginTransaction()
-//                               .replace(R.id.placeholder, cheeseFragment)
-//                               .commit();
-//
-//                   }
-//                   break;
-//                   case 3:
-//                   if (selected==3) {
-//                       SaladsFragment saladsFragment = new SaladsFragment();
-//                       activity.getFragmentManager().beginTransaction()
-//                               .replace(R.id.placeholder, saladsFragment)
-//                               .commit();
-//
-//                   }
-//                   break;
-//                   case 4:
-//                   if (selected==4) {
-//
-//                       SaucesFragment saucesFragment = new SaucesFragment();
-//                       activity.getFragmentManager().beginTransaction()
-//                               .replace(R.id.placeholder, saucesFragment)
-//                               .commit();
-//                   }
-//                   break;
-//               }
-//           }
-//
-//           @Override
-//           public void onTabUnselected(TabLayout.Tab tab) {
-//
-//           }
-//
-//           @Override
-//           public void onTabReselected(TabLayout.Tab tab) {
-//
-//           }
-//       });
-
 
         next.setOnClickListener(new View.OnClickListener(){
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)

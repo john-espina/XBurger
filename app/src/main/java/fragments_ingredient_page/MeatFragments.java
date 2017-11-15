@@ -14,7 +14,6 @@ import android.widget.RadioGroup;
 import com.example.espinajohn.xburger.MainActivity;
 import com.example.espinajohn.xburger.R;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
@@ -47,21 +46,14 @@ public class MeatFragments extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_meat_fragments, container, false);
         rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_meat_choices);
 
-        try {
-            //if statement here if previously clicked so won't need to query the database again
-            allStocks = MainActivity.getStockHashMap();
-            stocks =  new StockDetailsController().execute().get();
-            allPatties = allStocks.get("pattieCategory");
-            patties = stocks.get("pattieCategory");
+        //if statement here if previously clicked so won't need to query the database again
+        allStocks = MainActivity.getAllStockHashMap();
+        stocks =  MainActivity.getAvailableStocksHashMap();
+        allPatties = allStocks.get("pattieCategory");
+        patties = stocks.get("pattieCategory");
 
-            //Create and add radiobuttons to radiogroup from current stocks
-            radioButtons = StockControls.generateRadioButtons(rg,this, allPatties);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        //Create and add radiobuttons to radiogroup from current stocks
+        radioButtons = StockControls.generateRadioButtons(rg,this, allPatties);
 
         //create arraylist of radiobuttons
         //radioButtonArrayList = StockControls.createRadioButtonList(rg);
@@ -94,20 +86,20 @@ public class MeatFragments extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//
+//        try {
+//            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+//            childFragmentManager.setAccessible(true);
+//            childFragmentManager.set(this, null);
+//
+//        } catch (NoSuchFieldException e) {
+//            throw new RuntimeException(e);
+//        } catch (IllegalAccessException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 }

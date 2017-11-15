@@ -3,12 +3,13 @@ package fragments_ingredient_page;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 
 /**
  * Created by espinajohn on 15/11/2017.
  */
 
-public class ViewPageAdapter extends FragmentPagerAdapter {
+public class ViewPageAdapter extends FragmentStatePagerAdapter {
 
     public ViewPageAdapter(FragmentManager fm) {
         super(fm);
@@ -39,7 +40,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
             fragment = new SaladsFragment();
 
         }
-        else if (position==4){
+        else  {
 
             fragment = new SaucesFragment();
 

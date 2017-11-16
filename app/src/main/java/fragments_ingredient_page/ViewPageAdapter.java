@@ -9,7 +9,7 @@ import android.support.v13.app.FragmentStatePagerAdapter;
  * Created by espinajohn on 15/11/2017.
  */
 
-public class ViewPageAdapter extends FragmentStatePagerAdapter {
+public class ViewPageAdapter extends FragmentPagerAdapter {
 
     public ViewPageAdapter(FragmentManager fm) {
         super(fm);
@@ -17,6 +17,7 @@ public class ViewPageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+
         Fragment fragment = null;
 
         if (position==0){

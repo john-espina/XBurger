@@ -278,7 +278,20 @@ public class BurgerAppLayout extends ListActivity{
         ArrayList<Stock> porkyb = new ArrayList<> ();
         ArrayList<Stock> chickenyb = new ArrayList<> ();
 
+        ArrayList<Integer> plainInt = new ArrayList<>();
+
         final Boolean[] wantcustomburger = {false};
+
+
+        ArrayList<Integer> availableStocksList = MainActivity.getAvailableStocksList();
+        ArrayList<String> premadeBurgerIngredientsList = new ArrayList<>();
+
+
+
+
+
+
+
 
         customise.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override

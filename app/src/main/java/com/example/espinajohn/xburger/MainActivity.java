@@ -8,45 +8,29 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import api_communicators.AllStockRetriever;
+import api_communicators.AvailableStocksListRetriever;
 import api_communicators.GetAllStockItems;
 import api_communicators.StockDetailsController;
-import entity.Item;
 
 
 public class MainActivity extends AppCompatActivity {
 
     BurgerAppLayout control;
-
     int currentLayout;
-    ArrayList<Item> burger_order;
     Boolean loggedin;
     int customerid;
-
     private static HashMap<String, ArrayList> allStockHashMap = new HashMap<>();
-    public static HashMap<Integer, Boolean> selectedStock;
     private static  HashMap<String, ArrayList> availableStocksHashMap = new HashMap<>();
+    public static HashMap<Integer, Boolean> selectedStock;
+    private static ArrayList<Integer> availableStocksList = new ArrayList<>();
 
-    public static HashMap<String, ArrayList> getAllStockHashMap() {
-        return allStockHashMap;
-    }
 
-    public static void setAllStockHashMap(HashMap<String, ArrayList> allStockHashMap) {
-        MainActivity.allStockHashMap = allStockHashMap;
-    }
 
-    public static HashMap<String, ArrayList> getAvailableStocksHashMap() {
-        return availableStocksHashMap;
-    }
-
-    public static void setAvailableStocksHashMap(HashMap<String, ArrayList> availableStocksHashMap) {
-        MainActivity.availableStocksHashMap = availableStocksHashMap;
-    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -79,6 +63,17 @@ public class MainActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+        try {
+            setAvailableStocksList(new AvailableStocksListRetriever().execute().get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+
 
         //Call the Burger Controller to set up the main screen
         if (savedInstanceState != null) {
@@ -151,4 +146,34 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onStart();
     }
+
+
+    public static HashMap<String, ArrayList> getAllStockHashMap() {
+        return allStockHashMap;
+    }
+
+    public static void setAllStockHashMap(HashMap<String, ArrayList> allStockHashMap) {
+        MainActivity.allStockHashMap = allStockHashMap;
+    }
+
+    public static HashMap<String, ArrayList> getAvailableStocksHashMap() {
+        return availableStocksHashMap;
+    }
+
+    public static void setAvailableStocksHashMap(HashMap<String, ArrayList> availableStocksHashMap) {
+        MainActivity.availableStocksHashMap = availableStocksHashMap;
+    }
+
+    public static ArrayList<Integer> getAvailableStocksList() {
+        return availableStocksList;
+    }
+
+    public static void setAvailableStocksList(ArrayList<Integer> availableStocksList) {
+        MainActivity.availableStocksList = availableStocksList;
+    }
 }
+
+
+
+
+

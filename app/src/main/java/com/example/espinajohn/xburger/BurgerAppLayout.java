@@ -237,7 +237,7 @@ public class BurgerAppLayout extends ListActivity{
 
                 if (customer !=null){
                     if (!passwordString.equals("") && customer.validateCustomerPassword (passwordString, customer.getPassHash (), customer.getSalt (), customer.getIterations ())) {
-                            setUpLandingPage ();
+                            setUpPreMadeBurgerPage();
                             app_logged_in = true;
                             customer_id = customer.getCustomer_id ();
                     } else {
@@ -533,7 +533,7 @@ public class BurgerAppLayout extends ListActivity{
                 final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder (activity);
 
                 //Title & message
-                alertDialogBuilder.setMessage ("Items Added to Cart! \n To proceed to Checkout press 'Yes'. To add more items press 'Add More Items'.").setTitle ("Proceed to Checkout?");
+                alertDialogBuilder.setMessage ("Proceed to Checkout?").setTitle ("Items Added to Cart! ");
 
                 //Action button ok
                 alertDialogBuilder.setPositiveButton ("Yes", new DialogInterface.OnClickListener () {
@@ -622,7 +622,7 @@ public class BurgerAppLayout extends ListActivity{
         TextView pricetotal = (TextView) activity.findViewById (R.id.priceTotal);
         pricetotal.setTextColor (WHITE);
         double getPrice = Math.round (master_order.getPrice());
-        pricetotal.setText ("Your total price is " + getPrice);
+        pricetotal.setText ("Your total price is $" + getPrice + "0");
 
         back4.setOnClickListener (new View.OnClickListener (){
 
@@ -729,10 +729,6 @@ public class BurgerAppLayout extends ListActivity{
         EditText signup_username = (EditText) activity.findViewById(R.id.signup_username);
         EditText signup_password = (EditText) activity.findViewById(R.id.signup_password);
         EditText signup_email = (EditText) activity.findViewById(R.id.signup_email);
-        EditText signup_fname = (EditText) activity.findViewById(R.id.signup_fname);
-        EditText signup_lname = (EditText) activity.findViewById(R.id.signup_lname);
-        EditText signup_ph = (EditText) activity.findViewById (R.id.signup_phnum);
-        EditText signup_pin = (EditText) activity.findViewById (R.id.signup_pin2);
         Button signup = (Button) activity.findViewById(R.id.sign_up_button);
         Button back6 = (Button) activity.findViewById (R.id.back_to_landing_page6);
 
@@ -742,10 +738,6 @@ public class BurgerAppLayout extends ListActivity{
                 String usernameString = signup_username.getText().toString();
                 String passwordString = signup_password.getText ().toString ();
                 String emailString = signup_email.getText().toString();
-                String fnameString = signup_fname.getText().toString();
-                String lnameString = signup_lname.getText().toString();
-                String phoneString = signup_ph.getText ().toString ();
-                String pinString = signup_pin.getText().toString ();
 
                 //Send all the strings to the database
                 //Check if username is taken
@@ -761,19 +753,19 @@ public class BurgerAppLayout extends ListActivity{
                     Log.d ("Password", "" + password_strength);
 
                     if (password_strength < 2) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is very weak would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is very weak, would you like to continue?", passwordString, usernameString, emailString, null, null);
 
                     } else if (password_strength < 3) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is weak would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is weak, would you like to continue?", passwordString, usernameString, emailString, null, null);
 
                     } else if (password_strength < 4) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is moderate would you like to review it?", passwordString, usernameString, emailString, phoneString, pinString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is moderate, would you like to continue?", passwordString, usernameString, emailString, null, null);
 
                     } else if (password_strength < 5) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is strong, would you like to change it?", passwordString, usernameString, emailString, phoneString, pinString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is strong, would you like to continue?", passwordString, usernameString, emailString, null, null);
 
                     } else if (password_strength > 4) {
-                        alertDialogMessageCancel ("Password Alert", "Your password is very strong, would you like to change it?", passwordString, usernameString, emailString, phoneString, pinString);
+                        alertDialogMessageCancel ("Password Alert", "Your password is very strong, would you like to continue?", passwordString, usernameString, emailString, null, null );
                     }
                 }
             }
@@ -812,15 +804,24 @@ public class BurgerAppLayout extends ListActivity{
         alertDialogBuilder.setMessage (message).setTitle (title);
 
         //Action button ok
-        alertDialogBuilder.setPositiveButton ("No", new DialogInterface.OnClickListener () {
+        alertDialogBuilder.setPositiveButton ("Yes", new DialogInterface.OnClickListener () {
             public void onClick(DialogInterface dialog, int id) {
-                createCustomer (passwordString, usernameString, emailString, phoneString, stringPin);
-                alertDialogMessage ("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
-                setUpPreMadeBurgerPage ();
+                createCustomer (passwordString, usernameString, emailString, null, null);
+
+                Customer c = CustomerControls.createCustomer(usernameString);
+                if (c !=null) {
+                    if (!passwordString.equals("") && c.validateCustomerPassword(passwordString, c.getPassHash(), c.getSalt(), c.getIterations())) {
+                        app_logged_in = true;
+                        customer_id = c.getCustomer_id();
+                    }
+
+                    alertDialogMessage("Sign Up Successful", "Thanks for joining Xtreme Burgers!");
+                    setUpPreMadeBurgerPage();
+                }
             }
         });
 
-        alertDialogBuilder.setNegativeButton ("Yes", new DialogInterface.OnClickListener (){
+        alertDialogBuilder.setNegativeButton ("Review Password", new DialogInterface.OnClickListener (){
 
             @Override
             public void onClick(DialogInterface dialogInterface, int id) {
@@ -894,12 +895,8 @@ public class BurgerAppLayout extends ListActivity{
         byte[] hashpass = Passwords.hash (pword, salt, iterationsInt);
         String hashpassString = Passwords.base64Encode (hashpass);
 
-        //Hash the pin
-        char[] pin = stringPin.toCharArray ();
-        byte[] hashpin = Passwords.hash (pin, salt, iterationsInt);
-        String hashpinString = Passwords.base64Encode (hashpin);
-
         //Other variables that are needed to construct a customer
+        String hashpinString = "";
         String cardtokenString = "";
 
         Customer customer = new Customer (usernameString, emailString, phoneString, iterationsInt, saltString, hashpassString, hashpinString, cardtokenString);

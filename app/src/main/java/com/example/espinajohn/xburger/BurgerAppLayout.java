@@ -38,6 +38,7 @@ import entity.Stock;
 import fragments_ingredient_page.ViewPageAdapter;
 import helpers.CustomerControls;
 import helpers.OrderControls;
+import helpers.PreMadeBurgersHolder;
 import helpers.StockControls;
 import helpers.TokenGeneratorControls;
 import passwords.PasswordStrengthChecker;
@@ -321,13 +322,25 @@ public class BurgerAppLayout extends ListActivity{
         porkyb = new ArrayList<> ();
         chickenyb = new ArrayList<> ();
 
-        ArrayList<Integer> plainInt = new ArrayList<>();
+
 
         final Boolean[] wantcustomburger = {false};
 
 
         ArrayList<Integer> availableStocksList = MainActivity.getAvailableStocksList();
-        ArrayList<String> premadeBurgerIngredientsList = new ArrayList<>();
+        ArrayList<Integer> hammyBurgerStocks = new ArrayList<>();
+        ArrayList<Integer> chikeneyBurgerStocks = new ArrayList<>();
+        ArrayList<Integer> porkyyBurgerStocks = new ArrayList<>();
+        ArrayList<Integer> cheesyBurgerStocks = new ArrayList<>();
+
+
+        hammyBurgerStocks = PreMadeBurgersHolder.getHammyBurgerList();
+
+
+        if (StockControls.isAvailable(availableStocksList, hammyBurgerStocks)){
+            hammiest.setClickable(false);
+        }
+
 
         customise.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
@@ -346,6 +359,9 @@ public class BurgerAppLayout extends ListActivity{
         hammiest.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+
+
                 hammyb.add (new Stock(11));
                 hammyb.add (new Stock(41));
                 hammyb.add (new Stock(51));

@@ -74,7 +74,7 @@
 
                     <ImageView
                         android:id="@+id/custom_burger"
-                        android:layout_width="250dp"
+                        android:layout_width="350dp"
                         android:layout_height="120dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
@@ -96,7 +96,7 @@
 
                     <ImageView
                         android:id="@+id/plain_burger"
-                        android:layout_width="250dp"
+                        android:layout_width="350dp"
                         android:layout_height="120dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
@@ -120,7 +120,7 @@
 
                     <ImageView
                         android:id="@+id/hamburger"
-                        android:layout_width="250dp"
+                        android:layout_width="350dp"
                         android:layout_height="120dp"
                         android:src="@mipmap/hamburger" />
 
@@ -140,7 +140,7 @@
 
                     <ImageView
                         android:id="@+id/cheese_burger"
-                        android:layout_width="250dp"
+                        android:layout_width="350dp"
                         android:layout_height="120dp"
                         android:src="@mipmap/cheese_burger" />
 
@@ -161,7 +161,7 @@
 
                     <ImageView
                         android:id="@+id/pork_burger"
-                        android:layout_width="250dp"
+                        android:layout_width="350dp"
                         android:layout_height="120dp"
                         android:src="@mipmap/pork_burger" />
 
@@ -180,7 +180,7 @@
 
                     <ImageView
                         android:id="@+id/chicken_burger"
-                        android:layout_width="250dp"
+                        android:layout_width="350dp"
                         android:layout_height="120dp"
                         android:src="@mipmap/chicken_burger" />
 

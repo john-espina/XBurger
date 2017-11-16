@@ -480,4 +480,17 @@ public class StockControls {
         }
     }
 
+
+    public static boolean isAvailable (ArrayList<Integer> availableStocks, ArrayList<Integer> premadeStocks){
+
+        for (int i=0; i<premadeStocks.size();i++){
+            if (!availableStocks.contains(premadeStocks.get(i))){
+                return false;
+            } else return true;
+        }
+
+
+        return true;
+    }
+
 }

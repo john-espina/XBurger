@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.espinajohn.xburger.BurgerAppLayout;
 import com.example.espinajohn.xburger.MainActivity;
 import com.example.espinajohn.xburger.R;
 
@@ -70,13 +71,13 @@ public class MeatFragments extends Fragment {
                 for (int i = 0;i < count;i++) {
                     View o = radioGroup.getChildAt(i);
                     if (o instanceof RadioButton) {
-                        MainActivity.selectedStock.put(o.getId (), false);
-                        Log.d ("RG", "" + o.getId () + MainActivity.selectedStock.get(o.getId()));
+                        BurgerAppLayout.selectedStock.put(o.getId (), false);
+                        Log.d ("RG", "" + o.getId () + BurgerAppLayout.selectedStock.get(o.getId()));
                     }
                 }
 
                 //Set the new selection to true
-                MainActivity.selectedStock.put (checkedId, true);
+                BurgerAppLayout.selectedStock.put (checkedId, true);
             }
         });
 

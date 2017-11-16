@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.espinajohn.xburger.BurgerAppLayout;
 import com.example.espinajohn.xburger.MainActivity;
 
 import java.util.ArrayList;
@@ -306,10 +307,10 @@ public class StockControls {
                     //code here for the click response associated with each checkboxes
                     //i assume all checkboxes will have the same onClick response
                     // hence we can assign the onClickListener as we generate them.
-                    if (MainActivity.selectedStock.get (resourceID)){
-                        MainActivity.selectedStock.put (resourceID, false);
+                    if (BurgerAppLayout.selectedStock.get (resourceID)){
+                        BurgerAppLayout.selectedStock.put (resourceID, false);
                     } else {
-                        MainActivity.selectedStock.put (resourceID, true);
+                        BurgerAppLayout.selectedStock.put (resourceID, true);
                     }
                     Log.d("selected", newCheckBox.getText().toString() + newCheckBox.getId());
                 }
@@ -351,10 +352,10 @@ public class StockControls {
                     //code here for the click response associated with each checkboxes
                     //i assume all checkboxes will have the same onClick response
                     // hence we can assign the onClickListener as we generate them.
-                    if (MainActivity.selectedStock.get (resourceID)){
-                        MainActivity.selectedStock.put (resourceID, false);
+                    if (BurgerAppLayout.selectedStock.get (resourceID)){
+                        BurgerAppLayout.selectedStock.put (resourceID, false);
                     } else {
-                        MainActivity.selectedStock.put (resourceID, true);
+                        BurgerAppLayout.selectedStock.put (resourceID, true);
                     }
                     Log.d("selected", newCheckBox.getText().toString() + newCheckBox.getId());
                 }

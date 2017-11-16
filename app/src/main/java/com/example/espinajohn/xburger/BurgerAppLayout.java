@@ -22,6 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
@@ -58,7 +61,7 @@ public class BurgerAppLayout extends ListActivity{
     Boolean app_logged_in;
     int customer_id;
     int currentLayout;
-    public static HashMap<Integer, Boolean> selectedStock = MainActivity.selectedStock;
+    public static HashMap<Integer, Boolean> selectedStock;
 
     //Things to remembers for orders
     ArrayList<Item> listofitems = new ArrayList<Item>();
@@ -101,6 +104,18 @@ public class BurgerAppLayout extends ListActivity{
         }
     }
 
+    public Boolean deletedFiles(String filename){
+        try {
+            File file = new File(filename);
+            file.delete ();
+            return true;
+        } catch (Exception e) {
+            Log.d ("write", "Didnt Read???");
+            Log.d ("write", e.toString ());
+        }
+        return false;
+    }
+
     //Methods
     public void setUpLandingPage(){
 
@@ -111,6 +126,30 @@ public class BurgerAppLayout extends ListActivity{
         //Set the controls
         Button order = (Button) activity.findViewById(R.id.button_make_order);
         Button order_history = (Button) activity.findViewById(R.id.button_order_history);
+        Button logout = (Button) activity.findViewById (R.id.button_logout);
+
+        logout.setVisibility (View.INVISIBLE);
+
+//        if (app_logged_in != null && app_logged_in){
+//            logout.setVisibility (View.VISIBLE);
+//            logout.setOnClickListener (new View.OnClickListener (){
+//
+//                @Override
+//                public void onClick(View view) {
+//                    //Need to delete the files to erase the history
+//                    if (deletedFiles ("masterorder")){
+//                        Log.d ("Deleted", "Deleted?");
+//                    };
+//                    deletedFiles ("loggedin");
+//                    deletedFiles ("customerid");
+//                    deletedFiles ("currentlayout");
+//                    deletedFiles ("listofitems");
+//                    deletedFiles ("selectedstock");
+//
+//
+//                }
+//            });
+//        }
 
 
         order.setOnClickListener(new View.OnClickListener() {

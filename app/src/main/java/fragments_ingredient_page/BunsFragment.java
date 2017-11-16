@@ -86,8 +86,8 @@ public class BunsFragment extends Fragment {
                 for (int i = 0;i < count;i++) {
                     View o = radioGroup.getChildAt(i);
                     if (o instanceof RadioButton) {
-                        MainActivity.selectedStock.put(o.getId (), false);
-                        Log.d ("RG", "" + o.getId () + MainActivity.selectedStock.get(o.getId()));
+                        BurgerAppLayout.selectedStock.put(o.getId (), false);
+                        Log.d ("RG", "" + o.getId () + BurgerAppLayout.selectedStock.get(o.getId()));
                     }
                 }
 

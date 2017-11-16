@@ -109,19 +109,7 @@ public class BurgerAppLayout extends ListActivity{
                 break;
         }
     }
-
-    public Boolean deletedFiles(String filename){
-        try {
-            File file = new File(filename);
-            file.delete ();
-            return true;
-        } catch (Exception e) {
-            Log.d ("write", "Didnt Read???");
-            Log.d ("write", e.toString ());
-        }
-        return false;
-    }
-
+    
     //Methods
     public void setUpLandingPage(){
 

@@ -109,7 +109,7 @@ public class BurgerAppLayout extends ListActivity{
                 break;
         }
     }
-    
+
     //Methods
     public void setUpLandingPage(){
 
@@ -719,7 +719,7 @@ public class BurgerAppLayout extends ListActivity{
 
         if (master_order != null) {
             master = master + "\nYour order is pending!";
-            master = master + "\nYour total price is: $" + Math.round (master_order.getPrice ()) + "\n";
+            master = master + "\nYour total price is: $" + Math.round (master_order.getPrice ()) + ".00\n";
 
             for (int i = 0; i < master_order.getItems ().size (); i++){
                 master = master + "\nItem " + (i+1) + ": " + master_order.getItems ().get (i).getItem_type () + "\n";

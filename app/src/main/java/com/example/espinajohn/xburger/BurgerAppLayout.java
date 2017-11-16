@@ -158,7 +158,7 @@ public class BurgerAppLayout extends ListActivity{
 
             if (!orders.isEmpty ()) {
                 for (int i = orders.size ()-1; i >= 0; i--) {
-                    String to_save = "Order: " + orders.get (i).getOrder_id () + " Time: " + orders.get (i).getOrder_datetime () + " Status: ";
+                    String to_save = "Order: " + orders.get (i).getOrder_id () + "\nTime: " + orders.get (i).getOrder_datetime () + "\nStatus: ";
                     if (orders.get (i).getStatus ().equals ("0")) {
                         to_save = to_save + " Pending ";
                     } else if (orders.get (i).getStatus ().equals ("1")) {
@@ -168,7 +168,7 @@ public class BurgerAppLayout extends ListActivity{
                     } else if (orders.get (i).getStatus ().equals ("3")) {
                         to_save = to_save + " Insufficient ingredients ";
                     }
-                    to_save = to_save + " Price: $" + Math.round (orders.get (i).getPrice () * 100) / 100;
+                    to_save = to_save + "\nPrice: $" + Math.round (orders.get (i).getPrice () * 100) / 100;
                     orderinfo.add (to_save);
                 }
             }

@@ -68,7 +68,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="#fff"
                 android:orientation="vertical"
-                android:paddingTop="5dp"></LinearLayout>
+                android:padding="10dp"></LinearLayout>
 
 
         </ScrollView>

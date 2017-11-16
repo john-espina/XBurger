@@ -39,6 +39,7 @@ import helpers.TokenGeneratorControls;
 import passwords.PasswordStrengthChecker;
 import passwords.Passwords;
 
+import static android.graphics.Color.BLACK;
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.WHITE;
 
@@ -620,7 +621,7 @@ public class BurgerAppLayout extends ListActivity{
 
         //Display the price of the order
         TextView pricetotal = (TextView) activity.findViewById (R.id.priceTotal);
-        pricetotal.setTextColor (WHITE);
+        pricetotal.setTextColor (BLACK);
         double getPrice = Math.round (master_order.getPrice());
         pricetotal.setText ("Your total price is $" + getPrice + "0");
 

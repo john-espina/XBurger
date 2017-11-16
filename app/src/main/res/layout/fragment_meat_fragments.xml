@@ -11,10 +11,11 @@
     <TextView
         android:id="@+id/title_meat_bun_options"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/step_one_subtitle"
+        android:layout_margin="0dp"
         android:layout_weight="1"
         android:background="@drawable/headings_bg"
         android:elevation="5dp"

@@ -8,6 +8,23 @@
     app:layout_constraintTop_toBottomOf="@id/step_one_subtitle"
     tools:context="com.example.espinajohn.xburger.fragments_ingredient_page.BunsFragment">
 
+    <TextView
+        android:id="@+id/title_bun_option"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/step_one_subtitle"
+        android:layout_margin="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/headings_bg"
+        android:elevation="5dp"
+        android:padding="5dp"
+        android:text="CARB LOADER"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
     <RadioGroup
         android:id="@+id/radiogroup_bun_choices"
         android:layout_width="match_parent"
@@ -21,22 +38,5 @@
 
     </RadioGroup>
 
-
-    <TextView
-        android:id="@+id/title_bun_option"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/step_one_subtitle"
-        android:layout_margin="0dp"
-        android:layout_weight="1"
-        android:elevation="5dp"
-        android:background="@drawable/headings_bg"
-        android:padding="5dp"
-        android:text="CARB LOADER"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:textSize="20sp" />
 
 </FrameLayout>

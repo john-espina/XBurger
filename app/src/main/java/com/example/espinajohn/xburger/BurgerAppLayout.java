@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import api_communicators.GetAllStockItems;
 import api_communicators.StockDetailsController;
 import entity.Customer;
 import entity.Item;
@@ -69,6 +70,11 @@ public class BurgerAppLayout extends ListActivity{
     ArrayList<Stock> current_sides;
     ArrayList<Stock> current_drinks;
     ArrayList<Stock> current_special;
+    ArrayList<Stock> plainb;
+    ArrayList<Stock> hammyb;
+    ArrayList<Stock> cheesyb;
+    ArrayList<Stock> porkyb;
+    ArrayList<Stock> chickenyb;
 
     //Constructor
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -130,26 +136,35 @@ public class BurgerAppLayout extends ListActivity{
 
         logout.setVisibility (View.INVISIBLE);
 
-//        if (app_logged_in != null && app_logged_in){
-//            logout.setVisibility (View.VISIBLE);
-//            logout.setOnClickListener (new View.OnClickListener (){
-//
-//                @Override
-//                public void onClick(View view) {
-//                    //Need to delete the files to erase the history
-//                    if (deletedFiles ("masterorder")){
-//                        Log.d ("Deleted", "Deleted?");
-//                    };
-//                    deletedFiles ("loggedin");
-//                    deletedFiles ("customerid");
-//                    deletedFiles ("currentlayout");
-//                    deletedFiles ("listofitems");
-//                    deletedFiles ("selectedstock");
-//
-//
-//                }
-//            });
-//        }
+        if (app_logged_in != null && app_logged_in){
+            logout.setVisibility (View.VISIBLE);
+            logout.setOnClickListener (new View.OnClickListener (){
+
+                @Override
+                public void onClick(View view) {
+
+                    app_logged_in = false;
+                    master_order = null;
+                    listofitems.clear ();
+                    try {
+                        selectedStock = new GetAllStockItems ().execute ().get ();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace ();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace ();
+                    }
+                    customer_id = 0;
+                    currentLayout = R.layout.activity_main;
+                    plainb.clear ();
+                    hammyb.clear ();
+                    cheesyb.clear ();
+                    porkyb.clear ();
+                    chickenyb.clear ();
+                    logout.setVisibility (View.INVISIBLE);
+                    alertDialogMessage ("Log Out Successful", "");
+                }
+            });
+        }
 
 
         order.setOnClickListener(new View.OnClickListener() {
@@ -312,11 +327,11 @@ public class BurgerAppLayout extends ListActivity{
         Button premadecancel = (Button) activity.findViewById (R.id.premade_cancel);
         CheckBox customise = (CheckBox) activity.findViewById (R.id.customise);
 
-        ArrayList<Stock> plainb = new ArrayList<> ();
-        ArrayList<Stock> hammyb = new ArrayList<> ();
-        ArrayList<Stock> cheesyb = new ArrayList<> ();
-        ArrayList<Stock> porkyb = new ArrayList<> ();
-        ArrayList<Stock> chickenyb = new ArrayList<> ();
+        plainb = new ArrayList<> ();
+        hammyb = new ArrayList<> ();
+        cheesyb = new ArrayList<> ();
+        porkyb = new ArrayList<> ();
+        chickenyb = new ArrayList<> ();
 
         ArrayList<Integer> plainInt = new ArrayList<>();
 
@@ -325,13 +340,6 @@ public class BurgerAppLayout extends ListActivity{
 
         ArrayList<Integer> availableStocksList = MainActivity.getAvailableStocksList();
         ArrayList<String> premadeBurgerIngredientsList = new ArrayList<>();
-
-
-
-
-
-
-
 
         customise.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
@@ -580,7 +588,7 @@ public class BurgerAppLayout extends ListActivity{
                     public void onClick(DialogInterface dialog, int id) {
                         master_order = new Order(customer_id, listofitems);
 
-                        Log.d ("MASTER ORDER", "" + master_order.getItems ().size ());
+                        //Log.d ("MASTER ORDER", "" + master_order.getItems ().size ());
 
                         setUpReviewOrder ();
                     }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/lightning"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="2dp"
+    tools:context="com.example.espinajohn.xburger.MainActivity">
+
+    <ImageView
+        android:id="@+id/logo_order_page"
+        android:layout_width="384dp"
+        android:layout_height="131dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="false"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
+        android:src="@drawable/logo_transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@mipmap/logo_transparent" />
+
+    <ImageView
+        android:id="@+id/burger_img"
+        android:layout_width="208dp"
+        android:layout_height="102dp"
+        android:layout_below="@+id/logo_order_page"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toTopOf="@+id/text_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_order_page"
+        app:srcCompat="@mipmap/burger_x" />
+
+    <Button
+        android:id="@+id/button_make_order"
+        android:layout_width="176dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/burger_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_bg"
+        android:padding="8dp"
+        android:text="@string/button_order_now"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/burger_img"
+        app:layout_constraintVertical_bias="0.46" />
+
+    <Button
+        android:id="@+id/button_order_history"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_below="@+id/button_make_order"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button_bg"
+        android:padding="10dp"
+        android:text="Order History"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/burger_img"
+        app:layout_constraintVertical_bias="0.46" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="10dp"
+        android:text="Powered by Team X-treme"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="12sp" />
+
+</LinearLayout>

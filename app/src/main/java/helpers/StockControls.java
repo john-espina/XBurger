@@ -202,8 +202,8 @@ public class StockControls {
 
         for (int i=0; i<stocks.size();i++){
             ingredientNames.add(stocks.get(i).getIngredient_name());
-            Log.d("available", stocks.get(i).getIngredient_name());
-            Log.d("rb", radioButtonArrayList.get(i).getText().toString());
+           // Log.d("available", stocks.get(i).getIngredient_name());
+           // Log.d("rb", radioButtonArrayList.get(i).getText().toString());
         }
 
         for (int i=0; i<radioButtonArrayList.size();i++){
@@ -228,14 +228,14 @@ public class StockControls {
 
         for (int i=0; i<stocks.size();i++){
             ingredientNames.add(stocks.get(i).getIngredient_name());
-            Log.d("available", stocks.get(i).getIngredient_name());
+           // Log.d("available", stocks.get(i).getIngredient_name());
         }
 
         for (int j=0; j<checkBoxes.size();j++){
             if (!ingredientNames.contains(checkBoxes.get(j).getText().toString())) {
                 checkBoxes.get(j).setEnabled(false);
                 checkBoxes.get(j).setText(checkBoxes.get(j).getText() + "  ( Not Available )");
-                Log.d("all", checkBoxes.get(j).getText().toString());
+                //Log.d("all", checkBoxes.get(j).getText().toString());
             }
         }
     }
@@ -311,8 +311,10 @@ public class StockControls {
                         BurgerAppLayout.selectedStock.put (resourceID, false);
                     } else {
                         BurgerAppLayout.selectedStock.put (resourceID, true);
+
                     }
                     Log.d("selected", newCheckBox.getText().toString() + newCheckBox.getId());
+
                 }
             });
 
@@ -468,16 +470,25 @@ public class StockControls {
 
         for (int i=0; i<stocks.size();i++){
             ingredientNames.add(stocks.get(i).getIngredient_name());
-            Log.d("available", stocks.get(i).getIngredient_name());
+            //Log.d("available", stocks.get(i).getIngredient_name());
         }
 
         for (int j=0; j<textViews.size();j++){
             if (!ingredientNames.contains(textViews.get(j).getText().toString())) {
                 textViews.get(j).setEnabled(false);
                 textViews.get(j).setText(textViews.get(j).getText() + "  ( Not Available )");
-                Log.d("all", textViews.get(j).getText().toString());
+                //Log.d("all", textViews.get(j).getText().toString());
             }
         }
+    }
+
+    public static boolean isAvailable(ArrayList<Integer> allStocks, ArrayList<Integer> premadeStockList){
+
+        for (int i=0;i<premadeStockList.size();i++){
+            if (!allStocks.contains(premadeStockList.get(i))){
+                return true;
+            }
+        }return false;
     }
 
 }

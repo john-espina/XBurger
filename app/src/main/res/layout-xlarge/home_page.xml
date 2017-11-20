@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/lightningblue"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!--app:srcCompat="@mipmap/logo" />-->
+
+    <!--app:srcCompat="@mipmap/burger_img2" />-->
+
+    <ImageView
+        android:id="@+id/logo_login_page"
+        android:layout_width="237dp"
+        android:layout_height="91dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="50dp"
+        android:background="@mipmap/logo_transparent" />
+
+    <EditText
+        android:id="@+id/username_"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/logo_login_page"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:hint="User Name or Email"
+        android:inputType="textPersonName"
+        android:padding="5dp"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/username_"
+        android:layout_alignStart="@+id/username_"
+        android:layout_alignTop="@+id/username_"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/background_light"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="5dp"
+        android:paddingLeft="10dp" />
+
+    <Button
+        android:id="@+id/homepage_login"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button_bg"
+        android:text="LOG IN"
+        android:textColor="#fff" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:clickable="true"
+            android:text="No Account yet? "
+            android:textAlignment="center"
+            android:textColor="#adadff" />
+
+        <TextView
+            android:id="@+id/homepage_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:clickable="true"
+            android:text="Sign Up here"
+            android:textAlignment="center"
+            android:textColor="#fff" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="100dp"
+        android:text="Powered by Team X-treme"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="12sp" />
+
+
+
+</LinearLayout>

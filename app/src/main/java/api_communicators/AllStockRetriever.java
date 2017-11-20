@@ -1,6 +1,7 @@
 package api_communicators;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -74,6 +75,9 @@ public class AllStockRetriever extends AsyncTask <String, Integer, HashMap >{
 
                     // Create a new Stock object and add it to the list of stocks.
                     Stock stockItem = new Stock(ingredient_id,ingredient_name, category, stock_level,price,img_file_name);
+                    Log.d("Stock Item ID", String.valueOf(stockItem.getIngredient_id()));
+                    Log.d("Stock Item Name", stockItem.getIngredient_name());
+
                     if (category.equalsIgnoreCase("Bread")){
                         buns.add(stockItem);
                     }

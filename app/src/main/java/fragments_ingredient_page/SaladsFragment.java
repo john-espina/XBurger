@@ -14,9 +14,8 @@ import com.example.espinajohn.xburger.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
+
 import entity.Stock;
-import api_communicators.StockDetailsController;
 import helpers.StockControls;
 
 
@@ -53,33 +52,12 @@ public class SaladsFragment extends Fragment {
         //Create and add radiobuttons to radiogroup from current stocks
         radioButtonArrayList = StockControls.generateCheckBoxes(rg,this, allSalads);
 
-        //create arraylist of radiobuttons
-        //radioButtonArrayList = StockControls.createRadioButtonList(rg);
-
 
 
         //compare radiobuttonarraylist to available stocks
         StockControls.updateStockViewOfCheckBoxes(salads, radioButtonArrayList );
+
         
         return  rootView;
     }
-
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//
-//        try {
-//            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-//            childFragmentManager.setAccessible(true);
-//            childFragmentManager.set(this, null);
-//
-//        } catch (NoSuchFieldException e) {
-//            throw new RuntimeException(e);
-//        } catch (IllegalAccessException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
-
-
 }

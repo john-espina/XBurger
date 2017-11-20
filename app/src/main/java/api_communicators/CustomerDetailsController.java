@@ -1,6 +1,7 @@
 package api_communicators;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,6 +53,7 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
 
             String usernaname = customer_object.get("Username").getAsString();
 
+
             if (!usernaname.equalsIgnoreCase("void")) {
 
 
@@ -69,13 +71,19 @@ public class CustomerDetailsController extends AsyncTask<String, Integer, Custom
                 return getCustomer();
             }
 
+
+
+
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+
     }
+
 
     protected void onProgressUpdate (Integer...progress){
     }

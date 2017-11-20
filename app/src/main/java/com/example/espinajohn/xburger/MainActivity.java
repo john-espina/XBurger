@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 import api_communicators.AllStockRetriever;
 import api_communicators.AvailableStocksListRetriever;
 import api_communicators.GetAllStockItems;
-import api_communicators.StockDetailsController;
+import api_communicators.AvailableStocksRetriever;
 import entity.Item;
 import entity.Order;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         try {
-            setAvailableStocksHashMap (new StockDetailsController ().execute ().get ());
+            setAvailableStocksHashMap (new AvailableStocksRetriever().execute ().get ());
         } catch (InterruptedException e) {
             e.printStackTrace ();
         } catch (ExecutionException e) {

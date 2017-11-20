@@ -1,6 +1,7 @@
 package api_communicators;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,6 +54,8 @@ public class AvailableStocksListRetriever extends AsyncTask<String, Integer, Arr
             JsonElement root = jp.parse(new InputStreamReader((InputStream)connection.getContent()));
             JsonArray ingredientsArray = root.getAsJsonArray(); //get the array of stock
             Gson gson = new GsonBuilder().serializeNulls().create();
+
+            Log.d("Available Stocks", ingredientsArray.get(0).toString());
 
             // Extract each item from the array and convert them to JsonObject
             for (int i=0; i<ingredientsArray.size();i++){

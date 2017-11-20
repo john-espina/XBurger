@@ -41,7 +41,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
             fragment = new SaladsFragment();
 
         }
-        else  {
+        else  if (position==4){
 
             fragment = new SaucesFragment();
 

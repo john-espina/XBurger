@@ -22,15 +22,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import api_communicators.GetAllStockItems;
-import api_communicators.StockDetailsController;
+import api_communicators.AvailableStocksRetriever;
 import entity.Customer;
 import entity.Item;
 import entity.Order;
@@ -277,6 +274,9 @@ public class BurgerAppLayout extends ListActivity{
                 String passwordString = password.getText().toString();
 
                 Customer customer = CustomerControls.createCustomer(usernameString);
+                Log.d("Customer ID:", String.valueOf(customer.getCustomer_id()));
+                Log.d("Customer Name", customer.getUsername());
+                Log.d("Customer Email", customer.getEmail());
 
                 if (customer !=null){
                     if (!passwordString.equals("") && customer.validateCustomerPassword (passwordString, customer.getPassHash (), customer.getSalt (), customer.getIterations ())) {
@@ -327,7 +327,21 @@ public class BurgerAppLayout extends ListActivity{
 
 
         ArrayList<Integer> availableStocksList = MainActivity.getAvailableStocksList();
-        ArrayList<String> premadeBurgerIngredientsList = new ArrayList<>();
+        ArrayList<Integer> premadeBurgerIngredientsList = new ArrayList<>();
+        premadeBurgerIngredientsList.add(31);
+        premadeBurgerIngredientsList.add(41);
+        premadeBurgerIngredientsList.add(51);
+        premadeBurgerIngredientsList.add(91);
+        premadeBurgerIngredientsList.add(201);
+        premadeBurgerIngredientsList.add(141);
+        premadeBurgerIngredientsList.add(441);
+        premadeBurgerIngredientsList.add(261);
+
+        if (StockControls.isAvailable(availableStocksList, premadeBurgerIngredientsList)){
+            chickeny.setClickable(false);
+            chickeny.setText("NA");
+        }
+
 
         customise.setOnCheckedChangeListener (new CompoundButton.OnCheckedChangeListener () {
             @Override
@@ -458,7 +472,7 @@ public class BurgerAppLayout extends ListActivity{
         try {
             //if statement here if previously clicked so won't need to query the database again
             allStocks = MainActivity.getAllStockHashMap();
-            stocks =  new StockDetailsController().execute().get();
+            stocks =  new AvailableStocksRetriever().execute().get();
             allSides = allStocks.get("sideCategory");
             sides = stocks.get("sideCategory");
 
@@ -512,7 +526,7 @@ public class BurgerAppLayout extends ListActivity{
         try {
             //if statement here if previously clicked so won't need to query the database again
             allStocks = MainActivity.getAllStockHashMap();
-            stocks =  new StockDetailsController().execute().get();
+            stocks =  new AvailableStocksRetriever().execute().get();
             allDrinks = allStocks.get("drinkCategory");
             drinks = stocks.get("drinkCategory");
 
@@ -909,6 +923,8 @@ public class BurgerAppLayout extends ListActivity{
                     Log.d("BurgerApp - Special", "" + s.getIngredient_id () + s.getIngredient_name ());
                 }
 
+                if (BurgerAppLayout.selectedStock.containsValue(Boolean.TRUE))
+                    Log.d("Selected",BurgerAppLayout.selectedStock.keySet().toString());
             }
         }
     }

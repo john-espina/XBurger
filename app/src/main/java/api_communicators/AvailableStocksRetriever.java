@@ -29,7 +29,7 @@ import helpers.StockControls;
  * Created by espinajohn on 8/11/2017.
  */
 
-public class StockDetailsController extends AsyncTask<String, Integer, HashMap >{
+public class AvailableStocksRetriever extends AsyncTask<String, Integer, HashMap >{
 
 
     int ingredient_id;

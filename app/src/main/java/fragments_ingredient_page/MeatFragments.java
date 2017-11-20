@@ -17,10 +17,8 @@ import com.example.espinajohn.xburger.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
 
 import entity.Stock;
-import api_communicators.StockDetailsController;
 import helpers.StockControls;
 
 
@@ -72,7 +70,7 @@ public class MeatFragments extends Fragment {
                     View o = radioGroup.getChildAt(i);
                     if (o instanceof RadioButton) {
                         BurgerAppLayout.selectedStock.put(o.getId (), false);
-                        Log.d ("RG", "" + o.getId () + BurgerAppLayout.selectedStock.get(o.getId()));
+                        Log.d ("Selected Meat", "" + ((RadioButton) o).getText());
                     }
                 }
 

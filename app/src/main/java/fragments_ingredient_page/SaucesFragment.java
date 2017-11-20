@@ -15,10 +15,8 @@ import com.example.espinajohn.xburger.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
 
 import entity.Stock;
-import api_communicators.StockDetailsController;
 import helpers.StockControls;
 
 

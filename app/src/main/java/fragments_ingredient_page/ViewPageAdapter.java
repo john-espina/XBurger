@@ -7,14 +7,17 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 
 /**
  * Created by espinajohn on 15/11/2017.
+ * This class is a custom Adapter used to present the Fragments by using Tabs
  */
 
 public class ViewPageAdapter extends FragmentPagerAdapter {
 
+    // Requires a constructor
     public ViewPageAdapter(FragmentManager fm) {
         super(fm);
     }
 
+    // This method will create the new Fragment from each Fragment class (i.e. BunsFragment)
     @Override
     public Fragment getItem(int position) {
 

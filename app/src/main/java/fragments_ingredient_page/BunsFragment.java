@@ -25,9 +25,18 @@ import helpers.StockControls;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This Fragment class is responsible for the activity under the Bun Category
+ * This class extends Fragment
+ * I don't think there is a need to implement all the methods; as far this app, the this Fragment class only requires
+ * an empty public constructor and the callback function onCreateView.
+ * Treat this Fragment class as another activity, so all elements inside this Fragment will be define here.
+ * It will also have it's own xml file.
+ * However, there is only one Fragment Placeholder inserted into the main activity xml. That is, multiple Fragment xml files,
+ * but only one placeholder inside the main activity xml.
  */
 public class BunsFragment extends Fragment {
 
+    // Declare all objects that willbe used in this acitivity
     RadioGroup rg;
     View rootView;
     ArrayList<Stock> buns = new ArrayList<>();
@@ -52,12 +61,6 @@ public class BunsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_buns, container, false);
         rg = (RadioGroup) rootView.findViewById(R.id.radiogroup_bun_choices);
 
-        //if statement here if previously clicked so won't need to query the database again
-
-        // Retrieve All stock from this category
-        // Retrieve Available stock from this category
-        // Compare the two
-
         allStocks = MainActivity.getAllStockHashMap(); // this is a HashMap of ALL of the stocks across all category (querried when app was started onCreate())
         stocks =  MainActivity.getAvailableStocksHashMap(); // also a HashMap of all Stocks, but only the available ones
         allBuns = allStocks.get("bunCategory"); //this is a list of ALL the buns
@@ -75,6 +78,8 @@ public class BunsFragment extends Fragment {
         //Set the hashmap to true/false when button is clicked
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 
+            // All logic related to this activity will be defined here
+            // That includes Listeners
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 int count = radioGroup.getChildCount();
@@ -97,19 +102,4 @@ public class BunsFragment extends Fragment {
         return rootView;
     }
 
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//
-//        try {
-//            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-//            childFragmentManager.setAccessible(true);
-//            childFragmentManager.set(this, null);
-//
-//        } catch (NoSuchFieldException e) {
-//            throw new RuntimeException(e);
-//        } catch (IllegalAccessException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }
